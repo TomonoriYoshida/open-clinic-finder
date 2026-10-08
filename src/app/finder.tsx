@@ -367,8 +367,7 @@ export default function Finder() {
 
             {searchedAt && (
               <p className="mt-4 text-sm leading-relaxed text-muted">
-                ※ 受付時間（なければ診療時間）で判定しています。臨時休診や最近の変更は反映されず、診療時間が公開されていない施設は表示されません。
-                お出かけの前に電話でご確認ください。
+                ※ 受付時間（なければ診療時間）で判定しています。臨時休診や最近の変更は反映されず、診療時間が公開されていない施設は表示されません。お出かけの前に電話でご確認ください。
               </p>
             )}
             <div className="mt-4">
