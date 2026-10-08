@@ -1,20 +1,25 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { isWithinJapan, searchPlaces, type NamedPlace } from "@/lib/places";
+import { formatDistance } from "@/lib/format";
+import { currentPositionIfAllowed, isWithinJapan, searchPlaces, type NamedPlace, type PlaceCandidate } from "@/lib/places";
 
 type Props = {
   onPick: (place: NamedPlace) => void;
   /** Shown as the big first step on the landing screen, compact elsewhere. */
   prominent?: boolean;
+  /** Where the list is searched from now; candidates are sorted from it when the visitor's own position isn't allowed. */
+  near?: NamedPlace | null;
 };
 
-export default function LocationPicker({ onPick, prominent = false }: Props) {
+export default function LocationPicker({ onPick, prominent = false, near = null }: Props) {
   const [locating, setLocating] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [keyword, setKeyword] = useState("");
   const [searching, setSearching] = useState(false);
-  const [candidates, setCandidates] = useState<NamedPlace[] | null>(null);
+  const [candidates, setCandidates] = useState<PlaceCandidate[] | null>(null);
+  /** What the candidates are sorted from ("現在地", "新宿駅"), or null when they aren't. */
+  const [origin, setOrigin] = useState<string | null>(null);
 
   function locate() {
     if (!("geolocation" in navigator)) {
@@ -54,7 +59,10 @@ export default function LocationPicker({ onPick, prominent = false }: Props) {
     setSearching(true);
     setError(null);
     try {
-      setCandidates(await searchPlaces(trimmed));
+      const here = await currentPositionIfAllowed();
+      const from = here ? { place: here, name: "現在地" } : near ? { place: near, name: near.name } : null;
+      setCandidates(await searchPlaces(trimmed, from?.place ?? null));
+      setOrigin(from?.name ?? null);
     } catch {
       setCandidates(null);
       setError("場所を検索できませんでした。時間をおいて、もう一度お試しください。");
@@ -115,7 +123,9 @@ export default function LocationPicker({ onPick, prominent = false }: Props) {
             <p className="leading-relaxed text-muted">見つかりませんでした。別の書き方（「〇〇駅」「〇〇市〇〇町」など）でお試しください。</p>
           ) : (
             <>
-              <p className="text-sm text-muted">場所を選んでください</p>
+              <p className="text-sm text-muted">
+                場所を選んでください{origin && `（同じ名前は${origin}から近い順）`}
+              </p>
               <ul className="mt-1 divide-y divide-border rounded-xl border border-control-border">
                 {candidates.map((candidate) => (
                   <li key={`${candidate.name}-${candidate.latitude}-${candidate.longitude}`}>
@@ -124,8 +134,15 @@ export default function LocationPicker({ onPick, prominent = false }: Props) {
                       onClick={() => onPick(candidate)}
                       className="w-full px-4 py-3 text-left hover:bg-band"
                     >
-                      {candidate.name}
-                      {candidate.area && <span className="ml-2 text-sm text-muted">{candidate.area}</span>}
+                      <span className="flex items-baseline justify-between gap-3">
+                        <span>
+                          {candidate.name}
+                          {candidate.area && <span className="ml-2 text-sm text-muted">{candidate.area}</span>}
+                        </span>
+                        {candidate.distance !== null && (
+                          <span className="shrink-0 text-sm text-muted">約{formatDistance(candidate.distance)}</span>
+                        )}
+                      </span>
                     </button>
                   </li>
                 ))}
