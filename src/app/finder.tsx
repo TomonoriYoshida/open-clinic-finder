@@ -3,6 +3,7 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import AttributionNotice from "@/components/attribution-notice";
+import BottomSheet, { OptionGrid } from "@/components/bottom-sheet";
 import EmergencyNotice from "@/components/emergency-notice";
 import FacilityResult from "@/components/facility-result";
 import LocationPicker from "@/components/location-picker";
@@ -15,7 +16,7 @@ import { formatDistance, numberFormatter } from "@/lib/format";
 import { markListVisited } from "@/lib/navigation";
 import { isWithinJapan, parsePlace, roundCoordinate, type NamedPlace } from "@/lib/places";
 import { activeStatus, institutionTypes } from "@/lib/site";
-import { formatJapanLocalTime, japanLocalTime, useCurrentMinute } from "@/lib/time";
+import { formatJapanLocalTime, formatJapanLocalTimeShort, japanLocalTime, useCurrentMinute } from "@/lib/time";
 
 const radiusOptions = [500, 1000, 2000, 5000, 10000];
 const defaultRadius = 2000;
@@ -34,8 +35,6 @@ const typeOptions: { value: string; label: string }[] = [
 const anyTime = "any";
 const localTimePattern = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/;
 
-const selectClass =
-  "w-full rounded-lg border border-border bg-background px-3 py-2 text-sm focus:border-accent focus:outline-none";
 const labelClass = "mb-1 block text-xs font-bold text-muted";
 
 export default function Finder() {
@@ -44,6 +43,7 @@ export default function Finder() {
   const now = useCurrentMinute();
   const options = useOptions();
   const [changingPlace, setChangingPlace] = useState(false);
+  const [openSheet, setOpenSheet] = useState<"when" | "radius" | "dept" | null>(null);
 
   useEffect(markListVisited, []);
 
@@ -157,7 +157,7 @@ export default function Finder() {
       </div>
       {changingPlace && <LocationPicker onPick={pick} />}
 
-      <div className="space-y-3 rounded-xl bg-surface p-3">
+      <div className="space-y-2 rounded-xl bg-surface p-3">
         <div role="radiogroup" aria-label="種類" className="grid grid-cols-5 gap-1">
           {typeOptions.map(({ value, label }) => (
             <button
@@ -174,80 +174,101 @@ export default function Finder() {
             </button>
           ))}
         </div>
-        <div className="grid grid-cols-2 gap-2">
-          <div>
-            <label htmlFor="when" className={labelClass}>
-              時間
-            </label>
-            <select
-              id="when"
-              value={when === null ? "" : when === anyTime ? anyTime : "at"}
-              onChange={(event) => {
-                const value = event.currentTarget.value;
-                update({ when: value === "at" ? japanLocalTime(new Date(Date.now() + 60 * 60 * 1000)) : value });
-              }}
-              className={selectClass}
-            >
-              <option value="">いま開いている</option>
-              <option value="at">日時を指定</option>
-              <option value={anyTime}>時間で絞らない</option>
-            </select>
-          </div>
-          <div>
-            <label htmlFor="radius" className={labelClass}>
-              範囲
-            </label>
-            <select
-              id="radius"
-              value={radius}
-              onChange={(event) => update({ r: event.currentTarget.value })}
-              className={selectClass}
-            >
-              {radiusOptions.map((option) => (
-                <option key={option} value={option}>
-                  {formatDistance(option)}以内
-                </option>
-              ))}
-            </select>
-          </div>
-          {when !== null && when !== anyTime && (
-            <div className="col-span-2">
-              <label htmlFor="at" className={labelClass}>
-                日時（日本時間）
-              </label>
-              <input
-                id="at"
-                type="datetime-local"
-                value={when}
-                onChange={(event) => event.currentTarget.value && update({ when: event.currentTarget.value })}
-                className={selectClass}
-              />
-            </div>
-          )}
+        <div className="flex flex-wrap gap-2">
+          <FilterButton isChanged={when !== null} onClick={() => setOpenSheet("when")}>
+            🕐 {when === null ? "いま開いている" : when === anyTime ? "時間で絞らない" : formatJapanLocalTimeShort(when)}
+          </FilterButton>
+          <FilterButton isChanged={radius !== defaultRadius} onClick={() => setOpenSheet("radius")}>
+            {formatDistance(radius)}以内
+          </FilterButton>
           {showsDepartmentFilter && (
-            <div className="col-span-2">
-              <label htmlFor="dept" className={labelClass}>
-                診療科
-              </label>
-              <select
-                id="dept"
-                value={departmentCategory}
-                onChange={(event) => update({ dept: event.currentTarget.value })}
-                className={selectClass}
-              >
-                <option value="">すべて</option>
-                {options.data
-                  ? options.data.department_categories.map((department) => (
-                      <option key={department.code} value={department.code}>
-                        {department.label}
-                      </option>
-                    ))
-                  : departmentCategory && <option value={departmentCategory}>…</option>}
-              </select>
-            </div>
+            <FilterButton isChanged={departmentCategory !== ""} onClick={() => setOpenSheet("dept")}>
+              {departmentCategory
+                ? (options.data?.department_categories.find(({ code }) => String(code) === departmentCategory)?.label ?? "診療科")
+                : "診療科"}
+            </FilterButton>
           )}
         </div>
       </div>
+
+      <BottomSheet open={openSheet === "when"} onClose={() => setOpenSheet(null)} title="いつ開いている施設を探しますか">
+        <OptionGrid
+          columns={3}
+          options={[
+            { value: "now", label: "いま" },
+            { value: "at", label: "日時を指定" },
+            { value: anyTime, label: "時間で絞らない" },
+          ]}
+          selected={when === null ? "now" : when === anyTime ? anyTime : "at"}
+          onSelect={(value) => {
+            if (value === "at") {
+              // Stays open for the date and time; searches for an hour from now meanwhile.
+              if (when === null || when === anyTime) {
+                update({ when: japanLocalTime(new Date(Date.now() + 60 * 60 * 1000)) });
+              }
+              return;
+            }
+            update({ when: value === "now" ? null : value });
+            setOpenSheet(null);
+          }}
+        />
+        {when !== null && when !== anyTime && (
+          <div className="mt-4">
+            <label htmlFor="at" className={labelClass}>
+              日時（日本時間）
+            </label>
+            <input
+              id="at"
+              type="datetime-local"
+              value={when}
+              onChange={(event) => event.currentTarget.value && update({ when: event.currentTarget.value })}
+              className="w-full rounded-xl border border-border bg-background px-4 py-3 focus:border-accent focus:outline-none"
+            />
+            <button
+              type="button"
+              onClick={() => setOpenSheet(null)}
+              className="mt-3 w-full rounded-xl bg-brand px-4 py-3 font-bold text-white hover:opacity-90"
+            >
+              この日時で探す
+            </button>
+          </div>
+        )}
+      </BottomSheet>
+
+      <BottomSheet open={openSheet === "radius"} onClose={() => setOpenSheet(null)} title="どのくらいの範囲で探しますか">
+        <OptionGrid
+          columns={3}
+          options={radiusOptions.map((option) => ({ value: option, label: `${formatDistance(option)}以内` }))}
+          selected={radius}
+          onSelect={(value) => {
+            update({ r: value === defaultRadius ? null : value });
+            setOpenSheet(null);
+          }}
+        />
+      </BottomSheet>
+
+      <BottomSheet open={openSheet === "dept"} onClose={() => setOpenSheet(null)} title="診療科">
+        {options.data ? (
+          <div className="max-h-[60vh] overflow-y-auto">
+            <OptionGrid
+              columns={3}
+              options={[
+                { value: "", label: "すべて" },
+                ...options.data.department_categories.map(({ code, label }) => ({ value: String(code), label })),
+              ]}
+              selected={departmentCategory}
+              onSelect={(value) => {
+                update({ dept: value });
+                setOpenSheet(null);
+              }}
+            />
+          </div>
+        ) : options.isError ? (
+          <ErrorState error={options.error} />
+        ) : (
+          <LoadingState />
+        )}
+      </BottomSheet>
 
       <section aria-live="polite">
         {facilities.isPending ? (
@@ -358,5 +379,24 @@ export default function Finder() {
         )}
       </section>
     </div>
+  );
+}
+
+/** Shows a filter's current value; tapping it opens that filter's sheet. Changed values stand out. */
+function FilterButton({ isChanged, onClick, children }: { isChanged: boolean; onClick: () => void; children: React.ReactNode }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-haspopup="dialog"
+      className={`inline-flex items-center gap-1 rounded-full border px-3 py-1.5 text-sm font-bold ${
+        isChanged ? "border-accent bg-band text-accent" : "border-border bg-background text-foreground"
+      }`}
+    >
+      {children}
+      <span aria-hidden className="text-xs text-muted">
+        ▾
+      </span>
+    </button>
   );
 }

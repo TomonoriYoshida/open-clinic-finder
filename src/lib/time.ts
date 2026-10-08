@@ -62,3 +62,10 @@ export function formatJapanLocalTime(value: string): string {
   const weekday = "日月火水木金土"[date.getUTCDay()];
   return `${date.getUTCMonth() + 1}月${date.getUTCDate()}日(${weekday}) ${Number(value.slice(11, 13))}:${value.slice(14, 16)}`;
 }
+
+/** "10/8(木) 19:05" for a Japan-local "YYYY-MM-DDTHH:mm", short enough for a button. */
+export function formatJapanLocalTimeShort(value: string): string {
+  const date = new Date(`${value.slice(0, 10)}T00:00:00Z`);
+  const weekday = "日月火水木金土"[date.getUTCDay()];
+  return `${date.getUTCMonth() + 1}/${date.getUTCDate()}(${weekday}) ${Number(value.slice(11, 13))}:${value.slice(14, 16)}`;
+}
