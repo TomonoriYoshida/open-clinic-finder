@@ -7,6 +7,7 @@ import DepartmentTags from "@/components/department-tags";
 import EmergencyNotice from "@/components/emergency-notice";
 import { actionClass, directionsUrl } from "@/components/facility-result";
 import FacilityMap from "@/components/map/facility-map";
+import NewTabMark from "@/components/new-tab-mark";
 import OpeningHoursTimetable from "@/components/opening-hours";
 import { EmptyState, ErrorState, LoadingState } from "@/components/query-state";
 import { useFacility, useFacilityOpeningHours } from "@/lib/api/queries";
@@ -31,7 +32,7 @@ function BackLink() {
           router.push("/");
         }
       }}
-      className="text-sm text-muted hover:text-accent"
+      className="-ml-2 inline-flex min-h-11 items-center px-2 text-muted hover:text-accent"
     >
       ← 一覧に戻る
     </button>
@@ -73,7 +74,7 @@ export default function FacilityDetail() {
       <header>
         <p className="text-sm font-bold text-accent">{data.institution_type.label}</p>
         <h1 className="mt-1 text-xl leading-snug font-bold sm:text-2xl">{data.name}</h1>
-        <p className="mt-2 text-sm text-muted">
+        <p className="mt-2 leading-relaxed text-muted">
           {data.postal_code && <span className="mr-2">〒{data.postal_code}</span>}
           {data.prefecture.label}
           {data.address}
@@ -86,6 +87,7 @@ export default function FacilityDetail() {
           )}
           <a href={directionsUrl(data)} target="_blank" rel="noopener noreferrer" className={actionClass}>
             🗺 経路
+            <NewTabMark />
           </a>
         </div>
       </header>

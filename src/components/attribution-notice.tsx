@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import type { Attribution } from "@/lib/api/types";
+import NewTabMark from "@/components/new-tab-mark";
 import { safeExternalUrl } from "@/lib/url";
 
 /**
@@ -9,7 +10,7 @@ import { safeExternalUrl } from "@/lib/url";
  */
 export default function AttributionNotice({ attribution }: { attribution: Attribution }) {
   return (
-    <aside className="mt-10 border-t border-border pt-3 text-xs leading-6 text-muted">
+    <aside className="mt-10 border-t border-border pt-3 text-sm leading-relaxed text-muted">
       <p className="font-bold">データの出典</p>
       <ul className="mt-1 list-disc space-y-0.5 pl-5">
         <li>{attribution.notice}</li>
@@ -32,7 +33,7 @@ export default function AttributionNotice({ attribution }: { attribution: Attrib
         </li>
       </ul>
       <details className="mt-1">
-        <summary className="cursor-pointer text-accent">出典元（各地方厚生局）</summary>
+        <summary className="cursor-pointer py-3 text-accent">出典元（各地方厚生局）</summary>
         <ul className="mt-1 flex flex-wrap gap-x-4 gap-y-1 pl-5">
           {attribution.sources.map((source) => (
             <li key={source.url}>
@@ -54,6 +55,7 @@ function ExternalLink({ url, children }: { url: string; children: ReactNode }) {
   return (
     <a href={href} target="_blank" rel="noopener noreferrer" className="text-accent underline underline-offset-2">
       {children}
+      <NewTabMark />
     </a>
   );
 }

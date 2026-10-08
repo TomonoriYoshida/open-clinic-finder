@@ -78,7 +78,7 @@ export default function OpeningHoursTimetable({
         <ClosureSummary closures={openingHours.closures} label={isPharmacy ? "定休日" : "休診日"} />
       )}
 
-      <p className="text-xs leading-5 text-muted">
+      <p className="text-sm leading-relaxed text-muted">
         ※ 厚生労働省「医療情報ネット」の{formatDate(openingHours.published_on)}
         時点の情報です（年2回更新）。臨時の{isPharmacy ? "休業" : "休診"}
         や最近の変更は含まれないため、お出かけの前に{isPharmacy ? "薬局" : "医療機関"}
@@ -128,7 +128,7 @@ function ScheduleTable({
                   className={day === today ? "bg-band! text-accent!" : ""}
                 >
                   {label}
-                  {day === today && <span className="ml-1 text-xs font-normal">今日</span>}
+                  {day === today && <span className="ml-1 text-sm font-normal">今日</span>}
                 </th>
               ))}
             </tr>
@@ -136,7 +136,7 @@ function ScheduleTable({
           <tbody>
             {schedule.slots.map((slot, slotIndex) => (
               <tr key={slot.number}>
-                <th scope="row" className="text-center! text-xs text-muted">
+                <th scope="row" className="text-center! text-sm text-muted">
                   時間帯{slotIndex + 1}
                 </th>
                 {days.map(({ day }) => {
@@ -163,7 +163,7 @@ function ScheduleTable({
             ))}
             {hasReception && (
               <tr>
-                <th scope="row" className="text-center! text-xs text-muted">
+                <th scope="row" className="text-center! text-sm text-muted">
                   受付
                 </th>
                 {days.map(({ day }) => (
@@ -185,12 +185,12 @@ function ScheduleTable({
       </div>
 
       {/* Phones and tablets: one line per day. */}
-      <dl className={`divide-y divide-border border border-border text-sm lg:hidden ${caption ? "mt-2" : ""}`}>
+      <dl className={`divide-y divide-border border border-border lg:hidden ${caption ? "mt-2" : ""}`}>
         {days.map(({ day, label }) => (
           <div key={day} className={`flex gap-3 px-3 py-2 ${day === today ? "bg-band" : ""}`}>
             <dt className="w-10 shrink-0 font-bold">
               {label}
-              {day === today && <span className="block text-xs font-normal text-accent">今日</span>}
+              {day === today && <span className="block text-sm font-normal text-accent">今日</span>}
             </dt>
             <dd className="min-w-0 flex-1">
               {isOff(day) ? (
@@ -199,7 +199,7 @@ function ScheduleTable({
                 <span>{hours[day].filter((value) => value !== null).join(" / ")}</span>
               )}
               {reception[day].length > 0 && (
-                <span className="block text-xs text-muted">受付 {reception[day].join(" / ")}</span>
+                <span className="block text-sm text-muted">受付 {reception[day].join(" / ")}</span>
               )}
             </dd>
           </div>
@@ -225,7 +225,7 @@ function ClosureSummary({ closures, label }: { closures: Closures; label: string
   }
 
   return (
-    <dl className="text-sm">
+    <dl>
       <div className="flex gap-3">
         <dt className="shrink-0 font-bold">{label}</dt>
         <dd>

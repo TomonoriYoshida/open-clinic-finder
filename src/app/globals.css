@@ -4,15 +4,19 @@
   --background: #ffffff;
   --foreground: #1f2933;
   --muted: #66707a;
+  /* Dividers and card outlines, which only decorate. */
   --border: #d3d9de;
+  /* Outlines that show where a control is: 3:1 or more against every background (DADS). */
+  --control-border: #7d8790;
   --surface: #f5f7f7;
   --band: #e6f4f1;
   /* Teal for text, outlines and icons. */
   --accent: #0f766e;
   /* Teal for filled areas under white text, identical in both color schemes. */
   --brand: #0f766e;
-  --warning: #a15c07;
+  --warning: #8a4e05;
   --danger: #b42318;
+  --focus: #1a56db;
 }
 
 @theme inline {
@@ -20,6 +24,7 @@
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
   --color-border: var(--border);
+  --color-control-border: var(--control-border);
   --color-surface: var(--surface);
   --color-band: var(--band);
   --color-accent: var(--accent);
@@ -36,17 +41,25 @@
     --foreground: #e4e9ea;
     --muted: #9aa6aa;
     --border: #2e3b3f;
+    --control-border: #6b7a80;
     --surface: #151d20;
     --band: #12302d;
     --accent: #5fd0c2;
     --warning: #f0b45a;
     --danger: #f28b82;
+    --focus: #8ab4f8;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
+}
+
+/* One visible focus ring for every control, drawn off the control so it shows on filled buttons too. */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
 }
 
 @layer components {
