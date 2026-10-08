@@ -1,5 +1,6 @@
 import Link from "next/link";
 import DepartmentTags from "@/components/department-tags";
+import NewTabMark from "@/components/new-tab-mark";
 import type { MedicalFacility } from "@/lib/api/types";
 import { formatDistance } from "@/lib/format";
 import { formatOpenUntil, minutesUntil } from "@/lib/time";
@@ -15,7 +16,7 @@ export function directionsUrl(facility: Pick<MedicalFacility, "name" | "address"
 }
 
 export const actionClass =
-  "inline-flex flex-1 items-center justify-center gap-1 rounded-lg border border-border px-3 py-2 text-sm font-bold text-accent hover:bg-band";
+  "inline-flex min-h-11 flex-1 items-center justify-center gap-1 rounded-lg border border-control-border px-3 font-bold text-accent hover:bg-band";
 
 export default function FacilityResult({
   facility,
@@ -34,14 +35,14 @@ export default function FacilityResult({
         <div className="flex items-start justify-between gap-3">
           <h2 className="font-bold text-foreground underline-offset-2 hover:underline">{facility.name}</h2>
           {facility.distance !== undefined && (
-            <span className="shrink-0 text-sm font-bold text-accent">{formatDistance(facility.distance)}</span>
+            <span className="shrink-0 font-bold text-accent">{formatDistance(facility.distance)}</span>
           )}
         </div>
-        <p className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-muted">
+        <p className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-muted">
           <span>{facility.institution_type.label}</span>
           {searchedAt !== null && facility.open_until !== undefined && (
             <span
-              className={`rounded-full px-2 py-0.5 text-xs font-bold ${
+              className={`rounded-full px-2 py-0.5 text-sm font-bold ${
                 closingSoon ? "bg-warning/15 text-warning" : "bg-band text-accent"
               }`}
             >
@@ -60,6 +61,7 @@ export default function FacilityResult({
         )}
         <a href={directionsUrl(facility)} target="_blank" rel="noopener noreferrer" className={actionClass}>
           🗺 経路
+          <NewTabMark />
         </a>
       </div>
     </article>

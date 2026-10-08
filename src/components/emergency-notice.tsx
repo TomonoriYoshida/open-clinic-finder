@@ -4,7 +4,7 @@
  */
 export default function EmergencyNotice() {
   return (
-    <aside className="rounded-xl border border-border bg-surface px-4 py-3 text-sm leading-6">
+    <aside className="rounded-xl border border-border bg-surface px-4 py-3 leading-relaxed">
       <p>
         <span className="font-bold text-danger">命に関わるときは迷わず </span>
         <a href="tel:119" className="font-bold text-danger underline underline-offset-2">

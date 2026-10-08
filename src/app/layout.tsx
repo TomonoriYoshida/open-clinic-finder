@@ -42,7 +42,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <SiteHeader />
           <main className="mx-auto w-full max-w-2xl flex-1 px-4 py-5">{children}</main>
           <footer className="border-t border-border bg-surface">
-            <div className="mx-auto w-full max-w-2xl space-y-1 px-4 py-5 text-xs leading-5 text-muted">
+            <div className="mx-auto w-full max-w-2xl space-y-2 px-4 py-5 text-sm leading-relaxed text-muted">
               <p>
                 施設は地方厚生局の「保険医療機関・保険薬局の指定一覧」、診療時間は厚生労働省「医療情報ネット」の公開情報です。
                 臨時休診や最近の変更は反映されないことがあるため、受診の前に電話でご確認ください。

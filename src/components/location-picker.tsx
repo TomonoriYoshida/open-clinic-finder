@@ -76,30 +76,35 @@ export default function LocationPicker({ onPick, prominent = false }: Props) {
         {locating ? "現在地を取得中…" : "📍 現在地から探す"}
       </button>
 
-      <form onSubmit={search} className="mt-3 flex gap-2" role="search">
-        <label htmlFor="place-keyword" className="sr-only">
-          駅名・住所
+      <form onSubmit={search} className="mt-4" role="search">
+        <label htmlFor="place-keyword" className="block font-bold">
+          駅名・住所で探す
         </label>
-        <input
-          id="place-keyword"
-          type="search"
-          value={keyword}
-          onChange={(event) => setKeyword(event.currentTarget.value)}
-          placeholder="駅名・住所で探す（例: 新宿駅）"
-          enterKeyHint="search"
-          className="min-w-0 flex-1 rounded-xl border border-border bg-background px-4 py-3 focus:border-accent focus:outline-none"
-        />
-        <button
-          type="submit"
-          disabled={searching}
-          className="shrink-0 rounded-xl border border-accent px-4 font-bold text-accent hover:bg-band disabled:opacity-60"
-        >
-          {searching ? "検索中" : "検索"}
-        </button>
+        <div className="mt-1 flex gap-2">
+          <input
+            id="place-keyword"
+            type="search"
+            value={keyword}
+            onChange={(event) => setKeyword(event.currentTarget.value)}
+            enterKeyHint="search"
+            aria-describedby="place-keyword-hint"
+            className="min-w-0 flex-1 rounded-xl border border-control-border bg-background px-4 py-3"
+          />
+          <button
+            type="submit"
+            disabled={searching}
+            className="min-h-11 shrink-0 rounded-xl border border-accent px-4 font-bold text-accent hover:bg-band disabled:opacity-60"
+          >
+            {searching ? "検索中" : "検索"}
+          </button>
+        </div>
+        <p id="place-keyword-hint" className="mt-1 text-sm text-muted">
+          例：新宿駅、大阪市北区梅田
+        </p>
       </form>
 
       {error && (
-        <p role="alert" className="mt-2 text-sm text-danger">
+        <p role="alert" className="mt-2 text-danger">
           {error}
         </p>
       )}
@@ -107,11 +112,11 @@ export default function LocationPicker({ onPick, prominent = false }: Props) {
       {candidates !== null && (
         <div className="mt-3" aria-live="polite">
           {candidates.length === 0 ? (
-            <p className="text-sm text-muted">見つかりませんでした。別の書き方（「〇〇駅」「〇〇市〇〇町」など）でお試しください。</p>
+            <p className="leading-relaxed text-muted">見つかりませんでした。別の書き方（「〇〇駅」「〇〇市〇〇町」など）でお試しください。</p>
           ) : (
             <>
-              <p className="text-xs text-muted">場所を選んでください</p>
-              <ul className="mt-1 divide-y divide-border rounded-xl border border-border">
+              <p className="text-sm text-muted">場所を選んでください</p>
+              <ul className="mt-1 divide-y divide-border rounded-xl border border-control-border">
                 {candidates.map((candidate) => (
                   <li key={`${candidate.name}-${candidate.latitude}-${candidate.longitude}`}>
                     <button

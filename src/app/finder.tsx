@@ -35,7 +35,7 @@ const typeOptions: { value: string; label: string }[] = [
 const anyTime = "any";
 const localTimePattern = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/;
 
-const labelClass = "mb-1 block text-xs font-bold text-muted";
+const labelClass = "mb-1 block text-sm font-bold text-muted";
 
 export default function Finder() {
   const router = useRouter();
@@ -128,7 +128,7 @@ export default function Finder() {
             <br />
             病院・薬局を探す
           </h1>
-          <p className="mt-2 text-sm text-muted">全国の病院・診療所・歯科・薬局から、近い順に表示します。</p>
+          <p className="mt-2 leading-relaxed text-muted">全国の病院・診療所・歯科・薬局から、近い順に表示します。</p>
         </section>
         <LocationPicker onPick={pick} prominent />
         <EmergencyNotice />
@@ -142,15 +142,15 @@ export default function Finder() {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between gap-3">
-        <p className="min-w-0 truncate font-bold">
+        <h1 className="min-w-0 truncate text-lg font-bold">
           <span aria-hidden>📍 </span>
           {placeName}の近く
-        </p>
+        </h1>
         <button
           type="button"
           onClick={() => setChangingPlace((value) => !value)}
           aria-expanded={changingPlace}
-          className="shrink-0 rounded-full border border-border px-3 py-1 text-sm text-accent hover:bg-band"
+          className="inline-flex min-h-11 shrink-0 items-center rounded-full border border-control-border px-4 text-accent hover:bg-band"
         >
           {changingPlace ? "閉じる" : "場所を変える"}
         </button>
@@ -166,8 +166,8 @@ export default function Finder() {
               role="radio"
               aria-checked={institutionType === value}
               onClick={() => update({ type: value, ...(hasDepartmentFilter(value) ? {} : { dept: null }) })}
-              className={`rounded-full px-1 py-1.5 text-sm font-bold ${
-                institutionType === value ? "bg-brand text-white" : "border border-border bg-background text-foreground"
+              className={`min-h-11 rounded-full px-1 font-bold ${
+                institutionType === value ? "bg-brand text-white" : "border border-control-border bg-background text-foreground"
               }`}
             >
               {label}
@@ -222,7 +222,7 @@ export default function Finder() {
               type="datetime-local"
               value={when}
               onChange={(event) => event.currentTarget.value && update({ when: event.currentTarget.value })}
-              className="w-full rounded-xl border border-border bg-background px-4 py-3 focus:border-accent focus:outline-none"
+              className="w-full rounded-xl border border-control-border bg-background px-4 py-3"
             />
             <button
               type="button"
@@ -278,13 +278,13 @@ export default function Finder() {
         ) : (
           <>
             <div className="flex items-center justify-between gap-3">
-              <p className="text-sm text-muted">
+              <p className="text-muted">
                 {searchedAt && when !== null && <>{formatJapanLocalTime(searchedAt)}に開いている</>}
                 <span className="font-bold text-foreground">{numberFormatter.format(facilities.data.meta.total)}件</span>
                 {facilities.data.meta.total > perPage && `（近い${perPage}件）`}
                 {facilities.isPlaceholderData && <span role="status"> 更新中…</span>}
               </p>
-              <div role="radiogroup" aria-label="表示" className="flex shrink-0 rounded-full border border-border p-0.5 text-sm">
+              <div role="radiogroup" aria-label="表示" className="flex shrink-0 rounded-full border border-control-border p-0.5">
                 {[
                   { value: null, label: "リスト" },
                   { value: "map", label: "地図" },
@@ -295,7 +295,7 @@ export default function Finder() {
                     role="radio"
                     aria-checked={isMapView === (value === "map")}
                     onClick={() => update({ view: value })}
-                    className={`rounded-full px-3 py-1 ${isMapView === (value === "map") ? "bg-brand font-bold text-white" : "text-muted"}`}
+                    className={`min-h-11 rounded-full px-4 ${isMapView === (value === "map") ? "bg-brand font-bold text-white" : "text-muted"}`}
                   >
                     {label}
                   </button>
@@ -342,12 +342,12 @@ export default function Finder() {
                 </EmptyState>
                 <div className="flex flex-wrap justify-center gap-2">
                   {nextRadius && (
-                    <button type="button" onClick={() => update({ r: nextRadius })} className="rounded-full border border-accent px-4 py-2 text-sm font-bold text-accent hover:bg-band">
+                    <button type="button" onClick={() => update({ r: nextRadius })} className="min-h-11 rounded-full border border-accent px-5 font-bold text-accent hover:bg-band">
                       {formatDistance(nextRadius)}以内に広げる
                     </button>
                   )}
                   {searchedAt && (
-                    <button type="button" onClick={() => update({ when: anyTime })} className="rounded-full border border-accent px-4 py-2 text-sm font-bold text-accent hover:bg-band">
+                    <button type="button" onClick={() => update({ when: anyTime })} className="min-h-11 rounded-full border border-accent px-5 font-bold text-accent hover:bg-band">
                       時間で絞らずに探す
                     </button>
                   )}
@@ -366,7 +366,7 @@ export default function Finder() {
             )}
 
             {searchedAt && (
-              <p className="mt-4 text-xs leading-5 text-muted">
+              <p className="mt-4 text-sm leading-relaxed text-muted">
                 ※ 受付時間（なければ診療時間）で判定しています。臨時休診や最近の変更は反映されず、診療時間が公開されていない施設は表示されません。
                 お出かけの前に電話でご確認ください。
               </p>
@@ -389,12 +389,12 @@ function FilterButton({ isChanged, onClick, children }: { isChanged: boolean; on
       type="button"
       onClick={onClick}
       aria-haspopup="dialog"
-      className={`inline-flex items-center gap-1 rounded-full border px-3 py-1.5 text-sm font-bold ${
-        isChanged ? "border-accent bg-band text-accent" : "border-border bg-background text-foreground"
+      className={`inline-flex min-h-11 items-center gap-1 rounded-full border px-4 font-bold ${
+        isChanged ? "border-accent bg-band text-accent" : "border-control-border bg-background text-foreground"
       }`}
     >
       {children}
-      <span aria-hidden className="text-xs text-muted">
+      <span aria-hidden className="text-sm text-muted">
         ▾
       </span>
     </button>

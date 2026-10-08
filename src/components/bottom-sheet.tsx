@@ -48,7 +48,7 @@ export default function BottomSheet({ open, onClose, title, children }: Props) {
           <button
             type="button"
             onClick={() => dialogRef.current?.close()}
-            className="rounded-full px-3 py-1 text-sm text-muted hover:bg-surface"
+            className="min-h-11 rounded-full px-4 text-muted hover:bg-surface"
           >
             閉じる
           </button>
@@ -80,8 +80,8 @@ export function OptionGrid<Value extends string | number>({
           role="radio"
           aria-checked={value === selected}
           onClick={() => onSelect(value)}
-          className={`rounded-xl px-2 py-3 text-sm font-bold ${
-            value === selected ? "bg-brand text-white" : "border border-border bg-background text-foreground hover:bg-band"
+          className={`min-h-12 rounded-xl px-2 py-2 font-bold ${
+            value === selected ? "bg-brand text-white" : "border border-control-border bg-background text-foreground hover:bg-band"
           }`}
         >
           {label}
