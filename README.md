@@ -43,6 +43,16 @@ mv ../medical-facility-master-api-laravel/storage/app/openapi.json openapi/opena
 docker compose exec app npm run generate:api
 ```
 
+## 市区町村名の対応表を更新する
+
+住所検索の候補に「宮城県栗原市」のような場所を添えるため、市区町村コードと名前の対応表（`src/lib/municipalities.json`）を同梱しています。
+APIが取り込んだアドレス・ベース・レジストリの市区町村マスターから書き出したもので、市区町村の合併などがあったときに作り直します。
+
+```bash
+# APIのリポジトリで
+vendor/bin/sail artisan tinker --execute 'echo json_encode(App\Models\Municipality::query()->orderBy("code")->get()->mapWithKeys(fn ($m) => [$m->code => App\Enums\Prefecture::from($m->prefecture_code)->label().$m->name]), JSON_UNESCAPED_UNICODE);' > ../open-clinic-finder/src/lib/municipalities.json
+```
+
 ## 本番への反映
 
 APIのサーバーでこのリポジトリをビルドし、書き出した `out/` をAPIのWebサーバー（Caddy）が `/` で配信します。

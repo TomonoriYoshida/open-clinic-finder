@@ -74,7 +74,17 @@ export default function LeafletMap({
       zoom,
       scrollWheelZoom: false,
     });
+    // Zoom to the search area before any tiles exist. Doing it afterwards
+    // (in the radius effect) changed the zoom while the first tiles were
+    // loading, and some of them were left invisible until the next zoom.
+    if (radius !== undefined) {
+      map.fitBounds(L.latLng(center.latitude, center.longitude).toBounds(radius * 2), { animate: false });
+      fittedRadiusRef.current = radius;
+    }
     L.tileLayer(tileUrl, { attribution: tileAttribution, maxZoom: 18 }).addTo(map);
+    // Follow the container's size (a rotated phone, the list toggled away).
+    const resizeObserver = new ResizeObserver(() => map.invalidateSize({ animate: false }));
+    resizeObserver.observe(containerRef.current);
     map.attributionControl.setPrefix(
       '<a href="https://leafletjs.com" target="_blank" rel="noopener noreferrer">Leaflet</a>',
     );
@@ -97,6 +107,7 @@ export default function LeafletMap({
     mapRef.current = map;
 
     return () => {
+      resizeObserver.disconnect();
       map.remove();
       mapRef.current = null;
       // A new map (e.g. React's dev-mode remount) has nothing drawn yet, so
