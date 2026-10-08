@@ -12,5 +12,9 @@ export const numberFormatter = new Intl.NumberFormat("ja-JP");
 export function formatDistance(meters: number): string {
   // Round first, so 997m reads "1km" rather than "1000m".
   const rounded = Math.round(meters / 10) * 10;
-  return rounded < 1000 ? `${rounded}m` : `${(rounded / 1000).toFixed(1).replace(/\.0$/, "")}km`;
+  if (rounded < 1000) {
+    return `${rounded}m`;
+  }
+  // Tenths of a kilometer only matter nearby: "3.2km", but "412km".
+  return rounded < 10000 ? `${(rounded / 1000).toFixed(1).replace(/\.0$/, "")}km` : `${Math.round(rounded / 1000)}km`;
 }

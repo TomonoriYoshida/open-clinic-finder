@@ -155,7 +155,7 @@ export default function Finder() {
           {changingPlace ? "閉じる" : "場所を変える"}
         </button>
       </div>
-      {changingPlace && <LocationPicker onPick={pick} />}
+      {changingPlace && <LocationPicker onPick={pick} near={{ ...place, name: placeName, area: null }} />}
 
       <div className="space-y-2 rounded-xl bg-surface p-3">
         <div role="radiogroup" aria-label="種類" className="grid grid-cols-5 gap-1">

@@ -10,6 +10,46 @@ export type NamedPlace = Place & {
   area: string | null;
 };
 
+/** A search result, with its distance in meters from the point it was sorted by (null without one). */
+export type PlaceCandidate = NamedPlace & { distance: number | null };
+
+/** Great-circle distance in meters. */
+export function distanceBetween(a: Place, b: Place): number {
+  const radians = (degrees: number) => (degrees * Math.PI) / 180;
+  const dLatitude = radians(b.latitude - a.latitude);
+  const dLongitude = radians(b.longitude - a.longitude);
+  const h =
+    Math.sin(dLatitude / 2) ** 2 +
+    Math.cos(radians(a.latitude)) * Math.cos(radians(b.latitude)) * Math.sin(dLongitude / 2) ** 2;
+  return 2 * 6371000 * Math.asin(Math.sqrt(h));
+}
+
+/**
+ * The visitor's position, but only if they already allowed it: sorting
+ * search results is no reason to ask. Null when not allowed, not known
+ * (Permissions API missing) or not found quickly.
+ */
+export async function currentPositionIfAllowed(): Promise<Place | null> {
+  try {
+    const permission = await navigator.permissions?.query({ name: "geolocation" });
+    if (permission?.state !== "granted") {
+      return null;
+    }
+  } catch {
+    return null;
+  }
+  return new Promise((resolve) => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const place = { latitude: position.coords.latitude, longitude: position.coords.longitude };
+        resolve(isWithinJapan(place) ? place : null);
+      },
+      () => resolve(null),
+      { enableHighAccuracy: false, timeout: 3000, maximumAge: 10 * 60 * 1000 },
+    );
+  });
+}
+
 export function isWithinJapan(place: Place): boolean {
   return (
     place.latitude >= latitudeRange[0] &&
@@ -80,9 +120,11 @@ function relevance(place: NamedPlace, keyword: string): number {
  * 住所検索API, which needs no key and allows calls from browsers. Its order
  * puts the station asked for behind like-named towns, so the results are
  * re-ranked, and the same place within about 1km (a station listed once per
- * line, a town listed both ways) is shown once.
+ * line, a town listed both ways) is shown once. Given an origin, equally
+ * relevant places come nearest first (新橋 near you before the other 新橋s);
+ * relevance still leads, so 新宿駅 is not pushed down by a nearer 新宿町.
  */
-export async function searchPlaces(keyword: string, signal?: AbortSignal): Promise<NamedPlace[]> {
+export async function searchPlaces(keyword: string, origin: Place | null = null, signal?: AbortSignal): Promise<PlaceCandidate[]> {
   const response = await fetch(
     `https://msearch.gsi.go.jp/address-search/AddressSearch?q=${encodeURIComponent(keyword)}`,
     { signal },
@@ -113,8 +155,12 @@ export async function searchPlaces(keyword: string, signal?: AbortSignal): Promi
   const seen = new Set<string>();
 
   return places
-    .map((place, index) => ({ place, index, rank: relevance(place, keyword) }))
-    .sort((a, b) => a.rank - b.rank || a.index - b.index)
+    .map((place, index) => ({
+      place: { ...place, distance: origin ? distanceBetween(origin, place) : null },
+      index,
+      rank: relevance(place, keyword),
+    }))
+    .sort((a, b) => a.rank - b.rank || (a.place.distance ?? 0) - (b.place.distance ?? 0) || a.index - b.index)
     .map(({ place }) => place)
     .filter((place) => {
       const key = `${place.area ?? ""}${place.name}@${place.latitude.toFixed(2)},${place.longitude.toFixed(2)}`;
