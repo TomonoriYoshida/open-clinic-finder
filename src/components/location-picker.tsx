@@ -26,7 +26,7 @@ export default function LocationPicker({ onPick, prominent = false }: Props) {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         setLocating(false);
-        const place = { latitude: position.coords.latitude, longitude: position.coords.longitude, name: "現在地" };
+        const place = { latitude: position.coords.latitude, longitude: position.coords.longitude, name: "現在地", area: null };
         if (isWithinJapan(place)) {
           onPick(place);
         } else {
@@ -120,6 +120,7 @@ export default function LocationPicker({ onPick, prominent = false }: Props) {
                       className="w-full px-4 py-3 text-left hover:bg-band"
                     >
                       {candidate.name}
+                      {candidate.area && <span className="ml-2 text-sm text-muted">{candidate.area}</span>}
                     </button>
                   </li>
                 ))}
