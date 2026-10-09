@@ -115,16 +115,10 @@ function relevance(place: NamedPlace, keyword: string): number {
   return name.includes(keyword) ? 2 : 3;
 }
 
-/**
- * Looks up an address or place name (駅名 too) with the 国土地理院
- * 住所検索API, which needs no key and allows calls from browsers. Its order
- * puts the station asked for behind like-named towns, so the results are
- * re-ranked, and the same place within about 1km (a station listed once per
- * line, a town listed both ways) is shown once. Given an origin, equally
- * relevant places come nearest first (新橋 near you before the other 新橋s);
- * relevance still leads, so 新宿駅 is not pushed down by a nearer 新宿町.
- */
-export async function searchPlaces(keyword: string, origin: Place | null = null, signal?: AbortSignal): Promise<PlaceCandidate[]> {
+/** Up to this many space-separated words are searched for; each is one request. */
+const maxWords = 3;
+
+async function fetchPlaces(keyword: string, signal?: AbortSignal): Promise<NamedPlace[]> {
   const response = await fetch(
     `https://msearch.gsi.go.jp/address-search/AddressSearch?q=${encodeURIComponent(keyword)}`,
     { signal },
@@ -152,13 +146,35 @@ export async function searchPlaces(keyword: string, origin: Place | null = null,
     }
   }
 
+  return places;
+}
+
+/**
+ * Looks up an address or place name (駅名 too) with the 国土地理院
+ * 住所検索API, which needs no key and allows calls from browsers. Its order
+ * puts the station asked for behind like-named towns, so the results are
+ * re-ranked, and the same place within about 1km (a station listed once per
+ * line, a town listed both ways) is shown once. Given an origin, equally
+ * relevant places come nearest first (新橋 near you before the other 新橋s);
+ * relevance still leads, so 新宿駅 is not pushed down by a nearer 新宿町.
+ *
+ * The API ignores spaces (福岡 赤坂 finds only 福岡), so each word is
+ * searched for on its own, and only places whose prefecture, municipality
+ * and name contain every word are kept: 福岡 赤坂 gives 福岡市中央区赤坂,
+ * in either order.
+ */
+export async function searchPlaces(keyword: string, origin: Place | null = null, signal?: AbortSignal): Promise<PlaceCandidate[]> {
+  const words = [...new Set(keyword.split(/\s+/).filter(Boolean))].slice(0, maxWords);
+  const places = (await Promise.all(words.map((word) => fetchPlaces(word, signal))))
+    .flat()
+    .filter((place) => words.length === 1 || words.every((word) => `${place.area ?? ""}${place.name}`.includes(word)));
   const seen = new Set<string>();
 
   return places
     .map((place, index) => ({
       place: { ...place, distance: origin ? distanceBetween(origin, place) : null },
       index,
-      rank: relevance(place, keyword),
+      rank: Math.min(...words.map((word) => relevance(place, word))),
     }))
     .sort((a, b) => a.rank - b.rank || (a.place.distance ?? 0) - (b.place.distance ?? 0) || a.index - b.index)
     .map(({ place }) => place)
