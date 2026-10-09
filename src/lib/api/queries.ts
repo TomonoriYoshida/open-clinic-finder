@@ -1,6 +1,31 @@
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { apiClient, unwrap } from "./client";
+import { apiClient, apiOrigin, unwrap } from "./client";
 import type { FacilityListQuery, FacilityPage } from "./types";
+
+export const maintenanceQueryKey = ["maintenance"] as const;
+
+/**
+ * Whether the API is down for maintenance (503). Asked once per page load,
+ * then every minute while it is, so the notice goes away on its own. A
+ * failure to connect is not maintenance: the queries report that themselves.
+ */
+export function useMaintenance() {
+  return useQuery({
+    queryKey: maintenanceQueryKey,
+    queryFn: async () => {
+      try {
+        // /options is the cheapest endpoint; no-store, since it is otherwise cached for a day.
+        const response = await fetch(`${apiOrigin}/api/v1/options`, { cache: "no-store" });
+        return response.status === 503;
+      } catch {
+        return false;
+      }
+    },
+    staleTime: Infinity,
+    retry: false,
+    refetchInterval: (query) => (query.state.data ? 60 * 1000 : false),
+  });
+}
 
 export function useOptions() {
   return useQuery({

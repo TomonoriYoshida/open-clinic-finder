@@ -15,6 +15,9 @@
   /* Teal for filled areas under white text, identical in both color schemes. */
   --brand: #0f766e;
   --warning: #8a4e05;
+  /* Ground and outline of the maintenance notice, around --warning text. */
+  --warning-surface: #fff6e6;
+  --warning-border: #e9c98f;
   --danger: #b42318;
   --focus: #1a56db;
 }
@@ -30,6 +33,8 @@
   --color-accent: var(--accent);
   --color-brand: var(--brand);
   --color-warning: var(--warning);
+  --color-warning-surface: var(--warning-surface);
+  --color-warning-border: var(--warning-border);
   --color-danger: var(--danger);
   /* System fonts only: nothing to download before the first search. */
   --font-sans: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic UI", Meiryo, system-ui, sans-serif;
@@ -46,6 +51,8 @@
     --band: #12302d;
     --accent: #5fd0c2;
     --warning: #f0b45a;
+    --warning-surface: #2a2113;
+    --warning-border: #5c4520;
     --danger: #f28b82;
     --focus: #8ab4f8;
   }
