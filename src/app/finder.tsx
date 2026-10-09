@@ -33,6 +33,19 @@ const typeOptions: { value: string; label: string }[] = [
 
 /** `when`: absent for "now", "any" for no time filter, else a Japan-local "YYYY-MM-DDTHH:mm". */
 const anyTime = "any";
+/** Place names come from the URL, which anyone can write: keep them short enough to be just a name. */
+const maxPlaceNameLength = 40;
+/**
+ * A phone number or a web address is never part of a place name, but would
+ * let a crafted link put "call 0120-..." in the heading; such names are not shown.
+ * Banchi like 2-8-1 still pass.
+ */
+const notAPlaceName = /\d{2,5}[-‐－ー]\d{1,4}[-‐－ー]\d{3,4}|\d{8,}|https?:|www\./i;
+
+function displayedPlaceName(value: string | null): string {
+  const name = value?.trim().slice(0, maxPlaceNameLength) ?? "";
+  return name === "" || notAPlaceName.test(name.normalize("NFKC")) ? "指定した地点" : name;
+}
 const localTimePattern = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/;
 
 const labelClass = "mb-1 block text-sm font-bold text-muted";
@@ -48,14 +61,15 @@ export default function Finder() {
   useEffect(markListVisited, []);
 
   const place = parsePlace(searchParams.get("lat"), searchParams.get("lng"));
-  const placeName = searchParams.get("place") || "指定した地点";
+  const placeName = displayedPlaceName(searchParams.get("place"));
   const radiusParam = Number(searchParams.get("r"));
   const radius = radiusOptions.includes(radiusParam) ? radiusParam : defaultRadius;
   const institutionType = typeOptions.some(({ value }) => value === searchParams.get("type"))
     ? (searchParams.get("type") ?? "")
     : "";
   const showsDepartmentFilter = hasDepartmentFilter(institutionType);
-  const departmentCategory = showsDepartmentFilter ? (searchParams.get("dept") ?? "") : "";
+  const deptParam = searchParams.get("dept") ?? "";
+  const departmentCategory = showsDepartmentFilter && /^\d{1,3}$/.test(deptParam) ? deptParam : "";
   const whenParam = searchParams.get("when");
   const when = whenParam === anyTime || (whenParam && localTimePattern.test(whenParam)) ? whenParam : null;
   const searchedAt = when === anyTime ? null : (when ?? (now ? japanLocalTime(now) : null));
