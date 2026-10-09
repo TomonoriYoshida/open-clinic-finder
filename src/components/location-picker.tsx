@@ -107,7 +107,7 @@ export default function LocationPicker({ onPick, prominent = false, near = null 
           </button>
         </div>
         <p id="place-keyword-hint" className="mt-1 text-sm text-muted">
-          例：新宿駅、大阪市北区梅田
+          例：新宿駅、大阪市北区梅田、福岡 赤坂
         </p>
       </form>
 
