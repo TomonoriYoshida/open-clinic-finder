@@ -1,11 +1,12 @@
 import type { Metadata, Viewport } from "next";
 import SiteHeader from "@/components/site-header";
 import { apiDocsUrl } from "@/lib/api/client";
-import { siteDescription, siteName } from "@/lib/site";
+import { ogImage, siteDescription, siteName, siteUrl } from "@/lib/site";
 import Providers from "./providers";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
     default: siteName,
     template: `%s | ${siteName}`,
@@ -20,13 +21,19 @@ export const metadata: Metadata = {
     icon: "/icon-192.png",
     apple: "/apple-icon.png",
   },
-  // Shown when the URL is shared (LINE, Slack, X, ...).
+  // Shown when the URL is shared (Facebook, LINE, X, ...). No url: here, a
+  // shared facility page would claim to be the top page; the top page sets it.
   openGraph: {
     type: "website",
     siteName,
     title: siteName,
     description: siteDescription,
     locale: "ja_JP",
+    images: [ogImage],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: [ogImage],
   },
 };
 

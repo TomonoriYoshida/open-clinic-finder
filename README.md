@@ -56,4 +56,5 @@ vendor/bin/sail artisan tinker --execute 'echo json_encode(App\Models\Municipali
 ## 本番への反映
 
 APIのサーバーでこのリポジトリをビルドし、書き出した `out/` をAPIのWebサーバー（Caddy）が `/` で配信します。
+リンクのプレビュー（Facebook・LINE・X など）に使う絶対URLは、既定で `https://168-110-42-30.sslip.io` です。独自ドメインに移ったら、ビルドのときに環境変数 `SITE_URL` を渡すか、`src/lib/site.ts` の既定値を変えてください（プレビュー画像 `og.png` に書くアドレスも変わります）。
 手順はAPIリポジトリの `DEPLOY.md` を参照してください。
