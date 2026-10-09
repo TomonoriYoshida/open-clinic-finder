@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import MaintenanceNotice from "@/components/maintenance-notice";
 import SiteHeader from "@/components/site-header";
 import { apiDocsUrl } from "@/lib/api/client";
 import { ogImage, siteDescription, siteName, siteUrl } from "@/lib/site";
@@ -47,7 +48,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="flex min-h-full flex-col">
         <Providers>
           <SiteHeader />
-          <main className="mx-auto w-full max-w-2xl flex-1 px-4 py-5">{children}</main>
+          <main className="mx-auto w-full max-w-2xl flex-1 px-4 py-5">
+            <MaintenanceNotice />
+            {children}
+          </main>
           <footer className="border-t border-border bg-surface">
             <div className="mx-auto w-full max-w-2xl space-y-2 px-4 py-5 text-sm leading-relaxed text-muted">
               <p>

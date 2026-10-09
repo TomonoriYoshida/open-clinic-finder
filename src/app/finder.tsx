@@ -9,7 +9,7 @@ import FacilityResult from "@/components/facility-result";
 import LocationPicker from "@/components/location-picker";
 import FacilityMap, { type MapMarker } from "@/components/map/facility-map";
 import { EmptyState, ErrorState, LoadingState } from "@/components/query-state";
-import { useFacilities, useOptions } from "@/lib/api/queries";
+import { useFacilities, useMaintenance, useOptions } from "@/lib/api/queries";
 import type { FacilityListQuery } from "@/lib/api/types";
 import { hasDepartmentFilter } from "@/lib/departments";
 import { formatDistance, numberFormatter } from "@/lib/format";
@@ -55,6 +55,7 @@ export default function Finder() {
   const searchParams = useSearchParams();
   const now = useCurrentMinute();
   const options = useOptions();
+  const { data: isUnderMaintenance = false } = useMaintenance();
   const [changingPlace, setChangingPlace] = useState(false);
   const [openSheet, setOpenSheet] = useState<"when" | "radius" | "dept" | null>(null);
 
@@ -144,7 +145,10 @@ export default function Finder() {
           </h1>
           <p className="mt-2 leading-relaxed text-muted">全国の病院・診療所・歯科・薬局から、近い順に表示します。</p>
         </section>
-        <LocationPicker onPick={pick} prominent />
+        {/* Searching can't work during maintenance; faded so the notice above explains why. */}
+        <fieldset disabled={isUnderMaintenance} className="disabled:opacity-45">
+          <LocationPicker onPick={pick} prominent />
+        </fieldset>
         <EmergencyNotice />
       </div>
     );
