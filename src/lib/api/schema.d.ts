@@ -879,6 +879,13 @@ export interface operations {
                                     /** @constant */
                                     url: "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/newpage_43373.html";
                                 };
+                                /** @description 住所からも医療情報ネットからも町丁目までしか求められない病院・診療所・歯科診療所の座標の出典（国土交通省、CC BY 4.0）。 */
+                                national_land_source: {
+                                    /** @constant */
+                                    name: "「国土数値情報（医療機関データ）」（国土交通省）を加工して作成";
+                                    /** @constant */
+                                    url: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P04-2020.html";
+                                };
                                 /** @description 市区町村の人口の出典（総務省、政府標準利用規約・CC BY 4.0 互換）。集計APIの人口あたりの件数に使う。 */
                                 population_source: {
                                     /** @constant */
@@ -1078,6 +1085,13 @@ export interface operations {
                                     /** @constant */
                                     url: "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/newpage_43373.html";
                                 };
+                                /** @description 住所からも医療情報ネットからも町丁目までしか求められない病院・診療所・歯科診療所の座標の出典（国土交通省、CC BY 4.0）。 */
+                                national_land_source: {
+                                    /** @constant */
+                                    name: "「国土数値情報（医療機関データ）」（国土交通省）を加工して作成";
+                                    /** @constant */
+                                    url: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P04-2020.html";
+                                };
                                 /** @description 市区町村の人口の出典（総務省、政府標準利用規約・CC BY 4.0 互換）。集計APIの人口あたりの件数に使う。 */
                                 population_source: {
                                     /** @constant */
@@ -1147,6 +1161,13 @@ export interface operations {
                                     name: "厚生労働省「医療情報ネット」のオープンデータ（所在地座標・診療時間・休診日）を加工して作成";
                                     /** @constant */
                                     url: "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/newpage_43373.html";
+                                };
+                                /** @description 住所からも医療情報ネットからも町丁目までしか求められない病院・診療所・歯科診療所の座標の出典（国土交通省、CC BY 4.0）。 */
+                                national_land_source: {
+                                    /** @constant */
+                                    name: "「国土数値情報（医療機関データ）」（国土交通省）を加工して作成";
+                                    /** @constant */
+                                    url: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P04-2020.html";
                                 };
                                 /** @description 市区町村の人口の出典（総務省、政府標準利用規約・CC BY 4.0 互換）。集計APIの人口あたりの件数に使う。 */
                                 population_source: {
@@ -1228,6 +1249,13 @@ export interface operations {
                                     /** @constant */
                                     url: "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/newpage_43373.html";
                                 };
+                                /** @description 住所からも医療情報ネットからも町丁目までしか求められない病院・診療所・歯科診療所の座標の出典（国土交通省、CC BY 4.0）。 */
+                                national_land_source: {
+                                    /** @constant */
+                                    name: "「国土数値情報（医療機関データ）」（国土交通省）を加工して作成";
+                                    /** @constant */
+                                    url: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P04-2020.html";
+                                };
                                 /** @description 市区町村の人口の出典（総務省、政府標準利用規約・CC BY 4.0 互換）。集計APIの人口あたりの件数に使う。 */
                                 population_source: {
                                     /** @constant */
@@ -1307,6 +1335,13 @@ export interface operations {
                                     name: "厚生労働省「医療情報ネット」のオープンデータ（所在地座標・診療時間・休診日）を加工して作成";
                                     /** @constant */
                                     url: "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/newpage_43373.html";
+                                };
+                                /** @description 住所からも医療情報ネットからも町丁目までしか求められない病院・診療所・歯科診療所の座標の出典（国土交通省、CC BY 4.0）。 */
+                                national_land_source: {
+                                    /** @constant */
+                                    name: "「国土数値情報（医療機関データ）」（国土交通省）を加工して作成";
+                                    /** @constant */
+                                    url: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P04-2020.html";
                                 };
                                 /** @description 市区町村の人口の出典（総務省、政府標準利用規約・CC BY 4.0 互換）。集計APIの人口あたりの件数に使う。 */
                                 population_source: {
@@ -1429,6 +1464,13 @@ export interface operations {
                                     name: "厚生労働省「医療情報ネット」のオープンデータ（所在地座標・診療時間・休診日）を加工して作成";
                                     /** @constant */
                                     url: "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/newpage_43373.html";
+                                };
+                                /** @description 住所からも医療情報ネットからも町丁目までしか求められない病院・診療所・歯科診療所の座標の出典（国土交通省、CC BY 4.0）。 */
+                                national_land_source: {
+                                    /** @constant */
+                                    name: "「国土数値情報（医療機関データ）」（国土交通省）を加工して作成";
+                                    /** @constant */
+                                    url: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P04-2020.html";
                                 };
                                 /** @description 市区町村の人口の出典（総務省、政府標準利用規約・CC BY 4.0 互換）。集計APIの人口あたりの件数に使う。 */
                                 population_source: {
@@ -1556,6 +1598,13 @@ export interface operations {
                                     name: "厚生労働省「医療情報ネット」のオープンデータ（所在地座標・診療時間・休診日）を加工して作成";
                                     /** @constant */
                                     url: "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/newpage_43373.html";
+                                };
+                                /** @description 住所からも医療情報ネットからも町丁目までしか求められない病院・診療所・歯科診療所の座標の出典（国土交通省、CC BY 4.0）。 */
+                                national_land_source: {
+                                    /** @constant */
+                                    name: "「国土数値情報（医療機関データ）」（国土交通省）を加工して作成";
+                                    /** @constant */
+                                    url: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P04-2020.html";
                                 };
                                 /** @description 市区町村の人口の出典（総務省、政府標準利用規約・CC BY 4.0 互換）。集計APIの人口あたりの件数に使う。 */
                                 population_source: {
@@ -1742,6 +1791,13 @@ export interface operations {
                                     /** @constant */
                                     url: "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/newpage_43373.html";
                                 };
+                                /** @description 住所からも医療情報ネットからも町丁目までしか求められない病院・診療所・歯科診療所の座標の出典（国土交通省、CC BY 4.0）。 */
+                                national_land_source: {
+                                    /** @constant */
+                                    name: "「国土数値情報（医療機関データ）」（国土交通省）を加工して作成";
+                                    /** @constant */
+                                    url: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P04-2020.html";
+                                };
                                 /** @description 市区町村の人口の出典（総務省、政府標準利用規約・CC BY 4.0 互換）。集計APIの人口あたりの件数に使う。 */
                                 population_source: {
                                     /** @constant */
@@ -1890,6 +1946,13 @@ export interface operations {
                                     name: "厚生労働省「医療情報ネット」のオープンデータ（所在地座標・診療時間・休診日）を加工して作成";
                                     /** @constant */
                                     url: "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/newpage_43373.html";
+                                };
+                                /** @description 住所からも医療情報ネットからも町丁目までしか求められない病院・診療所・歯科診療所の座標の出典（国土交通省、CC BY 4.0）。 */
+                                national_land_source: {
+                                    /** @constant */
+                                    name: "「国土数値情報（医療機関データ）」（国土交通省）を加工して作成";
+                                    /** @constant */
+                                    url: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P04-2020.html";
                                 };
                                 /** @description 市区町村の人口の出典（総務省、政府標準利用規約・CC BY 4.0 互換）。集計APIの人口あたりの件数に使う。 */
                                 population_source: {
@@ -2181,6 +2244,13 @@ export interface operations {
                                     name: "厚生労働省「医療情報ネット」のオープンデータ（所在地座標・診療時間・休診日）を加工して作成";
                                     /** @constant */
                                     url: "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/newpage_43373.html";
+                                };
+                                /** @description 住所からも医療情報ネットからも町丁目までしか求められない病院・診療所・歯科診療所の座標の出典（国土交通省、CC BY 4.0）。 */
+                                national_land_source: {
+                                    /** @constant */
+                                    name: "「国土数値情報（医療機関データ）」（国土交通省）を加工して作成";
+                                    /** @constant */
+                                    url: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P04-2020.html";
                                 };
                                 /** @description 市区町村の人口の出典（総務省、政府標準利用規約・CC BY 4.0 互換）。集計APIの人口あたりの件数に使う。 */
                                 population_source: {
