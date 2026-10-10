@@ -985,7 +985,7 @@ export interface operations {
                 latitude?: number;
                 /** @description 検索地点の経度（世界測地系） */
                 longitude?: number;
-                /** @description 検索半径（メートル、デフォルト1000、最大20000）。`latitude`・`longitude` と組み合わせる */
+                /** @description 検索半径（メートル、デフォルト1000、最大50000）。`latitude`・`longitude` と組み合わせる */
                 radius?: number;
                 /** @description 1ページあたりの件数（デフォルト25、最大100） */
                 per_page?: number;

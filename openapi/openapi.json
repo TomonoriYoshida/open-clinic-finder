@@ -529,11 +529,11 @@
                     {
                         "name": "radius",
                         "in": "query",
-                        "description": "\u691c\u7d22\u534a\u5f84\uff08\u30e1\u30fc\u30c8\u30eb\u3001\u30c7\u30d5\u30a9\u30eb\u30c81000\u3001\u6700\u592720000\uff09\u3002`latitude`\u30fb`longitude` \u3068\u7d44\u307f\u5408\u308f\u305b\u308b",
+                        "description": "\u691c\u7d22\u534a\u5f84\uff08\u30e1\u30fc\u30c8\u30eb\u3001\u30c7\u30d5\u30a9\u30eb\u30c81000\u3001\u6700\u592750000\uff09\u3002`latitude`\u30fb`longitude` \u3068\u7d44\u307f\u5408\u308f\u305b\u308b",
                         "schema": {
                             "type": "integer",
                             "minimum": 1,
-                            "maximum": 20000
+                            "maximum": 50000
                         }
                     },
                     {

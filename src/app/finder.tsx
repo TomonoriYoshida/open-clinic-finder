@@ -18,7 +18,7 @@ import { isWithinJapan, parsePlace, roundCoordinate, type NamedPlace } from "@/l
 import { activeStatus, institutionTypes } from "@/lib/site";
 import { formatJapanLocalTime, formatJapanLocalTimeShort, japanLocalTime, useCurrentMinute } from "@/lib/time";
 
-const radiusOptions = [500, 1000, 2000, 5000, 10000];
+const radiusOptions = [500, 1000, 2000, 5000, 10000, 20000, 50000];
 const defaultRadius = 2000;
 /** Nearest first; anything further is rarely where anyone heads to. */
 const perPage = 50;
