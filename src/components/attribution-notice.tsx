@@ -31,6 +31,11 @@ export default function AttributionNotice({ attribution }: { attribution: Attrib
           </ExternalLink>
           （{attribution.license.name}）
         </li>
+        <li>
+          位置（住所からも医療情報ネットからも町丁目までしか求められない病院・診療所・歯科）：
+          <ExternalLink url={attribution.national_land_source.url}>{attribution.national_land_source.name}</ExternalLink>
+          （CC BY 4.0）
+        </li>
       </ul>
       <details className="mt-1">
         <summary className="cursor-pointer py-3 text-accent">出典元（各地方厚生局）</summary>
