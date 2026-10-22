@@ -1,5 +1,6 @@
 import Link from "next/link";
 import DepartmentTags from "@/components/department-tags";
+import EPrescriptionBadges from "@/components/e-prescription-badges";
 import NewTabMark from "@/components/new-tab-mark";
 import type { MedicalFacility } from "@/lib/api/types";
 import { formatDistance } from "@/lib/format";
@@ -52,6 +53,7 @@ export default function FacilityResult({
           )}
         </p>
         <DepartmentTags departments={facility.department_categories} max={4} className="mt-2" />
+        <EPrescriptionBadges ePrescription={facility.e_prescription} className="mt-2" />
       </Link>
       <div className="mt-3 flex gap-2">
         {facility.phone_number && (

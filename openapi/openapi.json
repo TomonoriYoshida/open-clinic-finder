@@ -1,5 +1,5 @@
 {
-    "openapi": "3.1.0",
+    "openapi": "3.1.2",
     "info": {
         "title": "\u533b\u7642\u65bd\u8a2d\u30de\u30b9\u30bfAPI",
         "version": "0.0.1",
@@ -7,14 +7,14 @@
     },
     "servers": [
         {
-            "url": "http://localhost:8000/api"
+            "url": "https:\/\/168-110-42-30.sslip.io\/api"
         }
     ],
     "paths": {
-        "/v1/exports": {
+        "\/v1\/exports": {
             "get": {
                 "operationId": "v1.exports.index",
-                "description": "\u53d6\u308a\u6271\u3046\u7bc4\u56f2\u306e\u5168\u65bd\u8a2d\uff08\u5ec3\u6b62\u3092\u542b\u3080\uff09\u3092\u3001\u90fd\u9053\u5e9c\u770c\u3054\u3068\u3068\u5168\u4f53\uff08`all`\uff09\u306e CSV / JSON Lines\uff08gzip \u5727\u7e2e\uff09\u3067\u63d0\u4f9b\u3057\u307e\u3059\u3002\u6bce\u65e5\u306e\u53d6\u8fbc\u306e\u5f8c\u306b\u3001\u30c7\u30fc\u30bf\u304c\u5909\u308f\u3063\u3066\u3044\u308c\u3070\u4f5c\u308a\u76f4\u3057\u307e\u3059\u3002JSON Lines \u306e\u5404\u884c\u306f\u65bd\u8a2d\u8a73\u7d30\u3068\u540c\u3058\u5f62\u3067\u3059\u3002CSV \u306f\u30b3\u30fc\u30c9\u3068\u540d\u524d\u3092\u5225\u306e\u5217\u306b\u3057\u3001\u8a3a\u7642\u79d1\u76ee\u306f `|` \u533a\u5207\u308a\u3001`designation_history` \u3068 `bed_counts` \u306f JSON \u6587\u5b57\u5217\u3067\u3059\u3002`sha256` \u3067\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\u3057\u305f\u30d5\u30a1\u30a4\u30eb\u3092\u691c\u8a3c\u3067\u304d\u307e\u3059\u3002\u4ee5\u964d\u306e\u5dee\u5206\u306f\u3001\u4e00\u89a7API\u306e `updated_since` \u3067\u53d6\u5f97\u3057\u3066\u304f\u3060\u3055\u3044\u3002",
+                "description": "\u53d6\u308a\u6271\u3046\u7bc4\u56f2\u306e\u5168\u65bd\u8a2d\uff08\u5ec3\u6b62\u3092\u542b\u3080\uff09\u3092\u3001\u90fd\u9053\u5e9c\u770c\u3054\u3068\u3068\u5168\u4f53\uff08`all`\uff09\u306e CSV \/ JSON Lines\uff08gzip \u5727\u7e2e\uff09\u3067\u63d0\u4f9b\u3057\u307e\u3059\u3002\u6bce\u65e5\u306e\u53d6\u8fbc\u306e\u5f8c\u306b\u3001\u30c7\u30fc\u30bf\u304c\u5909\u308f\u3063\u3066\u3044\u308c\u3070\u4f5c\u308a\u76f4\u3057\u307e\u3059\u3002JSON Lines \u306e\u5404\u884c\u306f\u65bd\u8a2d\u8a73\u7d30\u3068\u540c\u3058\u5f62\u3067\u3059\u3002CSV \u306f\u30b3\u30fc\u30c9\u3068\u540d\u524d\u3092\u5225\u306e\u5217\u306b\u3057\u3001\u8a3a\u7642\u79d1\u76ee\u306f `|` \u533a\u5207\u308a\u3001`designation_history` \u3068 `bed_counts` \u306f JSON \u6587\u5b57\u5217\u3067\u3059\u3002`sha256` \u3067\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\u3057\u305f\u30d5\u30a1\u30a4\u30eb\u3092\u691c\u8a3c\u3067\u304d\u307e\u3059\u3002\u4ee5\u964d\u306e\u5dee\u5206\u306f\u3001\u4e00\u89a7API\u306e `updated_since` \u3067\u53d6\u5f97\u3057\u3066\u304f\u3060\u3055\u3044\u3002",
                 "summary": "\u4e00\u62ec\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\u306e\u30d5\u30a1\u30a4\u30eb\u4e00\u89a7",
                 "tags": [
                     "Export"
@@ -23,7 +23,7 @@
                     "200": {
                         "description": "",
                         "content": {
-                            "application/json": {
+                            "application\/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
@@ -61,7 +61,7 @@
                                                                 "records": 8130,
                                                                 "size": 428199,
                                                                 "sha256": "e45239903993bda22a9bcbe4d5aabf64bc26cf436c06eea5583e054c90377934",
-                                                                "url": "https://168-110-42-30.sslip.io/api/v1/exports/medical-facilities-01.csv.gz"
+                                                                "url": "https:\/\/168-110-42-30.sslip.io\/api\/v1\/exports\/medical-facilities-01.csv.gz"
                                                             },
                                                             {
                                                                 "name": "medical-facilities-all.jsonl.gz",
@@ -70,7 +70,7 @@
                                                                 "records": 224517,
                                                                 "size": 16248504,
                                                                 "sha256": "a0c6681a6d420e2dce225445426c087c68672bf02515b365fd0dec0c98d8ef01",
-                                                                "url": "https://168-110-42-30.sslip.io/api/v1/exports/medical-facilities-all.jsonl.gz"
+                                                                "url": "https:\/\/168-110-42-30.sslip.io\/api\/v1\/exports\/medical-facilities-all.jsonl.gz"
                                                             }
                                                         ]
                                                     ],
@@ -157,7 +157,7 @@
                                                                 },
                                                                 "url": {
                                                                     "type": "string",
-                                                                    "const": "https://www.digital.go.jp/resources/open_data/public_data_license_v1.0"
+                                                                    "const": "https:\/\/www.digital.go.jp\/resources\/open_data\/public_data_license_v1.0"
                                                                 }
                                                             },
                                                             "required": [
@@ -180,7 +180,7 @@
                                                                 },
                                                                 "url": {
                                                                     "type": "string",
-                                                                    "const": "https://catalog.registries.digital.go.jp/rc/dataset/"
+                                                                    "const": "https:\/\/catalog.registries.digital.go.jp\/rc\/dataset\/"
                                                                 }
                                                             },
                                                             "required": [
@@ -190,15 +190,15 @@
                                                         },
                                                         "medical_info_net_source": {
                                                             "type": "object",
-                                                            "description": "\u753a\u4e01\u76ee\u307e\u3067\u3057\u304b\u6c42\u3081\u3089\u308c\u306a\u3044\u65bd\u8a2d\u306e\u5ea7\u6a19\u3068\u3001\u65bd\u8a2d\u306e\u8a3a\u7642\u6642\u9593\u306e\u51fa\u5178\uff08\u539a\u751f\u52b4\u50cd\u7701\u3001PDL1.0\uff09\u3002",
+                                                            "description": "\u753a\u4e01\u76ee\u307e\u3067\u3057\u304b\u6c42\u3081\u3089\u308c\u306a\u3044\u65bd\u8a2d\u306e\u5ea7\u6a19\u3068\u3001\u65bd\u8a2d\u306e\u8a3a\u7642\u6642\u9593\u30fb\u30d5\u30ea\u30ac\u30ca\u30fb\u30db\u30fc\u30e0\u30da\u30fc\u30b8\u306e\u51fa\u5178\uff08\u539a\u751f\u52b4\u50cd\u7701\u3001PDL1.0\uff09\u3002",
                                                             "properties": {
                                                                 "name": {
                                                                     "type": "string",
-                                                                    "const": "\u539a\u751f\u52b4\u50cd\u7701\u300c\u533b\u7642\u60c5\u5831\u30cd\u30c3\u30c8\u300d\u306e\u30aa\u30fc\u30d7\u30f3\u30c7\u30fc\u30bf\uff08\u6240\u5728\u5730\u5ea7\u6a19\u30fb\u8a3a\u7642\u6642\u9593\u30fb\u4f11\u8a3a\u65e5\uff09\u3092\u52a0\u5de5\u3057\u3066\u4f5c\u6210"
+                                                                    "const": "\u539a\u751f\u52b4\u50cd\u7701\u300c\u533b\u7642\u60c5\u5831\u30cd\u30c3\u30c8\u300d\u306e\u30aa\u30fc\u30d7\u30f3\u30c7\u30fc\u30bf\uff08\u6240\u5728\u5730\u5ea7\u6a19\u30fb\u8a3a\u7642\u6642\u9593\u30fb\u4f11\u8a3a\u65e5\u30fb\u30d5\u30ea\u30ac\u30ca\u30fb\u30db\u30fc\u30e0\u30da\u30fc\u30b8\uff09\u3092\u52a0\u5de5\u3057\u3066\u4f5c\u6210"
                                                                 },
                                                                 "url": {
                                                                     "type": "string",
-                                                                    "const": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/newpage_43373.html"
+                                                                    "const": "https:\/\/www.mhlw.go.jp\/stf\/seisakunitsuite\/bunya\/kenkou_iryou\/iryou\/newpage_43373.html"
                                                                 }
                                                             },
                                                             "required": [
@@ -216,7 +216,7 @@
                                                                 },
                                                                 "url": {
                                                                     "type": "string",
-                                                                    "const": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P04-2020.html"
+                                                                    "const": "https:\/\/nlftp.mlit.go.jp\/ksj\/gml\/datalist\/KsjTmplt-P04-2020.html"
                                                                 }
                                                             },
                                                             "required": [
@@ -234,7 +234,25 @@
                                                                 },
                                                                 "url": {
                                                                     "type": "string",
-                                                                    "const": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/daityo/jinkou_jinkoudoutai-setaisuu.html"
+                                                                    "const": "https:\/\/www.soumu.go.jp\/main_sosiki\/jichi_gyousei\/daityo\/jinkou_jinkoudoutai-setaisuu.html"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "name",
+                                                                "url"
+                                                            ]
+                                                        },
+                                                        "e_prescription_source": {
+                                                            "type": "object",
+                                                            "description": "\u96fb\u5b50\u51e6\u65b9\u7b8b\u3078\u306e\u5bfe\u5fdc\u306e\u51fa\u5178\uff08\u539a\u751f\u52b4\u50cd\u7701\u3001PDL1.0\uff09\u3002\u65bd\u8a2d\u306e e_prescription \u3068\u4e00\u89a7API\u306e\u7d5e\u308a\u8fbc\u307f\u306b\u4f7f\u3046\u3002",
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string",
+                                                                    "const": "\u539a\u751f\u52b4\u50cd\u7701\u300c\u96fb\u5b50\u51e6\u65b9\u305b\u3093\u5bfe\u5fdc\u306e\u533b\u7642\u6a5f\u95a2\u30fb\u85ac\u5c40\u30ea\u30b9\u30c8\u300d\u3092\u52a0\u5de5\u3057\u3066\u4f5c\u6210"
+                                                                },
+                                                                "url": {
+                                                                    "type": "string",
+                                                                    "const": "https:\/\/www.mhlw.go.jp\/stf\/seisakunitsuite\/bunya\/denshishohousen_taioushisetsu.html"
                                                                 }
                                                             },
                                                             "required": [
@@ -252,7 +270,7 @@
                                                                 },
                                                                 "url": {
                                                                     "type": "string",
-                                                                    "const": "https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html"
+                                                                    "const": "https:\/\/www8.cao.go.jp\/chosei\/shukujitsu\/gaiyou.html"
                                                                 }
                                                             },
                                                             "required": [
@@ -288,6 +306,7 @@
                                                         "medical_info_net_source",
                                                         "national_land_source",
                                                         "population_source",
+                                                        "e_prescription_source",
                                                         "holiday_source",
                                                         "sources"
                                                     ]
@@ -309,7 +328,7 @@
                     "404": {
                         "description": "",
                         "content": {
-                            "application/json": {
+                            "application\/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
@@ -328,7 +347,7 @@
                 }
             }
         },
-        "/v1/exports/{filename}": {
+        "\/v1\/exports\/{filename}": {
             "get": {
                 "operationId": "v1.exports.show",
                 "description": "\u30d5\u30a1\u30a4\u30eb\u4e00\u89a7\u306e `url` \u304b\u3089\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\u3057\u307e\u3059\u3002`ETag`\uff08SHA-256\uff09\u3068 `If-None-Match` \u3067\u3001\u5909\u308f\u3063\u3066\u3044\u306a\u3051\u308c\u3070 304 \u3092\u8fd4\u3057\u307e\u3059\u3002",
@@ -350,7 +369,7 @@
                     "200": {
                         "description": "",
                         "content": {
-                            "application/gzip": {
+                            "application\/gzip": {
                                 "schema": {
                                     "type": "string",
                                     "format": "binary"
@@ -370,7 +389,7 @@
                     "404": {
                         "description": "",
                         "content": {
-                            "application/json": {
+                            "application\/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
@@ -389,10 +408,10 @@
                 }
             }
         },
-        "/v1/medical-facilities": {
+        "\/v1\/medical-facilities": {
             "get": {
                 "operationId": "v1.medical-facilities.index",
-                "description": "\u533b\u7642\u65bd\u8a2d\u30de\u30b9\u30bf\u3092\u30da\u30fc\u30b8\u30cd\u30fc\u30b7\u30e7\u30f3\u4ed8\u304d\u3067\u8fd4\u3057\u307e\u3059\u3002`q` \u306f\u65bd\u8a2d\u540d\u30fb\u4f4f\u6240\u306e\u5168\u89d2\u534a\u89d2/\u7570\u4f53\u5b57\u3086\u308c\u3092\u5438\u53ce\u3057\u305f\u3042\u3044\u307e\u3044\u691c\u7d22\u3067\u3059\u3002`latitude`\u30fb`longitude` \u3092\u6307\u5b9a\u3059\u308b\u3068\u3001`radius` \u4ee5\u5185\u306e\u65bd\u8a2d\u3092\u8fd1\u3044\u9806\u306b\u8fd4\u3057\u307e\u3059\u3002`open_at` \u3092\u6307\u5b9a\u3059\u308b\u3068\u3001\u305d\u306e\u65e5\u6642\u306b\u53d7\u4ed8\u4e2d\u306e\u65bd\u8a2d\uff08\u539a\u751f\u52b4\u50cd\u7701\u300c\u533b\u7642\u60c5\u5831\u30cd\u30c3\u30c8\u300d\u306e\u8a3a\u7642\u6642\u9593\u3067\u5224\u5b9a\uff09\u3060\u3051\u3092\u8fd4\u3057\u3001\u5404\u65bd\u8a2d\u306b\u53d7\u4ed8\u304c\u7d42\u308f\u308b\u65e5\u6642 `open_until` \u3092\u542b\u3081\u307e\u3059\u3002",
+                "description": "\u533b\u7642\u65bd\u8a2d\u30de\u30b9\u30bf\u3092\u30da\u30fc\u30b8\u30cd\u30fc\u30b7\u30e7\u30f3\u4ed8\u304d\u3067\u8fd4\u3057\u307e\u3059\u3002`q` \u306f\u65bd\u8a2d\u540d\u30fb\u4f4f\u6240\u306e\u5168\u89d2\u534a\u89d2\/\u7570\u4f53\u5b57\u3086\u308c\u3092\u5438\u53ce\u3057\u305f\u3042\u3044\u307e\u3044\u691c\u7d22\u3067\u3059\u3002`latitude`\u30fb`longitude` \u3092\u6307\u5b9a\u3059\u308b\u3068\u3001`radius` \u4ee5\u5185\u306e\u65bd\u8a2d\u3092\u8fd1\u3044\u9806\u306b\u8fd4\u3057\u307e\u3059\u3002`open_at` \u3092\u6307\u5b9a\u3059\u308b\u3068\u3001\u305d\u306e\u65e5\u6642\u306b\u53d7\u4ed8\u4e2d\u306e\u65bd\u8a2d\uff08\u539a\u751f\u52b4\u50cd\u7701\u300c\u533b\u7642\u60c5\u5831\u30cd\u30c3\u30c8\u300d\u306e\u8a3a\u7642\u6642\u9593\u3067\u5224\u5b9a\uff09\u3060\u3051\u3092\u8fd4\u3057\u3001\u5404\u65bd\u8a2d\u306b\u53d7\u4ed8\u304c\u7d42\u308f\u308b\u65e5\u6642 `open_until` \u3092\u542b\u3081\u307e\u3059\u3002",
                 "summary": "\u65bd\u8a2d\u4e00\u89a7\u30fb\u691c\u7d22",
                 "tags": [
                     "MedicalFacility"
@@ -403,7 +422,7 @@
                         "in": "query",
                         "description": "\u90fd\u9053\u5e9c\u770c\u30b3\u30fc\u30c9\uff08JIS X 0401\u306e2\u6841\u300101\u301c47\uff09",
                         "schema": {
-                            "$ref": "#/components/schemas/Prefecture"
+                            "$ref": "#\/components\/schemas\/Prefecture"
                         }
                     },
                     {
@@ -420,7 +439,7 @@
                         "in": "query",
                         "description": "\u65bd\u8a2d\u7a2e\u5225",
                         "schema": {
-                            "$ref": "#/components/schemas/InstitutionType"
+                            "$ref": "#\/components\/schemas\/InstitutionType"
                         }
                     },
                     {
@@ -428,7 +447,7 @@
                         "in": "query",
                         "description": "\u6307\u5b9a\u72b6\u614b",
                         "schema": {
-                            "$ref": "#/components/schemas/MedicalFacilityStatus"
+                            "$ref": "#\/components\/schemas\/MedicalFacilityStatus"
                         }
                     },
                     {
@@ -436,7 +455,7 @@
                         "in": "query",
                         "description": "\u767a\u884c\u5143\u306e\u5730\u65b9\u539a\u751f\u5c40",
                         "schema": {
-                            "$ref": "#/components/schemas/RhbBureau"
+                            "$ref": "#\/components\/schemas\/RhbBureau"
                         }
                     },
                     {
@@ -444,7 +463,7 @@
                         "in": "query",
                         "description": "\u8a3a\u7642\u79d1\u76ee\u306e\u5927\u5206\u985e",
                         "schema": {
-                            "$ref": "#/components/schemas/DepartmentBaseCategory"
+                            "$ref": "#\/components\/schemas\/DepartmentBaseCategory"
                         }
                     },
                     {
@@ -493,9 +512,17 @@
                         }
                     },
                     {
+                        "name": "e_prescription",
+                        "in": "query",
+                        "description": "\u96fb\u5b50\u51e6\u65b9\u7b8b\u3078\u306e\u5bfe\u5fdc\u3002`1` \u3067\u5bfe\u5fdc\u3057\u3066\u3044\u308b\u65bd\u8a2d\u3060\u3051\u3001`0` \u3067\u5bfe\u5fdc\u3057\u3066\u3044\u306a\u3044\u65bd\u8a2d\u3060\u3051\uff08\u539a\u751f\u52b4\u50cd\u7701\u306e\u5bfe\u5fdc\u65bd\u8a2d\u30ea\u30b9\u30c8\u306b\u3042\u308b\u304b\u3002\u6bce\u9031\u66f4\u65b0\uff09",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    {
                         "name": "sort",
                         "in": "query",
-                        "description": "\u4e26\u3073\u9806\u3002`designated_on` / `-designated_on`\uff08\u6307\u5b9a\u5e74\u6708\u65e5\u306e\u53e4\u3044\u9806 / \u65b0\u3057\u3044\u9806\u3001\u6307\u5b9a\u5e74\u6708\u65e5\u306e\u306a\u3044\u65bd\u8a2d\u306f\u672b\u5c3e\uff09\u3001`updated_at` / `-updated_at`\uff08\u5185\u5bb9\u304c\u5909\u308f\u3063\u305f\u65e5\u6642\u306e\u53e4\u3044\u9806 / \u65b0\u3057\u3044\u9806\uff09\u3002\u7701\u7565\u6642\u306fid\u9806",
+                        "description": "\u4e26\u3073\u9806\u3002`designated_on` \/ `-designated_on`\uff08\u6307\u5b9a\u5e74\u6708\u65e5\u306e\u53e4\u3044\u9806 \/ \u65b0\u3057\u3044\u9806\u3001\u6307\u5b9a\u5e74\u6708\u65e5\u306e\u306a\u3044\u65bd\u8a2d\u306f\u672b\u5c3e\uff09\u3001`updated_at` \/ `-updated_at`\uff08\u5185\u5bb9\u304c\u5909\u308f\u3063\u305f\u65e5\u6642\u306e\u53e4\u3044\u9806 \/ \u65b0\u3057\u3044\u9806\uff09\u3002\u7701\u7565\u6642\u306fid\u9806",
                         "schema": {
                             "type": "string",
                             "enum": [
@@ -611,7 +638,7 @@
                     "200": {
                         "description": "`MedicalFacilityResource` \u306e\u30da\u30fc\u30b8",
                         "content": {
-                            "application/json": {
+                            "application\/json": {
                                 "schema": {
                                     "anyOf": [
                                         {
@@ -620,7 +647,7 @@
                                                 "data": {
                                                     "type": "array",
                                                     "items": {
-                                                        "$ref": "#/components/schemas/MedicalFacilityResource"
+                                                        "$ref": "#\/components\/schemas\/MedicalFacilityResource"
                                                     }
                                                 },
                                                 "links": {
@@ -759,7 +786,7 @@
                                                                         },
                                                                         "url": {
                                                                             "type": "string",
-                                                                            "const": "https://www.digital.go.jp/resources/open_data/public_data_license_v1.0"
+                                                                            "const": "https:\/\/www.digital.go.jp\/resources\/open_data\/public_data_license_v1.0"
                                                                         }
                                                                     },
                                                                     "required": [
@@ -782,7 +809,7 @@
                                                                         },
                                                                         "url": {
                                                                             "type": "string",
-                                                                            "const": "https://catalog.registries.digital.go.jp/rc/dataset/"
+                                                                            "const": "https:\/\/catalog.registries.digital.go.jp\/rc\/dataset\/"
                                                                         }
                                                                     },
                                                                     "required": [
@@ -792,15 +819,15 @@
                                                                 },
                                                                 "medical_info_net_source": {
                                                                     "type": "object",
-                                                                    "description": "\u753a\u4e01\u76ee\u307e\u3067\u3057\u304b\u6c42\u3081\u3089\u308c\u306a\u3044\u65bd\u8a2d\u306e\u5ea7\u6a19\u3068\u3001\u65bd\u8a2d\u306e\u8a3a\u7642\u6642\u9593\u306e\u51fa\u5178\uff08\u539a\u751f\u52b4\u50cd\u7701\u3001PDL1.0\uff09\u3002",
+                                                                    "description": "\u753a\u4e01\u76ee\u307e\u3067\u3057\u304b\u6c42\u3081\u3089\u308c\u306a\u3044\u65bd\u8a2d\u306e\u5ea7\u6a19\u3068\u3001\u65bd\u8a2d\u306e\u8a3a\u7642\u6642\u9593\u30fb\u30d5\u30ea\u30ac\u30ca\u30fb\u30db\u30fc\u30e0\u30da\u30fc\u30b8\u306e\u51fa\u5178\uff08\u539a\u751f\u52b4\u50cd\u7701\u3001PDL1.0\uff09\u3002",
                                                                     "properties": {
                                                                         "name": {
                                                                             "type": "string",
-                                                                            "const": "\u539a\u751f\u52b4\u50cd\u7701\u300c\u533b\u7642\u60c5\u5831\u30cd\u30c3\u30c8\u300d\u306e\u30aa\u30fc\u30d7\u30f3\u30c7\u30fc\u30bf\uff08\u6240\u5728\u5730\u5ea7\u6a19\u30fb\u8a3a\u7642\u6642\u9593\u30fb\u4f11\u8a3a\u65e5\uff09\u3092\u52a0\u5de5\u3057\u3066\u4f5c\u6210"
+                                                                            "const": "\u539a\u751f\u52b4\u50cd\u7701\u300c\u533b\u7642\u60c5\u5831\u30cd\u30c3\u30c8\u300d\u306e\u30aa\u30fc\u30d7\u30f3\u30c7\u30fc\u30bf\uff08\u6240\u5728\u5730\u5ea7\u6a19\u30fb\u8a3a\u7642\u6642\u9593\u30fb\u4f11\u8a3a\u65e5\u30fb\u30d5\u30ea\u30ac\u30ca\u30fb\u30db\u30fc\u30e0\u30da\u30fc\u30b8\uff09\u3092\u52a0\u5de5\u3057\u3066\u4f5c\u6210"
                                                                         },
                                                                         "url": {
                                                                             "type": "string",
-                                                                            "const": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/newpage_43373.html"
+                                                                            "const": "https:\/\/www.mhlw.go.jp\/stf\/seisakunitsuite\/bunya\/kenkou_iryou\/iryou\/newpage_43373.html"
                                                                         }
                                                                     },
                                                                     "required": [
@@ -818,7 +845,7 @@
                                                                         },
                                                                         "url": {
                                                                             "type": "string",
-                                                                            "const": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P04-2020.html"
+                                                                            "const": "https:\/\/nlftp.mlit.go.jp\/ksj\/gml\/datalist\/KsjTmplt-P04-2020.html"
                                                                         }
                                                                     },
                                                                     "required": [
@@ -836,7 +863,25 @@
                                                                         },
                                                                         "url": {
                                                                             "type": "string",
-                                                                            "const": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/daityo/jinkou_jinkoudoutai-setaisuu.html"
+                                                                            "const": "https:\/\/www.soumu.go.jp\/main_sosiki\/jichi_gyousei\/daityo\/jinkou_jinkoudoutai-setaisuu.html"
+                                                                        }
+                                                                    },
+                                                                    "required": [
+                                                                        "name",
+                                                                        "url"
+                                                                    ]
+                                                                },
+                                                                "e_prescription_source": {
+                                                                    "type": "object",
+                                                                    "description": "\u96fb\u5b50\u51e6\u65b9\u7b8b\u3078\u306e\u5bfe\u5fdc\u306e\u51fa\u5178\uff08\u539a\u751f\u52b4\u50cd\u7701\u3001PDL1.0\uff09\u3002\u65bd\u8a2d\u306e e_prescription \u3068\u4e00\u89a7API\u306e\u7d5e\u308a\u8fbc\u307f\u306b\u4f7f\u3046\u3002",
+                                                                    "properties": {
+                                                                        "name": {
+                                                                            "type": "string",
+                                                                            "const": "\u539a\u751f\u52b4\u50cd\u7701\u300c\u96fb\u5b50\u51e6\u65b9\u305b\u3093\u5bfe\u5fdc\u306e\u533b\u7642\u6a5f\u95a2\u30fb\u85ac\u5c40\u30ea\u30b9\u30c8\u300d\u3092\u52a0\u5de5\u3057\u3066\u4f5c\u6210"
+                                                                        },
+                                                                        "url": {
+                                                                            "type": "string",
+                                                                            "const": "https:\/\/www.mhlw.go.jp\/stf\/seisakunitsuite\/bunya\/denshishohousen_taioushisetsu.html"
                                                                         }
                                                                     },
                                                                     "required": [
@@ -854,7 +899,7 @@
                                                                         },
                                                                         "url": {
                                                                             "type": "string",
-                                                                            "const": "https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html"
+                                                                            "const": "https:\/\/www8.cao.go.jp\/chosei\/shukujitsu\/gaiyou.html"
                                                                         }
                                                                     },
                                                                     "required": [
@@ -890,6 +935,7 @@
                                                                 "medical_info_net_source",
                                                                 "national_land_source",
                                                                 "population_source",
+                                                                "e_prescription_source",
                                                                 "holiday_source",
                                                                 "sources"
                                                             ]
@@ -922,7 +968,7 @@
                                                 "data": {
                                                     "type": "array",
                                                     "items": {
-                                                        "$ref": "#/components/schemas/MedicalFacilityResource"
+                                                        "$ref": "#\/components\/schemas\/MedicalFacilityResource"
                                                     }
                                                 },
                                                 "links": {
@@ -1007,7 +1053,7 @@
                                                                         },
                                                                         "url": {
                                                                             "type": "string",
-                                                                            "const": "https://www.digital.go.jp/resources/open_data/public_data_license_v1.0"
+                                                                            "const": "https:\/\/www.digital.go.jp\/resources\/open_data\/public_data_license_v1.0"
                                                                         }
                                                                     },
                                                                     "required": [
@@ -1030,7 +1076,7 @@
                                                                         },
                                                                         "url": {
                                                                             "type": "string",
-                                                                            "const": "https://catalog.registries.digital.go.jp/rc/dataset/"
+                                                                            "const": "https:\/\/catalog.registries.digital.go.jp\/rc\/dataset\/"
                                                                         }
                                                                     },
                                                                     "required": [
@@ -1040,15 +1086,15 @@
                                                                 },
                                                                 "medical_info_net_source": {
                                                                     "type": "object",
-                                                                    "description": "\u753a\u4e01\u76ee\u307e\u3067\u3057\u304b\u6c42\u3081\u3089\u308c\u306a\u3044\u65bd\u8a2d\u306e\u5ea7\u6a19\u3068\u3001\u65bd\u8a2d\u306e\u8a3a\u7642\u6642\u9593\u306e\u51fa\u5178\uff08\u539a\u751f\u52b4\u50cd\u7701\u3001PDL1.0\uff09\u3002",
+                                                                    "description": "\u753a\u4e01\u76ee\u307e\u3067\u3057\u304b\u6c42\u3081\u3089\u308c\u306a\u3044\u65bd\u8a2d\u306e\u5ea7\u6a19\u3068\u3001\u65bd\u8a2d\u306e\u8a3a\u7642\u6642\u9593\u30fb\u30d5\u30ea\u30ac\u30ca\u30fb\u30db\u30fc\u30e0\u30da\u30fc\u30b8\u306e\u51fa\u5178\uff08\u539a\u751f\u52b4\u50cd\u7701\u3001PDL1.0\uff09\u3002",
                                                                     "properties": {
                                                                         "name": {
                                                                             "type": "string",
-                                                                            "const": "\u539a\u751f\u52b4\u50cd\u7701\u300c\u533b\u7642\u60c5\u5831\u30cd\u30c3\u30c8\u300d\u306e\u30aa\u30fc\u30d7\u30f3\u30c7\u30fc\u30bf\uff08\u6240\u5728\u5730\u5ea7\u6a19\u30fb\u8a3a\u7642\u6642\u9593\u30fb\u4f11\u8a3a\u65e5\uff09\u3092\u52a0\u5de5\u3057\u3066\u4f5c\u6210"
+                                                                            "const": "\u539a\u751f\u52b4\u50cd\u7701\u300c\u533b\u7642\u60c5\u5831\u30cd\u30c3\u30c8\u300d\u306e\u30aa\u30fc\u30d7\u30f3\u30c7\u30fc\u30bf\uff08\u6240\u5728\u5730\u5ea7\u6a19\u30fb\u8a3a\u7642\u6642\u9593\u30fb\u4f11\u8a3a\u65e5\u30fb\u30d5\u30ea\u30ac\u30ca\u30fb\u30db\u30fc\u30e0\u30da\u30fc\u30b8\uff09\u3092\u52a0\u5de5\u3057\u3066\u4f5c\u6210"
                                                                         },
                                                                         "url": {
                                                                             "type": "string",
-                                                                            "const": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/newpage_43373.html"
+                                                                            "const": "https:\/\/www.mhlw.go.jp\/stf\/seisakunitsuite\/bunya\/kenkou_iryou\/iryou\/newpage_43373.html"
                                                                         }
                                                                     },
                                                                     "required": [
@@ -1066,7 +1112,7 @@
                                                                         },
                                                                         "url": {
                                                                             "type": "string",
-                                                                            "const": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P04-2020.html"
+                                                                            "const": "https:\/\/nlftp.mlit.go.jp\/ksj\/gml\/datalist\/KsjTmplt-P04-2020.html"
                                                                         }
                                                                     },
                                                                     "required": [
@@ -1084,7 +1130,25 @@
                                                                         },
                                                                         "url": {
                                                                             "type": "string",
-                                                                            "const": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/daityo/jinkou_jinkoudoutai-setaisuu.html"
+                                                                            "const": "https:\/\/www.soumu.go.jp\/main_sosiki\/jichi_gyousei\/daityo\/jinkou_jinkoudoutai-setaisuu.html"
+                                                                        }
+                                                                    },
+                                                                    "required": [
+                                                                        "name",
+                                                                        "url"
+                                                                    ]
+                                                                },
+                                                                "e_prescription_source": {
+                                                                    "type": "object",
+                                                                    "description": "\u96fb\u5b50\u51e6\u65b9\u7b8b\u3078\u306e\u5bfe\u5fdc\u306e\u51fa\u5178\uff08\u539a\u751f\u52b4\u50cd\u7701\u3001PDL1.0\uff09\u3002\u65bd\u8a2d\u306e e_prescription \u3068\u4e00\u89a7API\u306e\u7d5e\u308a\u8fbc\u307f\u306b\u4f7f\u3046\u3002",
+                                                                    "properties": {
+                                                                        "name": {
+                                                                            "type": "string",
+                                                                            "const": "\u539a\u751f\u52b4\u50cd\u7701\u300c\u96fb\u5b50\u51e6\u65b9\u305b\u3093\u5bfe\u5fdc\u306e\u533b\u7642\u6a5f\u95a2\u30fb\u85ac\u5c40\u30ea\u30b9\u30c8\u300d\u3092\u52a0\u5de5\u3057\u3066\u4f5c\u6210"
+                                                                        },
+                                                                        "url": {
+                                                                            "type": "string",
+                                                                            "const": "https:\/\/www.mhlw.go.jp\/stf\/seisakunitsuite\/bunya\/denshishohousen_taioushisetsu.html"
                                                                         }
                                                                     },
                                                                     "required": [
@@ -1102,7 +1166,7 @@
                                                                         },
                                                                         "url": {
                                                                             "type": "string",
-                                                                            "const": "https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html"
+                                                                            "const": "https:\/\/www8.cao.go.jp\/chosei\/shukujitsu\/gaiyou.html"
                                                                         }
                                                                     },
                                                                     "required": [
@@ -1138,6 +1202,7 @@
                                                                 "medical_info_net_source",
                                                                 "national_land_source",
                                                                 "population_source",
+                                                                "e_prescription_source",
                                                                 "holiday_source",
                                                                 "sources"
                                                             ]
@@ -1164,12 +1229,12 @@
                         }
                     },
                     "422": {
-                        "$ref": "#/components/responses/ValidationException"
+                        "$ref": "#\/components\/responses\/ValidationException"
                     }
                 }
             }
         },
-        "/v1/medical-facilities/{medicalFacility}": {
+        "\/v1\/medical-facilities\/{medicalFacility}": {
             "get": {
                 "operationId": "v1.medical-facilities.show",
                 "description": "id\u3092\u6307\u5b9a\u3057\u3066\u533b\u7642\u65bd\u8a2d\u30de\u30b9\u30bf\u306e1\u4ef6\u3092\u8fd4\u3057\u307e\u3059\u3002",
@@ -1192,12 +1257,12 @@
                     "200": {
                         "description": "`MedicalFacilityResource`",
                         "content": {
-                            "application/json": {
+                            "application\/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/components/schemas/MedicalFacilityResource"
+                                            "$ref": "#\/components\/schemas\/MedicalFacilityResource"
                                         },
                                         "meta": {
                                             "type": "object",
@@ -1220,7 +1285,7 @@
                                                                 },
                                                                 "url": {
                                                                     "type": "string",
-                                                                    "const": "https://www.digital.go.jp/resources/open_data/public_data_license_v1.0"
+                                                                    "const": "https:\/\/www.digital.go.jp\/resources\/open_data\/public_data_license_v1.0"
                                                                 }
                                                             },
                                                             "required": [
@@ -1243,7 +1308,7 @@
                                                                 },
                                                                 "url": {
                                                                     "type": "string",
-                                                                    "const": "https://catalog.registries.digital.go.jp/rc/dataset/"
+                                                                    "const": "https:\/\/catalog.registries.digital.go.jp\/rc\/dataset\/"
                                                                 }
                                                             },
                                                             "required": [
@@ -1253,15 +1318,15 @@
                                                         },
                                                         "medical_info_net_source": {
                                                             "type": "object",
-                                                            "description": "\u753a\u4e01\u76ee\u307e\u3067\u3057\u304b\u6c42\u3081\u3089\u308c\u306a\u3044\u65bd\u8a2d\u306e\u5ea7\u6a19\u3068\u3001\u65bd\u8a2d\u306e\u8a3a\u7642\u6642\u9593\u306e\u51fa\u5178\uff08\u539a\u751f\u52b4\u50cd\u7701\u3001PDL1.0\uff09\u3002",
+                                                            "description": "\u753a\u4e01\u76ee\u307e\u3067\u3057\u304b\u6c42\u3081\u3089\u308c\u306a\u3044\u65bd\u8a2d\u306e\u5ea7\u6a19\u3068\u3001\u65bd\u8a2d\u306e\u8a3a\u7642\u6642\u9593\u30fb\u30d5\u30ea\u30ac\u30ca\u30fb\u30db\u30fc\u30e0\u30da\u30fc\u30b8\u306e\u51fa\u5178\uff08\u539a\u751f\u52b4\u50cd\u7701\u3001PDL1.0\uff09\u3002",
                                                             "properties": {
                                                                 "name": {
                                                                     "type": "string",
-                                                                    "const": "\u539a\u751f\u52b4\u50cd\u7701\u300c\u533b\u7642\u60c5\u5831\u30cd\u30c3\u30c8\u300d\u306e\u30aa\u30fc\u30d7\u30f3\u30c7\u30fc\u30bf\uff08\u6240\u5728\u5730\u5ea7\u6a19\u30fb\u8a3a\u7642\u6642\u9593\u30fb\u4f11\u8a3a\u65e5\uff09\u3092\u52a0\u5de5\u3057\u3066\u4f5c\u6210"
+                                                                    "const": "\u539a\u751f\u52b4\u50cd\u7701\u300c\u533b\u7642\u60c5\u5831\u30cd\u30c3\u30c8\u300d\u306e\u30aa\u30fc\u30d7\u30f3\u30c7\u30fc\u30bf\uff08\u6240\u5728\u5730\u5ea7\u6a19\u30fb\u8a3a\u7642\u6642\u9593\u30fb\u4f11\u8a3a\u65e5\u30fb\u30d5\u30ea\u30ac\u30ca\u30fb\u30db\u30fc\u30e0\u30da\u30fc\u30b8\uff09\u3092\u52a0\u5de5\u3057\u3066\u4f5c\u6210"
                                                                 },
                                                                 "url": {
                                                                     "type": "string",
-                                                                    "const": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/newpage_43373.html"
+                                                                    "const": "https:\/\/www.mhlw.go.jp\/stf\/seisakunitsuite\/bunya\/kenkou_iryou\/iryou\/newpage_43373.html"
                                                                 }
                                                             },
                                                             "required": [
@@ -1279,7 +1344,7 @@
                                                                 },
                                                                 "url": {
                                                                     "type": "string",
-                                                                    "const": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P04-2020.html"
+                                                                    "const": "https:\/\/nlftp.mlit.go.jp\/ksj\/gml\/datalist\/KsjTmplt-P04-2020.html"
                                                                 }
                                                             },
                                                             "required": [
@@ -1297,7 +1362,25 @@
                                                                 },
                                                                 "url": {
                                                                     "type": "string",
-                                                                    "const": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/daityo/jinkou_jinkoudoutai-setaisuu.html"
+                                                                    "const": "https:\/\/www.soumu.go.jp\/main_sosiki\/jichi_gyousei\/daityo\/jinkou_jinkoudoutai-setaisuu.html"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "name",
+                                                                "url"
+                                                            ]
+                                                        },
+                                                        "e_prescription_source": {
+                                                            "type": "object",
+                                                            "description": "\u96fb\u5b50\u51e6\u65b9\u7b8b\u3078\u306e\u5bfe\u5fdc\u306e\u51fa\u5178\uff08\u539a\u751f\u52b4\u50cd\u7701\u3001PDL1.0\uff09\u3002\u65bd\u8a2d\u306e e_prescription \u3068\u4e00\u89a7API\u306e\u7d5e\u308a\u8fbc\u307f\u306b\u4f7f\u3046\u3002",
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string",
+                                                                    "const": "\u539a\u751f\u52b4\u50cd\u7701\u300c\u96fb\u5b50\u51e6\u65b9\u305b\u3093\u5bfe\u5fdc\u306e\u533b\u7642\u6a5f\u95a2\u30fb\u85ac\u5c40\u30ea\u30b9\u30c8\u300d\u3092\u52a0\u5de5\u3057\u3066\u4f5c\u6210"
+                                                                },
+                                                                "url": {
+                                                                    "type": "string",
+                                                                    "const": "https:\/\/www.mhlw.go.jp\/stf\/seisakunitsuite\/bunya\/denshishohousen_taioushisetsu.html"
                                                                 }
                                                             },
                                                             "required": [
@@ -1315,7 +1398,7 @@
                                                                 },
                                                                 "url": {
                                                                     "type": "string",
-                                                                    "const": "https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html"
+                                                                    "const": "https:\/\/www8.cao.go.jp\/chosei\/shukujitsu\/gaiyou.html"
                                                                 }
                                                             },
                                                             "required": [
@@ -1351,6 +1434,7 @@
                                                         "medical_info_net_source",
                                                         "national_land_source",
                                                         "population_source",
+                                                        "e_prescription_source",
                                                         "holiday_source",
                                                         "sources"
                                                     ]
@@ -1370,12 +1454,12 @@
                         }
                     },
                     "404": {
-                        "$ref": "#/components/responses/ModelNotFoundException"
+                        "$ref": "#\/components\/responses\/ModelNotFoundException"
                     }
                 }
             }
         },
-        "/v1/medical-facilities/{medicalFacility}/events": {
+        "\/v1\/medical-facilities\/{medicalFacility}\/events": {
             "get": {
                 "operationId": "v1.medical-facilities.events.index",
                 "description": "1\u3064\u306e\u65bd\u8a2d\u306e\u65b0\u898f\u30fb\u5ec3\u6b62\u30fb\u5909\u66f4\u3092\u65b0\u3057\u3044\u9806\u306b\u8fd4\u3057\u307e\u3059\u3002\u53d6\u8fbc\u3092\u59cb\u3081\u305f\u6642\u70b9\u3067\u63b2\u8f09\u3055\u308c\u3066\u3044\u305f\u65bd\u8a2d\u306f\u3001\u6700\u3082\u53e4\u3044\u8a18\u9332\u304c `origin` = \u521d\u56de\u53d6\u8fbc \u306e\u300c\u65b0\u898f\u300d\u306b\u306a\u308a\u307e\u3059\uff08\u958b\u696d\u65e5\u3067\u306f\u3042\u308a\u307e\u305b\u3093\uff09\u3002",
@@ -1398,14 +1482,14 @@
                     "200": {
                         "description": "`MedicalFacilityEventResource` \u306e\u914d\u5217",
                         "content": {
-                            "application/json": {
+                            "application\/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
                                         "data": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "#/components/schemas/MedicalFacilityEventResource"
+                                                "$ref": "#\/components\/schemas\/MedicalFacilityEventResource"
                                             }
                                         },
                                         "meta": {
@@ -1429,7 +1513,7 @@
                                                                 },
                                                                 "url": {
                                                                     "type": "string",
-                                                                    "const": "https://www.digital.go.jp/resources/open_data/public_data_license_v1.0"
+                                                                    "const": "https:\/\/www.digital.go.jp\/resources\/open_data\/public_data_license_v1.0"
                                                                 }
                                                             },
                                                             "required": [
@@ -1452,7 +1536,7 @@
                                                                 },
                                                                 "url": {
                                                                     "type": "string",
-                                                                    "const": "https://catalog.registries.digital.go.jp/rc/dataset/"
+                                                                    "const": "https:\/\/catalog.registries.digital.go.jp\/rc\/dataset\/"
                                                                 }
                                                             },
                                                             "required": [
@@ -1462,15 +1546,15 @@
                                                         },
                                                         "medical_info_net_source": {
                                                             "type": "object",
-                                                            "description": "\u753a\u4e01\u76ee\u307e\u3067\u3057\u304b\u6c42\u3081\u3089\u308c\u306a\u3044\u65bd\u8a2d\u306e\u5ea7\u6a19\u3068\u3001\u65bd\u8a2d\u306e\u8a3a\u7642\u6642\u9593\u306e\u51fa\u5178\uff08\u539a\u751f\u52b4\u50cd\u7701\u3001PDL1.0\uff09\u3002",
+                                                            "description": "\u753a\u4e01\u76ee\u307e\u3067\u3057\u304b\u6c42\u3081\u3089\u308c\u306a\u3044\u65bd\u8a2d\u306e\u5ea7\u6a19\u3068\u3001\u65bd\u8a2d\u306e\u8a3a\u7642\u6642\u9593\u30fb\u30d5\u30ea\u30ac\u30ca\u30fb\u30db\u30fc\u30e0\u30da\u30fc\u30b8\u306e\u51fa\u5178\uff08\u539a\u751f\u52b4\u50cd\u7701\u3001PDL1.0\uff09\u3002",
                                                             "properties": {
                                                                 "name": {
                                                                     "type": "string",
-                                                                    "const": "\u539a\u751f\u52b4\u50cd\u7701\u300c\u533b\u7642\u60c5\u5831\u30cd\u30c3\u30c8\u300d\u306e\u30aa\u30fc\u30d7\u30f3\u30c7\u30fc\u30bf\uff08\u6240\u5728\u5730\u5ea7\u6a19\u30fb\u8a3a\u7642\u6642\u9593\u30fb\u4f11\u8a3a\u65e5\uff09\u3092\u52a0\u5de5\u3057\u3066\u4f5c\u6210"
+                                                                    "const": "\u539a\u751f\u52b4\u50cd\u7701\u300c\u533b\u7642\u60c5\u5831\u30cd\u30c3\u30c8\u300d\u306e\u30aa\u30fc\u30d7\u30f3\u30c7\u30fc\u30bf\uff08\u6240\u5728\u5730\u5ea7\u6a19\u30fb\u8a3a\u7642\u6642\u9593\u30fb\u4f11\u8a3a\u65e5\u30fb\u30d5\u30ea\u30ac\u30ca\u30fb\u30db\u30fc\u30e0\u30da\u30fc\u30b8\uff09\u3092\u52a0\u5de5\u3057\u3066\u4f5c\u6210"
                                                                 },
                                                                 "url": {
                                                                     "type": "string",
-                                                                    "const": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/newpage_43373.html"
+                                                                    "const": "https:\/\/www.mhlw.go.jp\/stf\/seisakunitsuite\/bunya\/kenkou_iryou\/iryou\/newpage_43373.html"
                                                                 }
                                                             },
                                                             "required": [
@@ -1488,7 +1572,7 @@
                                                                 },
                                                                 "url": {
                                                                     "type": "string",
-                                                                    "const": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P04-2020.html"
+                                                                    "const": "https:\/\/nlftp.mlit.go.jp\/ksj\/gml\/datalist\/KsjTmplt-P04-2020.html"
                                                                 }
                                                             },
                                                             "required": [
@@ -1506,7 +1590,25 @@
                                                                 },
                                                                 "url": {
                                                                     "type": "string",
-                                                                    "const": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/daityo/jinkou_jinkoudoutai-setaisuu.html"
+                                                                    "const": "https:\/\/www.soumu.go.jp\/main_sosiki\/jichi_gyousei\/daityo\/jinkou_jinkoudoutai-setaisuu.html"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "name",
+                                                                "url"
+                                                            ]
+                                                        },
+                                                        "e_prescription_source": {
+                                                            "type": "object",
+                                                            "description": "\u96fb\u5b50\u51e6\u65b9\u7b8b\u3078\u306e\u5bfe\u5fdc\u306e\u51fa\u5178\uff08\u539a\u751f\u52b4\u50cd\u7701\u3001PDL1.0\uff09\u3002\u65bd\u8a2d\u306e e_prescription \u3068\u4e00\u89a7API\u306e\u7d5e\u308a\u8fbc\u307f\u306b\u4f7f\u3046\u3002",
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string",
+                                                                    "const": "\u539a\u751f\u52b4\u50cd\u7701\u300c\u96fb\u5b50\u51e6\u65b9\u305b\u3093\u5bfe\u5fdc\u306e\u533b\u7642\u6a5f\u95a2\u30fb\u85ac\u5c40\u30ea\u30b9\u30c8\u300d\u3092\u52a0\u5de5\u3057\u3066\u4f5c\u6210"
+                                                                },
+                                                                "url": {
+                                                                    "type": "string",
+                                                                    "const": "https:\/\/www.mhlw.go.jp\/stf\/seisakunitsuite\/bunya\/denshishohousen_taioushisetsu.html"
                                                                 }
                                                             },
                                                             "required": [
@@ -1524,7 +1626,7 @@
                                                                 },
                                                                 "url": {
                                                                     "type": "string",
-                                                                    "const": "https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html"
+                                                                    "const": "https:\/\/www8.cao.go.jp\/chosei\/shukujitsu\/gaiyou.html"
                                                                 }
                                                             },
                                                             "required": [
@@ -1560,6 +1662,7 @@
                                                         "medical_info_net_source",
                                                         "national_land_source",
                                                         "population_source",
+                                                        "e_prescription_source",
                                                         "holiday_source",
                                                         "sources"
                                                     ]
@@ -1579,12 +1682,12 @@
                         }
                     },
                     "404": {
-                        "$ref": "#/components/responses/ModelNotFoundException"
+                        "$ref": "#\/components\/responses\/ModelNotFoundException"
                     }
                 }
             }
         },
-        "/v1/medical-facility-events": {
+        "\/v1\/medical-facility-events": {
             "get": {
                 "operationId": "v1.medical-facility-events.index",
                 "description": "\u6bce\u6708\u306e\u516c\u958b\u30c7\u30fc\u30bf\u3092\u6bd4\u8f03\u3057\u3066\u898b\u3064\u304b\u3063\u305f\u3001\u65bd\u8a2d\u306e\u65b0\u898f\u30fb\u5ec3\u6b62\u30fb\u5909\u66f4\u3092\u65b0\u3057\u3044\u9806\u306b\u8fd4\u3057\u307e\u3059\u3002`occurred_on` \u306f\u5909\u5316\u304c\u8f09\u3063\u305f\u516c\u958b\u30c7\u30fc\u30bf\u306e\u65e5\u4ed8\u3067\u3001\u5b9f\u969b\u306e\u958b\u696d\u65e5\u30fb\u5ec3\u6b62\u65e5\u3067\u306f\u3042\u308a\u307e\u305b\u3093\u3002`facility` \u306f\u65bd\u8a2d\u306e\u73fe\u5728\u306e\u60c5\u5831\u3067\u3001\u5909\u5316\u306e\u6642\u70b9\u306e\u60c5\u5831\u3067\u306f\u3042\u308a\u307e\u305b\u3093\u3002\u53d6\u8fbc\u3092\u59cb\u3081\u305f\u6642\u70b9\u306e\u30c7\u30fc\u30bf\uff08\u521d\u56de\u53d6\u8fbc\uff09\u3068\u3001\u53d6\u308a\u8fbc\u307f\u76f4\u3057\u306b\u3088\u308b\u5dee\u5206\uff08\u518d\u51e6\u7406\uff09\u306f\u542b\u307f\u307e\u305b\u3093\u3002\u524d\u56de\u306e\u78ba\u8a8d\u4ee5\u964d\u306b\u898b\u3064\u304b\u3063\u305f\u5909\u5316\u306f\u3001`detected_since` \u3067\u53d6\u5f97\u3057\u3066\u304f\u3060\u3055\u3044\u3002",
@@ -1596,9 +1699,9 @@
                     {
                         "name": "event_type",
                         "in": "query",
-                        "description": "\u5909\u5316\u306e\u7a2e\u985e\uff081: \u65b0\u898f / 2: \u5ec3\u6b62 / 3: \u5909\u66f4\uff09",
+                        "description": "\u5909\u5316\u306e\u7a2e\u985e\uff081: \u65b0\u898f \/ 2: \u5ec3\u6b62 \/ 3: \u5909\u66f4\uff09",
                         "schema": {
-                            "$ref": "#/components/schemas/MedicalFacilityEventType"
+                            "$ref": "#\/components\/schemas\/MedicalFacilityEventType"
                         }
                     },
                     {
@@ -1633,7 +1736,7 @@
                         "in": "query",
                         "description": "\u65bd\u8a2d\u306e\u90fd\u9053\u5e9c\u770c\u30b3\u30fc\u30c9\uff08JIS X 0401\u306e2\u6841\u300101\u301c47\uff09",
                         "schema": {
-                            "$ref": "#/components/schemas/Prefecture"
+                            "$ref": "#\/components\/schemas\/Prefecture"
                         }
                     },
                     {
@@ -1641,7 +1744,7 @@
                         "in": "query",
                         "description": "\u65bd\u8a2d\u306e\u7a2e\u5225",
                         "schema": {
-                            "$ref": "#/components/schemas/InstitutionType"
+                            "$ref": "#\/components\/schemas\/InstitutionType"
                         }
                     },
                     {
@@ -1669,14 +1772,14 @@
                     "200": {
                         "description": "`MedicalFacilityEventWithFacilityResource` \u306e\u30da\u30fc\u30b8",
                         "content": {
-                            "application/json": {
+                            "application\/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
                                         "data": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "#/components/schemas/MedicalFacilityEventWithFacilityResource"
+                                                "$ref": "#\/components\/schemas\/MedicalFacilityEventWithFacilityResource"
                                             }
                                         },
                                         "links": {
@@ -1808,7 +1911,7 @@
                                                                 },
                                                                 "url": {
                                                                     "type": "string",
-                                                                    "const": "https://www.digital.go.jp/resources/open_data/public_data_license_v1.0"
+                                                                    "const": "https:\/\/www.digital.go.jp\/resources\/open_data\/public_data_license_v1.0"
                                                                 }
                                                             },
                                                             "required": [
@@ -1831,7 +1934,7 @@
                                                                 },
                                                                 "url": {
                                                                     "type": "string",
-                                                                    "const": "https://catalog.registries.digital.go.jp/rc/dataset/"
+                                                                    "const": "https:\/\/catalog.registries.digital.go.jp\/rc\/dataset\/"
                                                                 }
                                                             },
                                                             "required": [
@@ -1841,15 +1944,15 @@
                                                         },
                                                         "medical_info_net_source": {
                                                             "type": "object",
-                                                            "description": "\u753a\u4e01\u76ee\u307e\u3067\u3057\u304b\u6c42\u3081\u3089\u308c\u306a\u3044\u65bd\u8a2d\u306e\u5ea7\u6a19\u3068\u3001\u65bd\u8a2d\u306e\u8a3a\u7642\u6642\u9593\u306e\u51fa\u5178\uff08\u539a\u751f\u52b4\u50cd\u7701\u3001PDL1.0\uff09\u3002",
+                                                            "description": "\u753a\u4e01\u76ee\u307e\u3067\u3057\u304b\u6c42\u3081\u3089\u308c\u306a\u3044\u65bd\u8a2d\u306e\u5ea7\u6a19\u3068\u3001\u65bd\u8a2d\u306e\u8a3a\u7642\u6642\u9593\u30fb\u30d5\u30ea\u30ac\u30ca\u30fb\u30db\u30fc\u30e0\u30da\u30fc\u30b8\u306e\u51fa\u5178\uff08\u539a\u751f\u52b4\u50cd\u7701\u3001PDL1.0\uff09\u3002",
                                                             "properties": {
                                                                 "name": {
                                                                     "type": "string",
-                                                                    "const": "\u539a\u751f\u52b4\u50cd\u7701\u300c\u533b\u7642\u60c5\u5831\u30cd\u30c3\u30c8\u300d\u306e\u30aa\u30fc\u30d7\u30f3\u30c7\u30fc\u30bf\uff08\u6240\u5728\u5730\u5ea7\u6a19\u30fb\u8a3a\u7642\u6642\u9593\u30fb\u4f11\u8a3a\u65e5\uff09\u3092\u52a0\u5de5\u3057\u3066\u4f5c\u6210"
+                                                                    "const": "\u539a\u751f\u52b4\u50cd\u7701\u300c\u533b\u7642\u60c5\u5831\u30cd\u30c3\u30c8\u300d\u306e\u30aa\u30fc\u30d7\u30f3\u30c7\u30fc\u30bf\uff08\u6240\u5728\u5730\u5ea7\u6a19\u30fb\u8a3a\u7642\u6642\u9593\u30fb\u4f11\u8a3a\u65e5\u30fb\u30d5\u30ea\u30ac\u30ca\u30fb\u30db\u30fc\u30e0\u30da\u30fc\u30b8\uff09\u3092\u52a0\u5de5\u3057\u3066\u4f5c\u6210"
                                                                 },
                                                                 "url": {
                                                                     "type": "string",
-                                                                    "const": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/newpage_43373.html"
+                                                                    "const": "https:\/\/www.mhlw.go.jp\/stf\/seisakunitsuite\/bunya\/kenkou_iryou\/iryou\/newpage_43373.html"
                                                                 }
                                                             },
                                                             "required": [
@@ -1867,7 +1970,7 @@
                                                                 },
                                                                 "url": {
                                                                     "type": "string",
-                                                                    "const": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P04-2020.html"
+                                                                    "const": "https:\/\/nlftp.mlit.go.jp\/ksj\/gml\/datalist\/KsjTmplt-P04-2020.html"
                                                                 }
                                                             },
                                                             "required": [
@@ -1885,7 +1988,25 @@
                                                                 },
                                                                 "url": {
                                                                     "type": "string",
-                                                                    "const": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/daityo/jinkou_jinkoudoutai-setaisuu.html"
+                                                                    "const": "https:\/\/www.soumu.go.jp\/main_sosiki\/jichi_gyousei\/daityo\/jinkou_jinkoudoutai-setaisuu.html"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "name",
+                                                                "url"
+                                                            ]
+                                                        },
+                                                        "e_prescription_source": {
+                                                            "type": "object",
+                                                            "description": "\u96fb\u5b50\u51e6\u65b9\u7b8b\u3078\u306e\u5bfe\u5fdc\u306e\u51fa\u5178\uff08\u539a\u751f\u52b4\u50cd\u7701\u3001PDL1.0\uff09\u3002\u65bd\u8a2d\u306e e_prescription \u3068\u4e00\u89a7API\u306e\u7d5e\u308a\u8fbc\u307f\u306b\u4f7f\u3046\u3002",
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string",
+                                                                    "const": "\u539a\u751f\u52b4\u50cd\u7701\u300c\u96fb\u5b50\u51e6\u65b9\u305b\u3093\u5bfe\u5fdc\u306e\u533b\u7642\u6a5f\u95a2\u30fb\u85ac\u5c40\u30ea\u30b9\u30c8\u300d\u3092\u52a0\u5de5\u3057\u3066\u4f5c\u6210"
+                                                                },
+                                                                "url": {
+                                                                    "type": "string",
+                                                                    "const": "https:\/\/www.mhlw.go.jp\/stf\/seisakunitsuite\/bunya\/denshishohousen_taioushisetsu.html"
                                                                 }
                                                             },
                                                             "required": [
@@ -1903,7 +2024,7 @@
                                                                 },
                                                                 "url": {
                                                                     "type": "string",
-                                                                    "const": "https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html"
+                                                                    "const": "https:\/\/www8.cao.go.jp\/chosei\/shukujitsu\/gaiyou.html"
                                                                 }
                                                             },
                                                             "required": [
@@ -1939,6 +2060,7 @@
                                                         "medical_info_net_source",
                                                         "national_land_source",
                                                         "population_source",
+                                                        "e_prescription_source",
                                                         "holiday_source",
                                                         "sources"
                                                     ]
@@ -1968,12 +2090,12 @@
                         }
                     },
                     "422": {
-                        "$ref": "#/components/responses/ValidationException"
+                        "$ref": "#\/components\/responses\/ValidationException"
                     }
                 }
             }
         },
-        "/v1/stats/facility-events": {
+        "\/v1\/stats\/facility-events": {
             "get": {
                 "operationId": "v1.stats.facility-events",
                 "description": "\u6bce\u6708\u306e\u516c\u958b\u30c7\u30fc\u30bf\u3092\u6bd4\u8f03\u3057\u3066\u898b\u3064\u304b\u3063\u305f\u65bd\u8a2d\u306e\u65b0\u898f\u30fb\u5ec3\u6b62\uff08\u5909\u5316\u306e\u4e00\u89a7\u3068\u540c\u3058\u300c\u691c\u77e5\u300d\u306e\u8a18\u9332\uff09\u3092\u3001`group_by` \u3054\u3068\u306b\u6570\u3048\u307e\u3059\u3002\u521d\u56de\u53d6\u8fbc\u3068\u53d6\u308a\u8fbc\u307f\u76f4\u3057\uff08\u518d\u51e6\u7406\uff09\u306e\u8a18\u9332\u306f\u542b\u307f\u307e\u305b\u3093\u3002\u8a18\u9332\u306f\u904b\u7528\u3092\u59cb\u3081\u3066\u304b\u3089\u84c4\u7a4d\u3055\u308c\u308b\u305f\u3081\u3001\u6700\u521d\u306e1\u301c2\u304b\u6708\u306f0\u4ef6\u306b\u306a\u308a\u307e\u3059\u3002\n\n- `month`: \u671f\u9593\u5185\u306e\u3059\u3079\u3066\u306e\u6708\u3092\u53e4\u3044\u9806\u306b\u8fd4\u3057\u307e\u3059\uff08\u5909\u5316\u304c\u306a\u3044\u6708\u306f0\uff09\u3002\u6708\u306f\u5909\u5316\u304c\u8f09\u3063\u305f\u516c\u958b\u30c7\u30fc\u30bf\u306e\u6708\u3067\u3001\u5b9f\u969b\u306e\u958b\u696d\u30fb\u5ec3\u6b62\u306e\u6708\u3067\u306f\u3042\u308a\u307e\u305b\u3093\u3002\n- `municipality`: \u4ef6\u6570\u306e\u591a\u3044\u9806\u3067\u3059\u3002\u4f4f\u6240\u304b\u3089\u5e02\u533a\u753a\u6751\u3092\u5224\u5b9a\u3067\u304d\u306a\u3044\u65bd\u8a2d\u306f `key`\u30fb`label` \u304c null \u306e1\u4ef6\u306b\u307e\u3068\u3081\u307e\u3059\u3002\n\n\u65bd\u8a2d\u306e\u7d5e\u308a\u8fbc\u307f\uff08\u90fd\u9053\u5e9c\u770c\u30fb\u5e02\u533a\u753a\u6751\u30fb\u7a2e\u5225\u30fb\u8a3a\u7642\u79d1\u76ee\uff09\u306f\u3001\u65bd\u8a2d\u306e\u73fe\u5728\u306e\u5185\u5bb9\u3067\u5224\u5b9a\u3057\u307e\u3059\u3002",
@@ -1999,7 +2121,7 @@
                         "name": "event_type",
                         "in": "query",
                         "required": true,
-                        "description": "\u5909\u5316\u306e\u7a2e\u985e\uff081: \u65b0\u898f / 2: \u5ec3\u6b62\uff09",
+                        "description": "\u5909\u5316\u306e\u7a2e\u985e\uff081: \u65b0\u898f \/ 2: \u5ec3\u6b62\uff09",
                         "schema": {
                             "type": "integer",
                             "enum": [
@@ -2031,7 +2153,7 @@
                         "in": "query",
                         "description": "\u65bd\u8a2d\u306e\u90fd\u9053\u5e9c\u770c\u30b3\u30fc\u30c9\uff08JIS X 0401\u306e2\u6841\u300101\u301c47\uff09",
                         "schema": {
-                            "$ref": "#/components/schemas/Prefecture"
+                            "$ref": "#\/components\/schemas\/Prefecture"
                         }
                     },
                     {
@@ -2048,7 +2170,7 @@
                         "in": "query",
                         "description": "\u65bd\u8a2d\u306e\u7a2e\u5225",
                         "schema": {
-                            "$ref": "#/components/schemas/InstitutionType"
+                            "$ref": "#\/components\/schemas\/InstitutionType"
                         }
                     },
                     {
@@ -2056,7 +2178,7 @@
                         "in": "query",
                         "description": "\u65bd\u8a2d\u306e\u8a3a\u7642\u79d1\u76ee\u306e\u5927\u5206\u985e\uff08\u73fe\u5728\u306e\u8a3a\u7642\u79d1\u76ee\u3067\u5224\u5b9a\uff09",
                         "schema": {
-                            "$ref": "#/components/schemas/DepartmentBaseCategory"
+                            "$ref": "#\/components\/schemas\/DepartmentBaseCategory"
                         }
                     }
                 ],
@@ -2064,7 +2186,7 @@
                     "200": {
                         "description": "",
                         "content": {
-                            "application/json": {
+                            "application\/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
@@ -2151,7 +2273,7 @@
                                                                 },
                                                                 "url": {
                                                                     "type": "string",
-                                                                    "const": "https://www.digital.go.jp/resources/open_data/public_data_license_v1.0"
+                                                                    "const": "https:\/\/www.digital.go.jp\/resources\/open_data\/public_data_license_v1.0"
                                                                 }
                                                             },
                                                             "required": [
@@ -2174,7 +2296,7 @@
                                                                 },
                                                                 "url": {
                                                                     "type": "string",
-                                                                    "const": "https://catalog.registries.digital.go.jp/rc/dataset/"
+                                                                    "const": "https:\/\/catalog.registries.digital.go.jp\/rc\/dataset\/"
                                                                 }
                                                             },
                                                             "required": [
@@ -2184,15 +2306,15 @@
                                                         },
                                                         "medical_info_net_source": {
                                                             "type": "object",
-                                                            "description": "\u753a\u4e01\u76ee\u307e\u3067\u3057\u304b\u6c42\u3081\u3089\u308c\u306a\u3044\u65bd\u8a2d\u306e\u5ea7\u6a19\u3068\u3001\u65bd\u8a2d\u306e\u8a3a\u7642\u6642\u9593\u306e\u51fa\u5178\uff08\u539a\u751f\u52b4\u50cd\u7701\u3001PDL1.0\uff09\u3002",
+                                                            "description": "\u753a\u4e01\u76ee\u307e\u3067\u3057\u304b\u6c42\u3081\u3089\u308c\u306a\u3044\u65bd\u8a2d\u306e\u5ea7\u6a19\u3068\u3001\u65bd\u8a2d\u306e\u8a3a\u7642\u6642\u9593\u30fb\u30d5\u30ea\u30ac\u30ca\u30fb\u30db\u30fc\u30e0\u30da\u30fc\u30b8\u306e\u51fa\u5178\uff08\u539a\u751f\u52b4\u50cd\u7701\u3001PDL1.0\uff09\u3002",
                                                             "properties": {
                                                                 "name": {
                                                                     "type": "string",
-                                                                    "const": "\u539a\u751f\u52b4\u50cd\u7701\u300c\u533b\u7642\u60c5\u5831\u30cd\u30c3\u30c8\u300d\u306e\u30aa\u30fc\u30d7\u30f3\u30c7\u30fc\u30bf\uff08\u6240\u5728\u5730\u5ea7\u6a19\u30fb\u8a3a\u7642\u6642\u9593\u30fb\u4f11\u8a3a\u65e5\uff09\u3092\u52a0\u5de5\u3057\u3066\u4f5c\u6210"
+                                                                    "const": "\u539a\u751f\u52b4\u50cd\u7701\u300c\u533b\u7642\u60c5\u5831\u30cd\u30c3\u30c8\u300d\u306e\u30aa\u30fc\u30d7\u30f3\u30c7\u30fc\u30bf\uff08\u6240\u5728\u5730\u5ea7\u6a19\u30fb\u8a3a\u7642\u6642\u9593\u30fb\u4f11\u8a3a\u65e5\u30fb\u30d5\u30ea\u30ac\u30ca\u30fb\u30db\u30fc\u30e0\u30da\u30fc\u30b8\uff09\u3092\u52a0\u5de5\u3057\u3066\u4f5c\u6210"
                                                                 },
                                                                 "url": {
                                                                     "type": "string",
-                                                                    "const": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/newpage_43373.html"
+                                                                    "const": "https:\/\/www.mhlw.go.jp\/stf\/seisakunitsuite\/bunya\/kenkou_iryou\/iryou\/newpage_43373.html"
                                                                 }
                                                             },
                                                             "required": [
@@ -2210,7 +2332,7 @@
                                                                 },
                                                                 "url": {
                                                                     "type": "string",
-                                                                    "const": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P04-2020.html"
+                                                                    "const": "https:\/\/nlftp.mlit.go.jp\/ksj\/gml\/datalist\/KsjTmplt-P04-2020.html"
                                                                 }
                                                             },
                                                             "required": [
@@ -2228,7 +2350,25 @@
                                                                 },
                                                                 "url": {
                                                                     "type": "string",
-                                                                    "const": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/daityo/jinkou_jinkoudoutai-setaisuu.html"
+                                                                    "const": "https:\/\/www.soumu.go.jp\/main_sosiki\/jichi_gyousei\/daityo\/jinkou_jinkoudoutai-setaisuu.html"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "name",
+                                                                "url"
+                                                            ]
+                                                        },
+                                                        "e_prescription_source": {
+                                                            "type": "object",
+                                                            "description": "\u96fb\u5b50\u51e6\u65b9\u7b8b\u3078\u306e\u5bfe\u5fdc\u306e\u51fa\u5178\uff08\u539a\u751f\u52b4\u50cd\u7701\u3001PDL1.0\uff09\u3002\u65bd\u8a2d\u306e e_prescription \u3068\u4e00\u89a7API\u306e\u7d5e\u308a\u8fbc\u307f\u306b\u4f7f\u3046\u3002",
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string",
+                                                                    "const": "\u539a\u751f\u52b4\u50cd\u7701\u300c\u96fb\u5b50\u51e6\u65b9\u305b\u3093\u5bfe\u5fdc\u306e\u533b\u7642\u6a5f\u95a2\u30fb\u85ac\u5c40\u30ea\u30b9\u30c8\u300d\u3092\u52a0\u5de5\u3057\u3066\u4f5c\u6210"
+                                                                },
+                                                                "url": {
+                                                                    "type": "string",
+                                                                    "const": "https:\/\/www.mhlw.go.jp\/stf\/seisakunitsuite\/bunya\/denshishohousen_taioushisetsu.html"
                                                                 }
                                                             },
                                                             "required": [
@@ -2246,7 +2386,7 @@
                                                                 },
                                                                 "url": {
                                                                     "type": "string",
-                                                                    "const": "https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html"
+                                                                    "const": "https:\/\/www8.cao.go.jp\/chosei\/shukujitsu\/gaiyou.html"
                                                                 }
                                                             },
                                                             "required": [
@@ -2282,6 +2422,7 @@
                                                         "medical_info_net_source",
                                                         "national_land_source",
                                                         "population_source",
+                                                        "e_prescription_source",
                                                         "holiday_source",
                                                         "sources"
                                                     ]
@@ -2303,12 +2444,12 @@
                         }
                     },
                     "422": {
-                        "$ref": "#/components/responses/ValidationException"
+                        "$ref": "#\/components\/responses\/ValidationException"
                     }
                 }
             }
         },
-        "/v1/medical-facilities/{medicalFacility}/opening-hours": {
+        "\/v1\/medical-facilities\/{medicalFacility}\/opening-hours": {
             "get": {
                 "operationId": "v1.medical-facilities.opening-hours",
                 "description": "\u539a\u751f\u52b4\u50cd\u7701\u300c\u533b\u7642\u60c5\u5831\u30cd\u30c3\u30c8\u300d\u306e\u30aa\u30fc\u30d7\u30f3\u30c7\u30fc\u30bf\uff08\u5e742\u56de\u30016\u6708\u30fb12\u6708\u306b\u66f4\u65b0\uff09\u306b\u3042\u308b\u30011\u3064\u306e\u65bd\u8a2d\u306e\u8a3a\u7642\u6642\u9593\u3068\u4f11\u8a3a\u65e5\u3092\u8fd4\u3057\u307e\u3059\u3002\u5730\u65b9\u539a\u751f\u5c40\u306e\u30c7\u30fc\u30bf\u3068\u306f\u5171\u901a\u306e\u30b3\u30fc\u30c9\u304c\u306a\u3044\u305f\u3081\u3001\u540c\u3058\u5e02\u533a\u753a\u6751\u30fb\u65bd\u8a2d\u7a2e\u5225\u3067\u540d\u79f0\uff08\u307e\u305f\u306f\u6240\u5728\u5730\uff09\u304c\u4e00\u81f4\u3059\u308b\u65bd\u8a2d\u304c1\u3064\u3060\u3051\u898b\u3064\u304b\u3063\u305f\u3068\u304d\u306b\u8fd4\u3057\u3001\u898b\u3064\u304b\u3089\u306a\u3044\u3068\u304d\u306f `data` \u304c `null` \u306b\u306a\u308a\u307e\u3059\uff08\u7167\u5408\u306f\u6bce\u671d\u884c\u3046\u305f\u3081\u3001\u65b0\u3057\u304f\u8f09\u3063\u305f\u65bd\u8a2d\u306f\u7fcc\u671d\u304b\u3089\u8fd4\u308a\u307e\u3059\uff09\u3002`published_on` \u306e\u6642\u70b9\u306e\u60c5\u5831\u3067\u3001\u81e8\u6642\u306e\u4f11\u8a3a\u3084\u6700\u8fd1\u306e\u5909\u66f4\u306f\u542b\u307f\u307e\u305b\u3093\u3002\n\n`schedules` \u306f\u540c\u3058\u8a3a\u7642\u6642\u9593\u306e\u8a3a\u7642\u79d1\u3092\u307e\u3068\u3081\u305f\u3082\u306e\u3067\u3001`slots` \u306f\u6642\u9593\u5e2f\uff08\u5348\u524d\u30fb\u5348\u5f8c\u306a\u3069\uff09\u3054\u3068\u306e\u66dc\u65e5\u5225\u306e\u6642\u523b\u3067\u3059\uff08`day` \u306e `holiday` \u306f\u795d\u65e5\uff09\u3002\u6642\u523b\u306f\u516c\u958b\u30c7\u30fc\u30bf\u306e\u307e\u307e `HH:MM` \u3067\u8fd4\u3057\u3001\u7d42\u4e86\u304c\u958b\u59cb\u3088\u308a\u65e9\u3044\u3082\u306e\uff08\u591c\u9593\u306a\u3069\uff09\u3082\u305d\u306e\u307e\u307e\u3067\u3059\u3002\u85ac\u5c40\u306f `departments` \u304c\u7a7a\u3067\u3001\u53d7\u4ed8\u6642\u9593\u306f\u3042\u308a\u307e\u305b\u3093\u3002`closures` \u306f\u5b9a\u4f11\u65e5\u3067\u3001`weekly` \u304c\u6bce\u9031\u306e\u4f11\u307f\u3001`monthly` \u304c\u300c\u7b2c2\u6c34\u66dc\u300d\u306e\u3088\u3046\u306a\u6c7a\u307e\u3063\u305f\u9031\u306e\u4f11\u307f\u3001`holidays` \u304c\u795d\u65e5\u306b\u4f11\u3080\u304b\u3001`other` \u304c\u305d\u306e\u4ed6\uff08\u81ea\u7531\u8a18\u8ff0\uff09\u3067\u3059\u3002",
@@ -2331,7 +2472,7 @@
                     "200": {
                         "description": "",
                         "content": {
-                            "application/json": {
+                            "application\/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
@@ -2605,7 +2746,7 @@
                                                                 },
                                                                 "url": {
                                                                     "type": "string",
-                                                                    "const": "https://www.digital.go.jp/resources/open_data/public_data_license_v1.0"
+                                                                    "const": "https:\/\/www.digital.go.jp\/resources\/open_data\/public_data_license_v1.0"
                                                                 }
                                                             },
                                                             "required": [
@@ -2628,7 +2769,7 @@
                                                                 },
                                                                 "url": {
                                                                     "type": "string",
-                                                                    "const": "https://catalog.registries.digital.go.jp/rc/dataset/"
+                                                                    "const": "https:\/\/catalog.registries.digital.go.jp\/rc\/dataset\/"
                                                                 }
                                                             },
                                                             "required": [
@@ -2638,15 +2779,15 @@
                                                         },
                                                         "medical_info_net_source": {
                                                             "type": "object",
-                                                            "description": "\u753a\u4e01\u76ee\u307e\u3067\u3057\u304b\u6c42\u3081\u3089\u308c\u306a\u3044\u65bd\u8a2d\u306e\u5ea7\u6a19\u3068\u3001\u65bd\u8a2d\u306e\u8a3a\u7642\u6642\u9593\u306e\u51fa\u5178\uff08\u539a\u751f\u52b4\u50cd\u7701\u3001PDL1.0\uff09\u3002",
+                                                            "description": "\u753a\u4e01\u76ee\u307e\u3067\u3057\u304b\u6c42\u3081\u3089\u308c\u306a\u3044\u65bd\u8a2d\u306e\u5ea7\u6a19\u3068\u3001\u65bd\u8a2d\u306e\u8a3a\u7642\u6642\u9593\u30fb\u30d5\u30ea\u30ac\u30ca\u30fb\u30db\u30fc\u30e0\u30da\u30fc\u30b8\u306e\u51fa\u5178\uff08\u539a\u751f\u52b4\u50cd\u7701\u3001PDL1.0\uff09\u3002",
                                                             "properties": {
                                                                 "name": {
                                                                     "type": "string",
-                                                                    "const": "\u539a\u751f\u52b4\u50cd\u7701\u300c\u533b\u7642\u60c5\u5831\u30cd\u30c3\u30c8\u300d\u306e\u30aa\u30fc\u30d7\u30f3\u30c7\u30fc\u30bf\uff08\u6240\u5728\u5730\u5ea7\u6a19\u30fb\u8a3a\u7642\u6642\u9593\u30fb\u4f11\u8a3a\u65e5\uff09\u3092\u52a0\u5de5\u3057\u3066\u4f5c\u6210"
+                                                                    "const": "\u539a\u751f\u52b4\u50cd\u7701\u300c\u533b\u7642\u60c5\u5831\u30cd\u30c3\u30c8\u300d\u306e\u30aa\u30fc\u30d7\u30f3\u30c7\u30fc\u30bf\uff08\u6240\u5728\u5730\u5ea7\u6a19\u30fb\u8a3a\u7642\u6642\u9593\u30fb\u4f11\u8a3a\u65e5\u30fb\u30d5\u30ea\u30ac\u30ca\u30fb\u30db\u30fc\u30e0\u30da\u30fc\u30b8\uff09\u3092\u52a0\u5de5\u3057\u3066\u4f5c\u6210"
                                                                 },
                                                                 "url": {
                                                                     "type": "string",
-                                                                    "const": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/newpage_43373.html"
+                                                                    "const": "https:\/\/www.mhlw.go.jp\/stf\/seisakunitsuite\/bunya\/kenkou_iryou\/iryou\/newpage_43373.html"
                                                                 }
                                                             },
                                                             "required": [
@@ -2664,7 +2805,7 @@
                                                                 },
                                                                 "url": {
                                                                     "type": "string",
-                                                                    "const": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P04-2020.html"
+                                                                    "const": "https:\/\/nlftp.mlit.go.jp\/ksj\/gml\/datalist\/KsjTmplt-P04-2020.html"
                                                                 }
                                                             },
                                                             "required": [
@@ -2682,7 +2823,25 @@
                                                                 },
                                                                 "url": {
                                                                     "type": "string",
-                                                                    "const": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/daityo/jinkou_jinkoudoutai-setaisuu.html"
+                                                                    "const": "https:\/\/www.soumu.go.jp\/main_sosiki\/jichi_gyousei\/daityo\/jinkou_jinkoudoutai-setaisuu.html"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "name",
+                                                                "url"
+                                                            ]
+                                                        },
+                                                        "e_prescription_source": {
+                                                            "type": "object",
+                                                            "description": "\u96fb\u5b50\u51e6\u65b9\u7b8b\u3078\u306e\u5bfe\u5fdc\u306e\u51fa\u5178\uff08\u539a\u751f\u52b4\u50cd\u7701\u3001PDL1.0\uff09\u3002\u65bd\u8a2d\u306e e_prescription \u3068\u4e00\u89a7API\u306e\u7d5e\u308a\u8fbc\u307f\u306b\u4f7f\u3046\u3002",
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string",
+                                                                    "const": "\u539a\u751f\u52b4\u50cd\u7701\u300c\u96fb\u5b50\u51e6\u65b9\u305b\u3093\u5bfe\u5fdc\u306e\u533b\u7642\u6a5f\u95a2\u30fb\u85ac\u5c40\u30ea\u30b9\u30c8\u300d\u3092\u52a0\u5de5\u3057\u3066\u4f5c\u6210"
+                                                                },
+                                                                "url": {
+                                                                    "type": "string",
+                                                                    "const": "https:\/\/www.mhlw.go.jp\/stf\/seisakunitsuite\/bunya\/denshishohousen_taioushisetsu.html"
                                                                 }
                                                             },
                                                             "required": [
@@ -2700,7 +2859,7 @@
                                                                 },
                                                                 "url": {
                                                                     "type": "string",
-                                                                    "const": "https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html"
+                                                                    "const": "https:\/\/www8.cao.go.jp\/chosei\/shukujitsu\/gaiyou.html"
                                                                 }
                                                             },
                                                             "required": [
@@ -2736,6 +2895,7 @@
                                                         "medical_info_net_source",
                                                         "national_land_source",
                                                         "population_source",
+                                                        "e_prescription_source",
                                                         "holiday_source",
                                                         "sources"
                                                     ]
@@ -2755,12 +2915,12 @@
                         }
                     },
                     "404": {
-                        "$ref": "#/components/responses/ModelNotFoundException"
+                        "$ref": "#\/components\/responses\/ModelNotFoundException"
                     }
                 }
             }
         },
-        "/v1/stats/facilities": {
+        "\/v1\/stats\/facilities": {
             "get": {
                 "operationId": "v1.stats.facilities",
                 "description": "\u7d5e\u308a\u8fbc\u3093\u3060\u65bd\u8a2d\u3092 `group_by` \u3054\u3068\u306b\u6570\u3048\u307e\u3059\u3002\u7d5e\u308a\u8fbc\u307f\u306e\u6761\u4ef6\u306f\u4e00\u89a7API\u3068\u540c\u3058\u3067\u3059\u3002\u300c\u671f\u9593\u5185\u306b\u65b0\u898f\u958b\u696d\u3057\u305f\u65bd\u8a2d\u300d\u306f\u3001`designation_reason=\u65b0\u898f` \u3068 `designated_from`\u30fb`designated_to` \u3067\u6570\u3048\u307e\u3059\uff08\u4fdd\u967a\u533b\u7642\u6a5f\u95a2\u306e\u6307\u5b9a\u306f6\u5e74\u3054\u3068\u306b\u66f4\u65b0\u3055\u308c\u307e\u3059\u304c\u3001\u6307\u5b9a\u5e74\u6708\u65e5\u306f\u6700\u521d\u306e\u6307\u5b9a\u65e5\u306e\u307e\u307e\u3067\u3059\uff09\u3002\n\n- `month`: \u671f\u9593\u5185\u306e\u3059\u3079\u3066\u306e\u6708\u3092\u53e4\u3044\u9806\u306b\u8fd4\u3057\u307e\u3059\uff08\u65bd\u8a2d\u304c\u306a\u3044\u6708\u306f0\uff09\u3002\n- `municipality`: \u65bd\u8a2d\u6570\u306e\u591a\u3044\u9806\u3067\u3059\u3002\u4f4f\u6240\u304b\u3089\u5e02\u533a\u753a\u6751\u3092\u5224\u5b9a\u3067\u304d\u306a\u3044\u65bd\u8a2d\u306f `key`\u30fb`label` \u304c null \u306e1\u4ef6\u306b\u307e\u3068\u3081\u307e\u3059\u3002\n- `department_category`: \u65bd\u8a2d\u6570\u306e\u591a\u3044\u9806\u3067\u3059\u30021\u3064\u306e\u65bd\u8a2d\u304c\u8907\u6570\u306e\u8a3a\u7642\u79d1\u76ee\u306b\u6570\u3048\u3089\u308c\u308b\u305f\u3081\u3001`count` \u306e\u5408\u8a08\u306f `meta.total` \u3068\u4e00\u81f4\u3057\u307e\u305b\u3093\u3002\n\n`municipality` \u306e\u3068\u304d\u306f\u3001\u5404\u5e02\u533a\u753a\u6751\u306e\u4eba\u53e3\uff08\u7dcf\u52d9\u7701\u300c\u4f4f\u6c11\u57fa\u672c\u53f0\u5e33\u306b\u57fa\u3065\u304f\u4eba\u53e3\u300d\u3001`meta.population_as_of` \u6642\u70b9\uff09\u3068\u4eba\u53e31\u4e07\u4eba\u3042\u305f\u308a\u306e\u4ef6\u6570\uff08`count_per_10k`\uff09\u3082\u8fd4\u3057\u307e\u3059\u3002\u4f4f\u6c11\u767b\u9332\u4e0a\u306e\u4eba\u53e3\u306e\u305f\u3081\u3001\u663c\u9593\u4eba\u53e3\u306e\u591a\u3044\u90fd\u5fc3\u90e8\u3067\u306f\u9ad8\u304f\u51fa\u307e\u3059\u3002\u307b\u304b\u306e `group_by` \u3068\u3001\u4eba\u53e3\u304c\u308f\u304b\u3089\u306a\u3044\u5e02\u533a\u753a\u6751\u3067\u306f null \u3067\u3059\u3002",
@@ -2773,9 +2933,9 @@
                         "name": "group_by",
                         "in": "query",
                         "required": true,
-                        "description": "\u96c6\u8a08\u306e\u5358\u4f4d\u3002`month`\uff08\u6307\u5b9a\u5e74\u6708\u65e5\u306e\u6708\uff09\u3001`municipality`\uff08\u5e02\u533a\u753a\u6751\uff09\u3001`department_category`\uff08\u8a3a\u7642\u79d1\u76ee\u306e\u5927\u5206\u985e\uff09\u3002`month` \u306e\u3068\u304d\u306f `designated_from`\u30fb`designated_to` \u304c\u5fc5\u9808\u3067\u3001\u671f\u9593\u306f60\u304b\u6708\u307e\u3067\n| |\n|---|\n| `month` <br/> \u6307\u5b9a\u5e74\u6708\u65e5\u306e\u6708\uff08\u671f\u9593\u5185\u306e\u3059\u3079\u3066\u306e\u6708\u3092\u8fd4\u3059\uff09 |\n| `municipality` <br/> \u5e02\u533a\u753a\u6751 |\n| `department_category` <br/> \u8a3a\u7642\u79d1\u76ee\u306e\u5927\u5206\u985e\uff08\u8907\u6570\u306e\u5927\u5206\u985e\u3092\u6301\u3064\u65bd\u8a2d\u306f\u3001\u305d\u308c\u305e\u308c\u306b\u6570\u3048\u308b\uff09 |",
+                        "description": "\u96c6\u8a08\u306e\u5358\u4f4d\u3002`month`\uff08\u6307\u5b9a\u5e74\u6708\u65e5\u306e\u6708\uff09\u3001`municipality`\uff08\u5e02\u533a\u753a\u6751\uff09\u3001`department_category`\uff08\u8a3a\u7642\u79d1\u76ee\u306e\u5927\u5206\u985e\uff09\u3002`month` \u306e\u3068\u304d\u306f `designated_from`\u30fb`designated_to` \u304c\u5fc5\u9808\u3067\u3001\u671f\u9593\u306f60\u304b\u6708\u307e\u3067\n| |\n|---|\n| `month` <br\/> \u6307\u5b9a\u5e74\u6708\u65e5\u306e\u6708\uff08\u671f\u9593\u5185\u306e\u3059\u3079\u3066\u306e\u6708\u3092\u8fd4\u3059\uff09 |\n| `municipality` <br\/> \u5e02\u533a\u753a\u6751 |\n| `department_category` <br\/> \u8a3a\u7642\u79d1\u76ee\u306e\u5927\u5206\u985e\uff08\u8907\u6570\u306e\u5927\u5206\u985e\u3092\u6301\u3064\u65bd\u8a2d\u306f\u3001\u305d\u308c\u305e\u308c\u306b\u6570\u3048\u308b\uff09 |",
                         "schema": {
-                            "$ref": "#/components/schemas/FacilityStatsGrouping"
+                            "$ref": "#\/components\/schemas\/FacilityStatsGrouping"
                         }
                     },
                     {
@@ -2783,7 +2943,7 @@
                         "in": "query",
                         "description": "\u90fd\u9053\u5e9c\u770c\u30b3\u30fc\u30c9\uff08JIS X 0401\u306e2\u6841\u300101\u301c47\uff09",
                         "schema": {
-                            "$ref": "#/components/schemas/Prefecture"
+                            "$ref": "#\/components\/schemas\/Prefecture"
                         }
                     },
                     {
@@ -2800,7 +2960,7 @@
                         "in": "query",
                         "description": "\u65bd\u8a2d\u7a2e\u5225",
                         "schema": {
-                            "$ref": "#/components/schemas/InstitutionType"
+                            "$ref": "#\/components\/schemas\/InstitutionType"
                         }
                     },
                     {
@@ -2808,7 +2968,7 @@
                         "in": "query",
                         "description": "\u6307\u5b9a\u72b6\u614b",
                         "schema": {
-                            "$ref": "#/components/schemas/MedicalFacilityStatus"
+                            "$ref": "#\/components\/schemas\/MedicalFacilityStatus"
                         }
                     },
                     {
@@ -2816,7 +2976,7 @@
                         "in": "query",
                         "description": "\u8a3a\u7642\u79d1\u76ee\u306e\u5927\u5206\u985e",
                         "schema": {
-                            "$ref": "#/components/schemas/DepartmentBaseCategory"
+                            "$ref": "#\/components\/schemas\/DepartmentBaseCategory"
                         }
                     },
                     {
@@ -2826,6 +2986,14 @@
                         "schema": {
                             "type": "string",
                             "maxLength": 20
+                        }
+                    },
+                    {
+                        "name": "e_prescription",
+                        "in": "query",
+                        "description": "\u96fb\u5b50\u51e6\u65b9\u7b8b\u3078\u306e\u5bfe\u5fdc\u3002`1` \u3067\u5bfe\u5fdc\u3057\u3066\u3044\u308b\u65bd\u8a2d\u3060\u3051\u3001`0` \u3067\u5bfe\u5fdc\u3057\u3066\u3044\u306a\u3044\u65bd\u8a2d\u3060\u3051\uff08\u539a\u751f\u52b4\u50cd\u7701\u306e\u5bfe\u5fdc\u65bd\u8a2d\u30ea\u30b9\u30c8\u306b\u3042\u308b\u304b\u3002\u6bce\u9031\u66f4\u65b0\uff09",
+                        "schema": {
+                            "type": "boolean"
                         }
                     },
                     {
@@ -2851,7 +3019,7 @@
                     "200": {
                         "description": "",
                         "content": {
-                            "application/json": {
+                            "application\/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
@@ -2969,7 +3137,7 @@
                                                                 },
                                                                 "url": {
                                                                     "type": "string",
-                                                                    "const": "https://www.digital.go.jp/resources/open_data/public_data_license_v1.0"
+                                                                    "const": "https:\/\/www.digital.go.jp\/resources\/open_data\/public_data_license_v1.0"
                                                                 }
                                                             },
                                                             "required": [
@@ -2992,7 +3160,7 @@
                                                                 },
                                                                 "url": {
                                                                     "type": "string",
-                                                                    "const": "https://catalog.registries.digital.go.jp/rc/dataset/"
+                                                                    "const": "https:\/\/catalog.registries.digital.go.jp\/rc\/dataset\/"
                                                                 }
                                                             },
                                                             "required": [
@@ -3002,15 +3170,15 @@
                                                         },
                                                         "medical_info_net_source": {
                                                             "type": "object",
-                                                            "description": "\u753a\u4e01\u76ee\u307e\u3067\u3057\u304b\u6c42\u3081\u3089\u308c\u306a\u3044\u65bd\u8a2d\u306e\u5ea7\u6a19\u3068\u3001\u65bd\u8a2d\u306e\u8a3a\u7642\u6642\u9593\u306e\u51fa\u5178\uff08\u539a\u751f\u52b4\u50cd\u7701\u3001PDL1.0\uff09\u3002",
+                                                            "description": "\u753a\u4e01\u76ee\u307e\u3067\u3057\u304b\u6c42\u3081\u3089\u308c\u306a\u3044\u65bd\u8a2d\u306e\u5ea7\u6a19\u3068\u3001\u65bd\u8a2d\u306e\u8a3a\u7642\u6642\u9593\u30fb\u30d5\u30ea\u30ac\u30ca\u30fb\u30db\u30fc\u30e0\u30da\u30fc\u30b8\u306e\u51fa\u5178\uff08\u539a\u751f\u52b4\u50cd\u7701\u3001PDL1.0\uff09\u3002",
                                                             "properties": {
                                                                 "name": {
                                                                     "type": "string",
-                                                                    "const": "\u539a\u751f\u52b4\u50cd\u7701\u300c\u533b\u7642\u60c5\u5831\u30cd\u30c3\u30c8\u300d\u306e\u30aa\u30fc\u30d7\u30f3\u30c7\u30fc\u30bf\uff08\u6240\u5728\u5730\u5ea7\u6a19\u30fb\u8a3a\u7642\u6642\u9593\u30fb\u4f11\u8a3a\u65e5\uff09\u3092\u52a0\u5de5\u3057\u3066\u4f5c\u6210"
+                                                                    "const": "\u539a\u751f\u52b4\u50cd\u7701\u300c\u533b\u7642\u60c5\u5831\u30cd\u30c3\u30c8\u300d\u306e\u30aa\u30fc\u30d7\u30f3\u30c7\u30fc\u30bf\uff08\u6240\u5728\u5730\u5ea7\u6a19\u30fb\u8a3a\u7642\u6642\u9593\u30fb\u4f11\u8a3a\u65e5\u30fb\u30d5\u30ea\u30ac\u30ca\u30fb\u30db\u30fc\u30e0\u30da\u30fc\u30b8\uff09\u3092\u52a0\u5de5\u3057\u3066\u4f5c\u6210"
                                                                 },
                                                                 "url": {
                                                                     "type": "string",
-                                                                    "const": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/newpage_43373.html"
+                                                                    "const": "https:\/\/www.mhlw.go.jp\/stf\/seisakunitsuite\/bunya\/kenkou_iryou\/iryou\/newpage_43373.html"
                                                                 }
                                                             },
                                                             "required": [
@@ -3028,7 +3196,7 @@
                                                                 },
                                                                 "url": {
                                                                     "type": "string",
-                                                                    "const": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P04-2020.html"
+                                                                    "const": "https:\/\/nlftp.mlit.go.jp\/ksj\/gml\/datalist\/KsjTmplt-P04-2020.html"
                                                                 }
                                                             },
                                                             "required": [
@@ -3046,7 +3214,25 @@
                                                                 },
                                                                 "url": {
                                                                     "type": "string",
-                                                                    "const": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/daityo/jinkou_jinkoudoutai-setaisuu.html"
+                                                                    "const": "https:\/\/www.soumu.go.jp\/main_sosiki\/jichi_gyousei\/daityo\/jinkou_jinkoudoutai-setaisuu.html"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "name",
+                                                                "url"
+                                                            ]
+                                                        },
+                                                        "e_prescription_source": {
+                                                            "type": "object",
+                                                            "description": "\u96fb\u5b50\u51e6\u65b9\u7b8b\u3078\u306e\u5bfe\u5fdc\u306e\u51fa\u5178\uff08\u539a\u751f\u52b4\u50cd\u7701\u3001PDL1.0\uff09\u3002\u65bd\u8a2d\u306e e_prescription \u3068\u4e00\u89a7API\u306e\u7d5e\u308a\u8fbc\u307f\u306b\u4f7f\u3046\u3002",
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string",
+                                                                    "const": "\u539a\u751f\u52b4\u50cd\u7701\u300c\u96fb\u5b50\u51e6\u65b9\u305b\u3093\u5bfe\u5fdc\u306e\u533b\u7642\u6a5f\u95a2\u30fb\u85ac\u5c40\u30ea\u30b9\u30c8\u300d\u3092\u52a0\u5de5\u3057\u3066\u4f5c\u6210"
+                                                                },
+                                                                "url": {
+                                                                    "type": "string",
+                                                                    "const": "https:\/\/www.mhlw.go.jp\/stf\/seisakunitsuite\/bunya\/denshishohousen_taioushisetsu.html"
                                                                 }
                                                             },
                                                             "required": [
@@ -3064,7 +3250,7 @@
                                                                 },
                                                                 "url": {
                                                                     "type": "string",
-                                                                    "const": "https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html"
+                                                                    "const": "https:\/\/www8.cao.go.jp\/chosei\/shukujitsu\/gaiyou.html"
                                                                 }
                                                             },
                                                             "required": [
@@ -3100,6 +3286,7 @@
                                                         "medical_info_net_source",
                                                         "national_land_source",
                                                         "population_source",
+                                                        "e_prescription_source",
                                                         "holiday_source",
                                                         "sources"
                                                     ]
@@ -3122,12 +3309,12 @@
                         }
                     },
                     "422": {
-                        "$ref": "#/components/responses/ValidationException"
+                        "$ref": "#\/components\/responses\/ValidationException"
                     }
                 }
             }
         },
-        "/v1/options": {
+        "\/v1\/options": {
             "get": {
                 "operationId": "v1.options",
                 "description": "\u4e00\u89a7API\u306e\u7d5e\u308a\u8fbc\u307f\u6761\u4ef6\u306b\u4f7f\u3048\u308b\u5024\u3068\u3001\u305d\u306e\u65e5\u672c\u8a9e\u540d\u3092\u8fd4\u3057\u307e\u3059\u3002`code` \u306f\u305d\u306e\u307e\u307e\u5404\u30d1\u30e9\u30e1\u30fc\u30bf\u306b\u6e21\u305b\u307e\u3059\u3002\u90fd\u9053\u5e9c\u770c\u30fb\u5730\u65b9\u539a\u751f\u5c40\u30fb\u65bd\u8a2d\u7a2e\u5225\u306f\u3001\u3053\u306eAPI\u304c\u53d6\u308a\u6271\u3046\u7bc4\u56f2\u306e\u3082\u306e\u3060\u3051\u3092\u8fd4\u3057\u307e\u3059\u3002`designation_reasons` \u306f\u5143\u30c7\u30fc\u30bf\u3067\u306f\u81ea\u7531\u8a18\u8ff0\u306e\u305f\u3081\u3001\u4ee3\u8868\u7684\u306a\u5024\u306e\u307f\u3067\u3059\u3002",
@@ -3139,7 +3326,7 @@
                     "200": {
                         "description": "",
                         "content": {
-                            "application/json": {
+                            "application\/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
@@ -3452,7 +3639,7 @@
                 }
             }
         },
-        "/v1/holidays": {
+        "\/v1\/holidays": {
             "get": {
                 "operationId": "v1.holidays",
                 "description": "\u5185\u95a3\u5e9c\u300c\u56fd\u6c11\u306e\u795d\u65e5\u300d\u306e\u4e00\u89a7\u304b\u3089\u3001\u671f\u9593\u5185\u306e\u795d\u65e5\u30fb\u4f11\u65e5\uff08\u632f\u66ff\u4f11\u65e5\u30fb\u56fd\u6c11\u306e\u4f11\u65e5\u3092\u542b\u3080\uff09\u3092\u65e5\u4ed8\u9806\u306b\u8fd4\u3057\u307e\u3059\u3002\u4e00\u89a7\u306b\u306f\u7fcc\u5e74\u672b\u307e\u3067\u304c\u8f09\u308a\u3001\u7fcc\u5e74\u5206\u306f\u4f8b\u5e742\u6708\u3054\u308d\u306b\u8ffd\u52a0\u3055\u308c\u307e\u3059\u3002\u5e74\u672b\u5e74\u59cb\u3084\u304a\u76c6\u306f\u542b\u307f\u307e\u305b\u3093\u3002\u4e00\u89a7API\u306e `open_at` \u306f\u3001\u795d\u65e5\u306b\u306f\u8a3a\u7642\u6642\u9593\u306e\u300c\u795d\u300d\u306e\u6642\u523b\u3067\u5224\u5b9a\u3057\u307e\u3059\u3002",
@@ -3484,7 +3671,7 @@
                     "200": {
                         "description": "",
                         "content": {
-                            "application/json": {
+                            "application\/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
@@ -3544,7 +3731,7 @@
                                                                 },
                                                                 "url": {
                                                                     "type": "string",
-                                                                    "const": "https://www.digital.go.jp/resources/open_data/public_data_license_v1.0"
+                                                                    "const": "https:\/\/www.digital.go.jp\/resources\/open_data\/public_data_license_v1.0"
                                                                 }
                                                             },
                                                             "required": [
@@ -3567,7 +3754,7 @@
                                                                 },
                                                                 "url": {
                                                                     "type": "string",
-                                                                    "const": "https://catalog.registries.digital.go.jp/rc/dataset/"
+                                                                    "const": "https:\/\/catalog.registries.digital.go.jp\/rc\/dataset\/"
                                                                 }
                                                             },
                                                             "required": [
@@ -3577,15 +3764,15 @@
                                                         },
                                                         "medical_info_net_source": {
                                                             "type": "object",
-                                                            "description": "\u753a\u4e01\u76ee\u307e\u3067\u3057\u304b\u6c42\u3081\u3089\u308c\u306a\u3044\u65bd\u8a2d\u306e\u5ea7\u6a19\u3068\u3001\u65bd\u8a2d\u306e\u8a3a\u7642\u6642\u9593\u306e\u51fa\u5178\uff08\u539a\u751f\u52b4\u50cd\u7701\u3001PDL1.0\uff09\u3002",
+                                                            "description": "\u753a\u4e01\u76ee\u307e\u3067\u3057\u304b\u6c42\u3081\u3089\u308c\u306a\u3044\u65bd\u8a2d\u306e\u5ea7\u6a19\u3068\u3001\u65bd\u8a2d\u306e\u8a3a\u7642\u6642\u9593\u30fb\u30d5\u30ea\u30ac\u30ca\u30fb\u30db\u30fc\u30e0\u30da\u30fc\u30b8\u306e\u51fa\u5178\uff08\u539a\u751f\u52b4\u50cd\u7701\u3001PDL1.0\uff09\u3002",
                                                             "properties": {
                                                                 "name": {
                                                                     "type": "string",
-                                                                    "const": "\u539a\u751f\u52b4\u50cd\u7701\u300c\u533b\u7642\u60c5\u5831\u30cd\u30c3\u30c8\u300d\u306e\u30aa\u30fc\u30d7\u30f3\u30c7\u30fc\u30bf\uff08\u6240\u5728\u5730\u5ea7\u6a19\u30fb\u8a3a\u7642\u6642\u9593\u30fb\u4f11\u8a3a\u65e5\uff09\u3092\u52a0\u5de5\u3057\u3066\u4f5c\u6210"
+                                                                    "const": "\u539a\u751f\u52b4\u50cd\u7701\u300c\u533b\u7642\u60c5\u5831\u30cd\u30c3\u30c8\u300d\u306e\u30aa\u30fc\u30d7\u30f3\u30c7\u30fc\u30bf\uff08\u6240\u5728\u5730\u5ea7\u6a19\u30fb\u8a3a\u7642\u6642\u9593\u30fb\u4f11\u8a3a\u65e5\u30fb\u30d5\u30ea\u30ac\u30ca\u30fb\u30db\u30fc\u30e0\u30da\u30fc\u30b8\uff09\u3092\u52a0\u5de5\u3057\u3066\u4f5c\u6210"
                                                                 },
                                                                 "url": {
                                                                     "type": "string",
-                                                                    "const": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/newpage_43373.html"
+                                                                    "const": "https:\/\/www.mhlw.go.jp\/stf\/seisakunitsuite\/bunya\/kenkou_iryou\/iryou\/newpage_43373.html"
                                                                 }
                                                             },
                                                             "required": [
@@ -3603,7 +3790,7 @@
                                                                 },
                                                                 "url": {
                                                                     "type": "string",
-                                                                    "const": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P04-2020.html"
+                                                                    "const": "https:\/\/nlftp.mlit.go.jp\/ksj\/gml\/datalist\/KsjTmplt-P04-2020.html"
                                                                 }
                                                             },
                                                             "required": [
@@ -3621,7 +3808,25 @@
                                                                 },
                                                                 "url": {
                                                                     "type": "string",
-                                                                    "const": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/daityo/jinkou_jinkoudoutai-setaisuu.html"
+                                                                    "const": "https:\/\/www.soumu.go.jp\/main_sosiki\/jichi_gyousei\/daityo\/jinkou_jinkoudoutai-setaisuu.html"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "name",
+                                                                "url"
+                                                            ]
+                                                        },
+                                                        "e_prescription_source": {
+                                                            "type": "object",
+                                                            "description": "\u96fb\u5b50\u51e6\u65b9\u7b8b\u3078\u306e\u5bfe\u5fdc\u306e\u51fa\u5178\uff08\u539a\u751f\u52b4\u50cd\u7701\u3001PDL1.0\uff09\u3002\u65bd\u8a2d\u306e e_prescription \u3068\u4e00\u89a7API\u306e\u7d5e\u308a\u8fbc\u307f\u306b\u4f7f\u3046\u3002",
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string",
+                                                                    "const": "\u539a\u751f\u52b4\u50cd\u7701\u300c\u96fb\u5b50\u51e6\u65b9\u305b\u3093\u5bfe\u5fdc\u306e\u533b\u7642\u6a5f\u95a2\u30fb\u85ac\u5c40\u30ea\u30b9\u30c8\u300d\u3092\u52a0\u5de5\u3057\u3066\u4f5c\u6210"
+                                                                },
+                                                                "url": {
+                                                                    "type": "string",
+                                                                    "const": "https:\/\/www.mhlw.go.jp\/stf\/seisakunitsuite\/bunya\/denshishohousen_taioushisetsu.html"
                                                                 }
                                                             },
                                                             "required": [
@@ -3639,7 +3844,7 @@
                                                                 },
                                                                 "url": {
                                                                     "type": "string",
-                                                                    "const": "https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html"
+                                                                    "const": "https:\/\/www8.cao.go.jp\/chosei\/shukujitsu\/gaiyou.html"
                                                                 }
                                                             },
                                                             "required": [
@@ -3675,6 +3880,7 @@
                                                         "medical_info_net_source",
                                                         "national_land_source",
                                                         "population_source",
+                                                        "e_prescription_source",
                                                         "holiday_source",
                                                         "sources"
                                                     ]
@@ -3694,7 +3900,7 @@
                         }
                     },
                     "422": {
-                        "$ref": "#/components/responses/ValidationException"
+                        "$ref": "#\/components\/responses\/ValidationException"
                     }
                 }
             }
@@ -3737,7 +3943,7 @@
             },
             "FacilityStatsGrouping": {
                 "type": "string",
-                "description": "\u65bd\u8a2d\u6570\u306e\u96c6\u8a08\uff08GET /v1/stats/facilities\uff09\u306e `group_by` \u306b\u6307\u5b9a\u3067\u304d\u308b\u5358\u4f4d\n\n| |\n|---|\n| `month` <br/> \u6307\u5b9a\u5e74\u6708\u65e5\u306e\u6708\uff08\u671f\u9593\u5185\u306e\u3059\u3079\u3066\u306e\u6708\u3092\u8fd4\u3059\uff09 |\n| `municipality` <br/> \u5e02\u533a\u753a\u6751 |\n| `department_category` <br/> \u8a3a\u7642\u79d1\u76ee\u306e\u5927\u5206\u985e\uff08\u8907\u6570\u306e\u5927\u5206\u985e\u3092\u6301\u3064\u65bd\u8a2d\u306f\u3001\u305d\u308c\u305e\u308c\u306b\u6570\u3048\u308b\uff09 |",
+                "description": "\u65bd\u8a2d\u6570\u306e\u96c6\u8a08\uff08GET \/v1\/stats\/facilities\uff09\u306e `group_by` \u306b\u6307\u5b9a\u3067\u304d\u308b\u5358\u4f4d\n\n| |\n|---|\n| `month` <br\/> \u6307\u5b9a\u5e74\u6708\u65e5\u306e\u6708\uff08\u671f\u9593\u5185\u306e\u3059\u3079\u3066\u306e\u6708\u3092\u8fd4\u3059\uff09 |\n| `municipality` <br\/> \u5e02\u533a\u753a\u6751 |\n| `department_category` <br\/> \u8a3a\u7642\u79d1\u76ee\u306e\u5927\u5206\u985e\uff08\u8907\u6570\u306e\u5927\u5206\u985e\u3092\u6301\u3064\u65bd\u8a2d\u306f\u3001\u305d\u308c\u305e\u308c\u306b\u6570\u3048\u308b\uff09 |",
                 "enum": [
                     "month",
                     "municipality",
@@ -3768,7 +3974,7 @@
                     },
                     "event_type": {
                         "type": "object",
-                        "description": "\u5909\u5316\u306e\u7a2e\u985e\uff081: \u65b0\u898f / 2: \u5ec3\u6b62 / 3: \u5909\u66f4\uff09",
+                        "description": "\u5909\u5316\u306e\u7a2e\u985e\uff081: \u65b0\u898f \/ 2: \u5ec3\u6b62 \/ 3: \u5909\u66f4\uff09",
                         "examples": [
                             {
                                 "code": 3,
@@ -3790,7 +3996,7 @@
                     },
                     "origin": {
                         "type": "object",
-                        "description": "\u8a18\u9332\u306e\u304d\u3063\u304b\u3051\u30021: \u521d\u56de\u53d6\u8fbc\uff08\u53d6\u8fbc\u3092\u59cb\u3081\u305f\u6642\u70b9\u3067\u63b2\u8f09\u3055\u308c\u3066\u3044\u305f\u65bd\u8a2d\uff09/ 2: \u691c\u77e5\uff08\u516c\u958b\u30c7\u30fc\u30bf\u306e\u6bd4\u8f03\u3067\u898b\u3064\u304b\u3063\u305f\u5b9f\u969b\u306e\u5909\u5316\uff09/\n3: \u518d\u51e6\u7406\uff08\u540c\u3058\u516c\u958b\u30c7\u30fc\u30bf\u3092\u53d6\u308a\u8fbc\u307f\u76f4\u3057\u305f\u3068\u304d\u306e\u3001\u3053\u306eAPI\u306e\u51e6\u7406\u306e\u5909\u66f4\u306b\u3088\u308b\u5dee\u5206\uff09",
+                        "description": "\u8a18\u9332\u306e\u304d\u3063\u304b\u3051\u30021: \u521d\u56de\u53d6\u8fbc\uff08\u53d6\u8fbc\u3092\u59cb\u3081\u305f\u6642\u70b9\u3067\u63b2\u8f09\u3055\u308c\u3066\u3044\u305f\u65bd\u8a2d\uff09\/ 2: \u691c\u77e5\uff08\u516c\u958b\u30c7\u30fc\u30bf\u306e\u6bd4\u8f03\u3067\u898b\u3064\u304b\u3063\u305f\u5b9f\u969b\u306e\u5909\u5316\uff09\/\n3: \u518d\u51e6\u7406\uff08\u540c\u3058\u516c\u958b\u30c7\u30fc\u30bf\u3092\u53d6\u308a\u8fbc\u307f\u76f4\u3057\u305f\u3068\u304d\u306e\u3001\u3053\u306eAPI\u306e\u51e6\u7406\u306e\u5909\u66f4\u306b\u3088\u308b\u5dee\u5206\uff09",
                         "examples": [
                             {
                                 "code": 2,
@@ -3968,7 +4174,7 @@
                     },
                     "event_type": {
                         "type": "object",
-                        "description": "\u5909\u5316\u306e\u7a2e\u985e\uff081: \u65b0\u898f / 2: \u5ec3\u6b62 / 3: \u5909\u66f4\uff09",
+                        "description": "\u5909\u5316\u306e\u7a2e\u985e\uff081: \u65b0\u898f \/ 2: \u5ec3\u6b62 \/ 3: \u5909\u66f4\uff09",
                         "examples": [
                             {
                                 "code": 3,
@@ -3990,7 +4196,7 @@
                     },
                     "origin": {
                         "type": "object",
-                        "description": "\u8a18\u9332\u306e\u304d\u3063\u304b\u3051\u30021: \u521d\u56de\u53d6\u8fbc\uff08\u53d6\u8fbc\u3092\u59cb\u3081\u305f\u6642\u70b9\u3067\u63b2\u8f09\u3055\u308c\u3066\u3044\u305f\u65bd\u8a2d\uff09/ 2: \u691c\u77e5\uff08\u516c\u958b\u30c7\u30fc\u30bf\u306e\u6bd4\u8f03\u3067\u898b\u3064\u304b\u3063\u305f\u5b9f\u969b\u306e\u5909\u5316\uff09/\n3: \u518d\u51e6\u7406\uff08\u540c\u3058\u516c\u958b\u30c7\u30fc\u30bf\u3092\u53d6\u308a\u8fbc\u307f\u76f4\u3057\u305f\u3068\u304d\u306e\u3001\u3053\u306eAPI\u306e\u51e6\u7406\u306e\u5909\u66f4\u306b\u3088\u308b\u5dee\u5206\uff09",
+                        "description": "\u8a18\u9332\u306e\u304d\u3063\u304b\u3051\u30021: \u521d\u56de\u53d6\u8fbc\uff08\u53d6\u8fbc\u3092\u59cb\u3081\u305f\u6642\u70b9\u3067\u63b2\u8f09\u3055\u308c\u3066\u3044\u305f\u65bd\u8a2d\uff09\/ 2: \u691c\u77e5\uff08\u516c\u958b\u30c7\u30fc\u30bf\u306e\u6bd4\u8f03\u3067\u898b\u3064\u304b\u3063\u305f\u5b9f\u969b\u306e\u5909\u5316\uff09\/\n3: \u518d\u51e6\u7406\uff08\u540c\u3058\u516c\u958b\u30c7\u30fc\u30bf\u3092\u53d6\u308a\u8fbc\u307f\u76f4\u3057\u305f\u3068\u304d\u306e\u3001\u3053\u306eAPI\u306e\u51e6\u7406\u306e\u5909\u66f4\u306b\u3088\u308b\u5dee\u5206\uff09",
                         "examples": [
                             {
                                 "code": 2,
@@ -4137,7 +4343,7 @@
                         }
                     },
                     "facility": {
-                        "$ref": "#/components/schemas/MedicalFacilityResource"
+                        "$ref": "#\/components\/schemas\/MedicalFacilityResource"
                     }
                 },
                 "required": [
@@ -4248,6 +4454,16 @@
                         "description": "\u65bd\u8a2d\u540d\uff08\u5143\u30c7\u30fc\u30bf\u306e\u8868\u8a18\u306e\u307e\u307e\u3002\u6cd5\u4eba\u540d\u3092\u542b\u3080\u3053\u3068\u304c\u3042\u308b\uff09",
                         "examples": [
                             "\u6771\u4eac\u6b6f\u79d1\u5927\u5b66\u6c34\u9053\u6a4b\u75c5\u9662"
+                        ]
+                    },
+                    "name_kana": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "\u65bd\u8a2d\u540d\u306e\u30d5\u30ea\u30ac\u30ca\uff08\u539a\u751f\u52b4\u50cd\u7701\u300c\u533b\u7642\u60c5\u5831\u30cd\u30c3\u30c8\u300d\u306e\u8868\u8a18\u3092\u3001\u5168\u89d2\u30ab\u30bf\u30ab\u30ca\u306b\u305d\u308d\u3048\u305f\u3082\u306e\u3002\u6cd5\u4eba\u540d\u3092\u542b\u3080\u3053\u3068\u304c\u3042\u308b\uff09\u3002\u533b\u7642\u60c5\u5831\u30cd\u30c3\u30c8\u3068\u7167\u5408\u3067\u304d\u306a\u3044\u65bd\u8a2d\u306fnull",
+                        "examples": [
+                            "\u30c8\u30a6\u30ad\u30e7\u30a6\u30b7\u30ab\u30c0\u30a4\u30ac\u30af\u30b9\u30a4\u30c9\u30a6\u30d0\u30b7\u30d3\u30e7\u30a6\u30a4\u30f3"
                         ]
                     },
                     "prefecture_code": {
@@ -4393,6 +4609,16 @@
                             "03-3262-3421"
                         ]
                     },
+                    "website_url": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "\u65bd\u8a2d\u306e\u30db\u30fc\u30e0\u30da\u30fc\u30b8\uff08\u539a\u751f\u52b4\u50cd\u7701\u300c\u533b\u7642\u60c5\u5831\u30cd\u30c3\u30c8\u300d\u306b\u8f09\u3063\u3066\u3044\u308b\u3082\u306e\u3002`http:\/\/` \u304b `https:\/\/` \u3067\u59cb\u307e\u308b\uff09\u3002\u8f09\u3063\u3066\u3044\u306a\u3044\u304b\u3001\u533b\u7642\u60c5\u5831\u30cd\u30c3\u30c8\u3068\u7167\u5408\u3067\u304d\u306a\u3044\u65bd\u8a2d\u306fnull",
+                        "examples": [
+                            "http:\/\/www.tdc.ac.jp\/sh\/tabid\/233\/Default.aspx"
+                        ]
+                    },
                     "designated_on": {
                         "type": [
                             "string",
@@ -4489,6 +4715,34 @@
                             ]
                         }
                     },
+                    "e_prescription": {
+                        "type": [
+                            "object",
+                            "null"
+                        ],
+                        "description": "\u96fb\u5b50\u51e6\u65b9\u7b8b\u3078\u306e\u5bfe\u5fdc\uff08\u539a\u751f\u52b4\u50cd\u7701\u306e\u5bfe\u5fdc\u65bd\u8a2d\u30ea\u30b9\u30c8\u3002\u6bce\u9031\u66f4\u65b0\uff09\u3002`started_on` \u306f\u96fb\u5b50\u51e6\u65b9\u7b8b\u306e\u904b\u7528\u958b\u59cb\u65e5\u3001`refill_started_on` \u306f\u30ea\u30d5\u30a3\u30eb\u51e6\u65b9\u7b8b\u3092\u96fb\u5b50\u51e6\u65b9\u7b8b\u3067\u6271\u3044\u59cb\u3081\u305f\u65e5\uff08\u6271\u3063\u3066\u3044\u306a\u3051\u308c\u3070null\uff09\u3002\u30ea\u30b9\u30c8\u306b\u306a\u3044\u65bd\u8a2d\u306fnull",
+                        "examples": [
+                            {
+                                "started_on": "2026-08-01",
+                                "refill_started_on": null
+                            }
+                        ],
+                        "properties": {
+                            "started_on": {
+                                "type": "string"
+                            },
+                            "refill_started_on": {
+                                "type": [
+                                    "string",
+                                    "null"
+                                ]
+                            }
+                        },
+                        "required": [
+                            "started_on",
+                            "refill_started_on"
+                        ]
+                    },
                     "created_at": {
                         "type": [
                             "string",
@@ -4520,6 +4774,7 @@
                     "status",
                     "bureau",
                     "name",
+                    "name_kana",
                     "prefecture_code",
                     "prefecture",
                     "municipality",
@@ -4527,10 +4782,12 @@
                     "address",
                     "location",
                     "phone_number",
+                    "website_url",
                     "designated_on",
                     "designation_history",
                     "bed_counts",
                     "department_categories",
+                    "e_prescription",
                     "created_at",
                     "updated_at"
                 ],
@@ -4620,7 +4877,7 @@
             "ValidationException": {
                 "description": "\u30d1\u30e9\u30e1\u30fc\u30bf\u306e\u8aa4\u308a",
                 "content": {
-                    "application/json": {
+                    "application\/json": {
                         "schema": {
                             "type": "object",
                             "properties": {
@@ -4650,7 +4907,7 @@
             "ModelNotFoundException": {
                 "description": "\u898b\u3064\u304b\u3089\u306a\u3044",
                 "content": {
-                    "application/json": {
+                    "application\/json": {
                         "schema": {
                             "type": "object",
                             "properties": {
