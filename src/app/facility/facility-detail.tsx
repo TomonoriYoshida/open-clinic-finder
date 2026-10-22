@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import AttributionNotice from "@/components/attribution-notice";
 import DepartmentTags from "@/components/department-tags";
+import EPrescriptionBadges from "@/components/e-prescription-badges";
 import EmergencyNotice from "@/components/emergency-notice";
 import { actionClass, directionsUrl } from "@/components/facility-result";
 import FacilityMap from "@/components/map/facility-map";
@@ -13,6 +14,7 @@ import { EmptyState, ErrorState, LoadingState } from "@/components/query-state";
 import { useFacility, useFacilityOpeningHours } from "@/lib/api/queries";
 import { listWasVisited } from "@/lib/navigation";
 import { institutionTypes, siteName } from "@/lib/site";
+import { safeExternalUrl } from "@/lib/url";
 
 function parseId(value: string | null): number | null {
   const id = Number(value);
@@ -65,6 +67,8 @@ export default function FacilityDetail() {
   const { data, meta } = facility.data;
   const isPharmacy = data.institution_type.code === institutionTypes.pharmacy;
   const hoursLabel = isPharmacy ? "営業時間" : "診療時間";
+  // The API repairs the source's broken URLs; checked again before it becomes a link.
+  const websiteUrl = data.website_url ? safeExternalUrl(data.website_url) : undefined;
 
   return (
     <div className="space-y-6">
@@ -73,19 +77,27 @@ export default function FacilityDetail() {
 
       <header>
         <p className="text-sm font-bold text-accent">{data.institution_type.label}</p>
-        <h1 className="mt-1 text-xl leading-snug font-bold sm:text-2xl">{data.name}</h1>
+        {data.name_kana && <p className="mt-1 text-sm text-muted">{data.name_kana}</p>}
+        <h1 className={`${data.name_kana ? "" : "mt-1 "}text-xl leading-snug font-bold sm:text-2xl`}>{data.name}</h1>
         <p className="mt-2 leading-relaxed text-muted">
           {data.postal_code && <span className="mr-2">〒{data.postal_code}</span>}
           {data.prefecture.label}
           {data.address}
         </p>
-        <div className="mt-4 flex gap-2">
+        <EPrescriptionBadges ePrescription={data.e_prescription} className="mt-2" />
+        <div className="mt-4 flex flex-wrap gap-2">
           {data.phone_number && (
-            <a href={`tel:${data.phone_number}`} className={actionClass}>
+            <a href={`tel:${data.phone_number}`} className={`${actionClass} basis-40`}>
               📞 {data.phone_number}
             </a>
           )}
-          <a href={directionsUrl(data)} target="_blank" rel="noopener noreferrer" className={actionClass}>
+          {websiteUrl && (
+            <a href={websiteUrl} target="_blank" rel="noopener noreferrer" className={`${actionClass} basis-40`}>
+              🌐 ホームページ
+              <NewTabMark />
+            </a>
+          )}
+          <a href={directionsUrl(data)} target="_blank" rel="noopener noreferrer" className={`${actionClass} basis-40`}>
             🗺 経路
             <NewTabMark />
           </a>
@@ -108,6 +120,16 @@ export default function FacilityDetail() {
           </div>
         ) : (
           <OpeningHoursTimetable openingHours={openingHours.data} isPharmacy={isPharmacy} />
+        )}
+        {websiteUrl && (
+          <p className="mt-3 text-sm leading-relaxed text-muted">
+            最新の{hoursLabel}や臨時の{isPharmacy ? "休業" : "休診"}は、
+            <a href={websiteUrl} target="_blank" rel="noopener noreferrer" className="text-accent underline underline-offset-2">
+              ホームページ
+              <NewTabMark />
+            </a>
+            でもご確認いただけます。
+          </p>
         )}
       </section>
 

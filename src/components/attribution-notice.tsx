@@ -25,7 +25,7 @@ export default function AttributionNotice({ attribution }: { attribution: Attrib
           （CC BY 4.0）
         </li>
         <li>
-          診療時間、位置（住所から町丁目までしか求められない施設）：
+          診療時間・フリガナ・ホームページ、位置（住所から町丁目までしか求められない施設）：
           <ExternalLink url={attribution.medical_info_net_source.url}>
             {attribution.medical_info_net_source.name}
           </ExternalLink>
@@ -35,6 +35,11 @@ export default function AttributionNotice({ attribution }: { attribution: Attrib
           位置（住所からも医療情報ネットからも町丁目までしか求められない病院・診療所・歯科）：
           <ExternalLink url={attribution.national_land_source.url}>{attribution.national_land_source.name}</ExternalLink>
           （CC BY 4.0）
+        </li>
+        <li>
+          電子処方箋への対応：
+          <ExternalLink url={attribution.e_prescription_source.url}>{attribution.e_prescription_source.name}</ExternalLink>
+          （{attribution.license.name}）
         </li>
       </ul>
       <details className="mt-1">

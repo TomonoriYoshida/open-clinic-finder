@@ -524,6 +524,11 @@ export interface components {
              */
             name: string;
             /**
+             * @description 施設名のフリガナ（厚生労働省「医療情報ネット」の表記を、全角カタカナにそろえたもの。法人名を含むことがある）。医療情報ネットと照合できない施設はnull
+             * @example トウキョウシカダイガクスイドウバシビョウイン
+             */
+            name_kana: string | null;
+            /**
              * @description 都道府県コード（JIS X 0401の2桁）。`prefecture.code` と同じ値
              * @example 13
              */
@@ -595,6 +600,11 @@ export interface components {
              */
             phone_number: string | null;
             /**
+             * @description 施設のホームページ（厚生労働省「医療情報ネット」に載っているもの。`http://` か `https://` で始まる）。載っていないか、医療情報ネットと照合できない施設はnull
+             * @example http://www.tdc.ac.jp/sh/tabid/233/Default.aspx
+             */
+            website_url: string | null;
+            /**
              * @description 指定年月日（YYYY-MM-DD）。最初に指定された日で、6年ごとの指定の更新では変わらない
              * @example 1991-11-01
              */
@@ -642,6 +652,17 @@ export interface components {
                 code: number;
                 label: string;
             }[];
+            /**
+             * @description 電子処方箋への対応（厚生労働省の対応施設リスト。毎週更新）。`started_on` は電子処方箋の運用開始日、`refill_started_on` はリフィル処方箋を電子処方箋で扱い始めた日（扱っていなければnull）。リストにない施設はnull
+             * @example {
+             *       "started_on": "2026-08-01",
+             *       "refill_started_on": null
+             *     }
+             */
+            e_prescription: {
+                started_on: string;
+                refill_started_on: string | null;
+            } | null;
             /**
              * Format: date-time
              * @description このAPIに施設を初めて取り込んだ日時（開業日ではない）
@@ -872,10 +893,10 @@ export interface operations {
                                     /** @constant */
                                     url: "https://catalog.registries.digital.go.jp/rc/dataset/";
                                 };
-                                /** @description 町丁目までしか求められない施設の座標と、施設の診療時間の出典（厚生労働省、PDL1.0）。 */
+                                /** @description 町丁目までしか求められない施設の座標と、施設の診療時間・フリガナ・ホームページの出典（厚生労働省、PDL1.0）。 */
                                 medical_info_net_source: {
                                     /** @constant */
-                                    name: "厚生労働省「医療情報ネット」のオープンデータ（所在地座標・診療時間・休診日）を加工して作成";
+                                    name: "厚生労働省「医療情報ネット」のオープンデータ（所在地座標・診療時間・休診日・フリガナ・ホームページ）を加工して作成";
                                     /** @constant */
                                     url: "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/newpage_43373.html";
                                 };
@@ -892,6 +913,13 @@ export interface operations {
                                     name: "総務省「住民基本台帳に基づく人口、人口動態及び世帯数」（市区町村別）を加工して作成";
                                     /** @constant */
                                     url: "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/daityo/jinkou_jinkoudoutai-setaisuu.html";
+                                };
+                                /** @description 電子処方箋への対応の出典（厚生労働省、PDL1.0）。施設の e_prescription と一覧APIの絞り込みに使う。 */
+                                e_prescription_source: {
+                                    /** @constant */
+                                    name: "厚生労働省「電子処方せん対応の医療機関・薬局リスト」を加工して作成";
+                                    /** @constant */
+                                    url: "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/denshishohousen_taioushisetsu.html";
                                 };
                                 /** @description 祝日の出典（内閣府、政府標準利用規約・CC BY 4.0 互換）。祝日APIと、一覧APIの open_at に使う。 */
                                 holiday_source: {
@@ -982,6 +1010,8 @@ export interface operations {
                 designated_to?: string;
                 /** @description 登録理由（`designation_history` の `reason`）。例: 新規、交代、組織変更、移転。指定年月日と組み合わせると「期間内に新規開業した施設」を取得できる */
                 designation_reason?: string;
+                /** @description 電子処方箋への対応。`1` で対応している施設だけ、`0` で対応していない施設だけ（厚生労働省の対応施設リストにあるか。毎週更新） */
+                e_prescription?: boolean;
                 /** @description 並び順。`designated_on` / `-designated_on`（指定年月日の古い順 / 新しい順、指定年月日のない施設は末尾）、`updated_at` / `-updated_at`（内容が変わった日時の古い順 / 新しい順）。省略時はid順 */
                 sort?: "id" | "designated_on" | "-designated_on" | "updated_at" | "-updated_at";
                 /** @description この日時以降に内容が変わった施設だけを返す（ISO 8601、例: 2026-10-01T05:00:00Z）。廃止・再開も含む。差分の同期には `sort=updated_at` と組み合わせる */
@@ -1078,10 +1108,10 @@ export interface operations {
                                     /** @constant */
                                     url: "https://catalog.registries.digital.go.jp/rc/dataset/";
                                 };
-                                /** @description 町丁目までしか求められない施設の座標と、施設の診療時間の出典（厚生労働省、PDL1.0）。 */
+                                /** @description 町丁目までしか求められない施設の座標と、施設の診療時間・フリガナ・ホームページの出典（厚生労働省、PDL1.0）。 */
                                 medical_info_net_source: {
                                     /** @constant */
-                                    name: "厚生労働省「医療情報ネット」のオープンデータ（所在地座標・診療時間・休診日）を加工して作成";
+                                    name: "厚生労働省「医療情報ネット」のオープンデータ（所在地座標・診療時間・休診日・フリガナ・ホームページ）を加工して作成";
                                     /** @constant */
                                     url: "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/newpage_43373.html";
                                 };
@@ -1098,6 +1128,13 @@ export interface operations {
                                     name: "総務省「住民基本台帳に基づく人口、人口動態及び世帯数」（市区町村別）を加工して作成";
                                     /** @constant */
                                     url: "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/daityo/jinkou_jinkoudoutai-setaisuu.html";
+                                };
+                                /** @description 電子処方箋への対応の出典（厚生労働省、PDL1.0）。施設の e_prescription と一覧APIの絞り込みに使う。 */
+                                e_prescription_source: {
+                                    /** @constant */
+                                    name: "厚生労働省「電子処方せん対応の医療機関・薬局リスト」を加工して作成";
+                                    /** @constant */
+                                    url: "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/denshishohousen_taioushisetsu.html";
                                 };
                                 /** @description 祝日の出典（内閣府、政府標準利用規約・CC BY 4.0 互換）。祝日APIと、一覧APIの open_at に使う。 */
                                 holiday_source: {
@@ -1155,10 +1192,10 @@ export interface operations {
                                     /** @constant */
                                     url: "https://catalog.registries.digital.go.jp/rc/dataset/";
                                 };
-                                /** @description 町丁目までしか求められない施設の座標と、施設の診療時間の出典（厚生労働省、PDL1.0）。 */
+                                /** @description 町丁目までしか求められない施設の座標と、施設の診療時間・フリガナ・ホームページの出典（厚生労働省、PDL1.0）。 */
                                 medical_info_net_source: {
                                     /** @constant */
-                                    name: "厚生労働省「医療情報ネット」のオープンデータ（所在地座標・診療時間・休診日）を加工して作成";
+                                    name: "厚生労働省「医療情報ネット」のオープンデータ（所在地座標・診療時間・休診日・フリガナ・ホームページ）を加工して作成";
                                     /** @constant */
                                     url: "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/newpage_43373.html";
                                 };
@@ -1175,6 +1212,13 @@ export interface operations {
                                     name: "総務省「住民基本台帳に基づく人口、人口動態及び世帯数」（市区町村別）を加工して作成";
                                     /** @constant */
                                     url: "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/daityo/jinkou_jinkoudoutai-setaisuu.html";
+                                };
+                                /** @description 電子処方箋への対応の出典（厚生労働省、PDL1.0）。施設の e_prescription と一覧APIの絞り込みに使う。 */
+                                e_prescription_source: {
+                                    /** @constant */
+                                    name: "厚生労働省「電子処方せん対応の医療機関・薬局リスト」を加工して作成";
+                                    /** @constant */
+                                    url: "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/denshishohousen_taioushisetsu.html";
                                 };
                                 /** @description 祝日の出典（内閣府、政府標準利用規約・CC BY 4.0 互換）。祝日APIと、一覧APIの open_at に使う。 */
                                 holiday_source: {
@@ -1242,10 +1286,10 @@ export interface operations {
                                     /** @constant */
                                     url: "https://catalog.registries.digital.go.jp/rc/dataset/";
                                 };
-                                /** @description 町丁目までしか求められない施設の座標と、施設の診療時間の出典（厚生労働省、PDL1.0）。 */
+                                /** @description 町丁目までしか求められない施設の座標と、施設の診療時間・フリガナ・ホームページの出典（厚生労働省、PDL1.0）。 */
                                 medical_info_net_source: {
                                     /** @constant */
-                                    name: "厚生労働省「医療情報ネット」のオープンデータ（所在地座標・診療時間・休診日）を加工して作成";
+                                    name: "厚生労働省「医療情報ネット」のオープンデータ（所在地座標・診療時間・休診日・フリガナ・ホームページ）を加工して作成";
                                     /** @constant */
                                     url: "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/newpage_43373.html";
                                 };
@@ -1262,6 +1306,13 @@ export interface operations {
                                     name: "総務省「住民基本台帳に基づく人口、人口動態及び世帯数」（市区町村別）を加工して作成";
                                     /** @constant */
                                     url: "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/daityo/jinkou_jinkoudoutai-setaisuu.html";
+                                };
+                                /** @description 電子処方箋への対応の出典（厚生労働省、PDL1.0）。施設の e_prescription と一覧APIの絞り込みに使う。 */
+                                e_prescription_source: {
+                                    /** @constant */
+                                    name: "厚生労働省「電子処方せん対応の医療機関・薬局リスト」を加工して作成";
+                                    /** @constant */
+                                    url: "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/denshishohousen_taioushisetsu.html";
                                 };
                                 /** @description 祝日の出典（内閣府、政府標準利用規約・CC BY 4.0 互換）。祝日APIと、一覧APIの open_at に使う。 */
                                 holiday_source: {
@@ -1329,10 +1380,10 @@ export interface operations {
                                     /** @constant */
                                     url: "https://catalog.registries.digital.go.jp/rc/dataset/";
                                 };
-                                /** @description 町丁目までしか求められない施設の座標と、施設の診療時間の出典（厚生労働省、PDL1.0）。 */
+                                /** @description 町丁目までしか求められない施設の座標と、施設の診療時間・フリガナ・ホームページの出典（厚生労働省、PDL1.0）。 */
                                 medical_info_net_source: {
                                     /** @constant */
-                                    name: "厚生労働省「医療情報ネット」のオープンデータ（所在地座標・診療時間・休診日）を加工して作成";
+                                    name: "厚生労働省「医療情報ネット」のオープンデータ（所在地座標・診療時間・休診日・フリガナ・ホームページ）を加工して作成";
                                     /** @constant */
                                     url: "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/newpage_43373.html";
                                 };
@@ -1349,6 +1400,13 @@ export interface operations {
                                     name: "総務省「住民基本台帳に基づく人口、人口動態及び世帯数」（市区町村別）を加工して作成";
                                     /** @constant */
                                     url: "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/daityo/jinkou_jinkoudoutai-setaisuu.html";
+                                };
+                                /** @description 電子処方箋への対応の出典（厚生労働省、PDL1.0）。施設の e_prescription と一覧APIの絞り込みに使う。 */
+                                e_prescription_source: {
+                                    /** @constant */
+                                    name: "厚生労働省「電子処方せん対応の医療機関・薬局リスト」を加工して作成";
+                                    /** @constant */
+                                    url: "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/denshishohousen_taioushisetsu.html";
                                 };
                                 /** @description 祝日の出典（内閣府、政府標準利用規約・CC BY 4.0 互換）。祝日APIと、一覧APIの open_at に使う。 */
                                 holiday_source: {
@@ -1458,10 +1516,10 @@ export interface operations {
                                     /** @constant */
                                     url: "https://catalog.registries.digital.go.jp/rc/dataset/";
                                 };
-                                /** @description 町丁目までしか求められない施設の座標と、施設の診療時間の出典（厚生労働省、PDL1.0）。 */
+                                /** @description 町丁目までしか求められない施設の座標と、施設の診療時間・フリガナ・ホームページの出典（厚生労働省、PDL1.0）。 */
                                 medical_info_net_source: {
                                     /** @constant */
-                                    name: "厚生労働省「医療情報ネット」のオープンデータ（所在地座標・診療時間・休診日）を加工して作成";
+                                    name: "厚生労働省「医療情報ネット」のオープンデータ（所在地座標・診療時間・休診日・フリガナ・ホームページ）を加工して作成";
                                     /** @constant */
                                     url: "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/newpage_43373.html";
                                 };
@@ -1478,6 +1536,13 @@ export interface operations {
                                     name: "総務省「住民基本台帳に基づく人口、人口動態及び世帯数」（市区町村別）を加工して作成";
                                     /** @constant */
                                     url: "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/daityo/jinkou_jinkoudoutai-setaisuu.html";
+                                };
+                                /** @description 電子処方箋への対応の出典（厚生労働省、PDL1.0）。施設の e_prescription と一覧APIの絞り込みに使う。 */
+                                e_prescription_source: {
+                                    /** @constant */
+                                    name: "厚生労働省「電子処方せん対応の医療機関・薬局リスト」を加工して作成";
+                                    /** @constant */
+                                    url: "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/denshishohousen_taioushisetsu.html";
                                 };
                                 /** @description 祝日の出典（内閣府、政府標準利用規約・CC BY 4.0 互換）。祝日APIと、一覧APIの open_at に使う。 */
                                 holiday_source: {
@@ -1592,10 +1657,10 @@ export interface operations {
                                     /** @constant */
                                     url: "https://catalog.registries.digital.go.jp/rc/dataset/";
                                 };
-                                /** @description 町丁目までしか求められない施設の座標と、施設の診療時間の出典（厚生労働省、PDL1.0）。 */
+                                /** @description 町丁目までしか求められない施設の座標と、施設の診療時間・フリガナ・ホームページの出典（厚生労働省、PDL1.0）。 */
                                 medical_info_net_source: {
                                     /** @constant */
-                                    name: "厚生労働省「医療情報ネット」のオープンデータ（所在地座標・診療時間・休診日）を加工して作成";
+                                    name: "厚生労働省「医療情報ネット」のオープンデータ（所在地座標・診療時間・休診日・フリガナ・ホームページ）を加工して作成";
                                     /** @constant */
                                     url: "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/newpage_43373.html";
                                 };
@@ -1612,6 +1677,13 @@ export interface operations {
                                     name: "総務省「住民基本台帳に基づく人口、人口動態及び世帯数」（市区町村別）を加工して作成";
                                     /** @constant */
                                     url: "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/daityo/jinkou_jinkoudoutai-setaisuu.html";
+                                };
+                                /** @description 電子処方箋への対応の出典（厚生労働省、PDL1.0）。施設の e_prescription と一覧APIの絞り込みに使う。 */
+                                e_prescription_source: {
+                                    /** @constant */
+                                    name: "厚生労働省「電子処方せん対応の医療機関・薬局リスト」を加工して作成";
+                                    /** @constant */
+                                    url: "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/denshishohousen_taioushisetsu.html";
                                 };
                                 /** @description 祝日の出典（内閣府、政府標準利用規約・CC BY 4.0 互換）。祝日APIと、一覧APIの open_at に使う。 */
                                 holiday_source: {
@@ -1784,10 +1856,10 @@ export interface operations {
                                     /** @constant */
                                     url: "https://catalog.registries.digital.go.jp/rc/dataset/";
                                 };
-                                /** @description 町丁目までしか求められない施設の座標と、施設の診療時間の出典（厚生労働省、PDL1.0）。 */
+                                /** @description 町丁目までしか求められない施設の座標と、施設の診療時間・フリガナ・ホームページの出典（厚生労働省、PDL1.0）。 */
                                 medical_info_net_source: {
                                     /** @constant */
-                                    name: "厚生労働省「医療情報ネット」のオープンデータ（所在地座標・診療時間・休診日）を加工して作成";
+                                    name: "厚生労働省「医療情報ネット」のオープンデータ（所在地座標・診療時間・休診日・フリガナ・ホームページ）を加工して作成";
                                     /** @constant */
                                     url: "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/newpage_43373.html";
                                 };
@@ -1804,6 +1876,13 @@ export interface operations {
                                     name: "総務省「住民基本台帳に基づく人口、人口動態及び世帯数」（市区町村別）を加工して作成";
                                     /** @constant */
                                     url: "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/daityo/jinkou_jinkoudoutai-setaisuu.html";
+                                };
+                                /** @description 電子処方箋への対応の出典（厚生労働省、PDL1.0）。施設の e_prescription と一覧APIの絞り込みに使う。 */
+                                e_prescription_source: {
+                                    /** @constant */
+                                    name: "厚生労働省「電子処方せん対応の医療機関・薬局リスト」を加工して作成";
+                                    /** @constant */
+                                    url: "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/denshishohousen_taioushisetsu.html";
                                 };
                                 /** @description 祝日の出典（内閣府、政府標準利用規約・CC BY 4.0 互換）。祝日APIと、一覧APIの open_at に使う。 */
                                 holiday_source: {
@@ -1849,6 +1928,8 @@ export interface operations {
                 department_category?: components["schemas"]["DepartmentBaseCategory"];
                 /** @description 登録理由（`designation_history` の `reason`）。例: 新規、交代、組織変更、移転。指定年月日と組み合わせると「期間内に新規開業した施設」を数えられる */
                 designation_reason?: string;
+                /** @description 電子処方箋への対応。`1` で対応している施設だけ、`0` で対応していない施設だけ（厚生労働省の対応施設リストにあるか。毎週更新） */
+                e_prescription?: boolean;
                 /** @description 指定年月日がこの日以降（YYYY-MM-DD）。`group_by=month` では必須 */
                 designated_from?: string;
                 /** @description 指定年月日がこの日以前（YYYY-MM-DD）。`group_by=month` では必須 */
@@ -1940,10 +2021,10 @@ export interface operations {
                                     /** @constant */
                                     url: "https://catalog.registries.digital.go.jp/rc/dataset/";
                                 };
-                                /** @description 町丁目までしか求められない施設の座標と、施設の診療時間の出典（厚生労働省、PDL1.0）。 */
+                                /** @description 町丁目までしか求められない施設の座標と、施設の診療時間・フリガナ・ホームページの出典（厚生労働省、PDL1.0）。 */
                                 medical_info_net_source: {
                                     /** @constant */
-                                    name: "厚生労働省「医療情報ネット」のオープンデータ（所在地座標・診療時間・休診日）を加工して作成";
+                                    name: "厚生労働省「医療情報ネット」のオープンデータ（所在地座標・診療時間・休診日・フリガナ・ホームページ）を加工して作成";
                                     /** @constant */
                                     url: "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/newpage_43373.html";
                                 };
@@ -1960,6 +2041,13 @@ export interface operations {
                                     name: "総務省「住民基本台帳に基づく人口、人口動態及び世帯数」（市区町村別）を加工して作成";
                                     /** @constant */
                                     url: "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/daityo/jinkou_jinkoudoutai-setaisuu.html";
+                                };
+                                /** @description 電子処方箋への対応の出典（厚生労働省、PDL1.0）。施設の e_prescription と一覧APIの絞り込みに使う。 */
+                                e_prescription_source: {
+                                    /** @constant */
+                                    name: "厚生労働省「電子処方せん対応の医療機関・薬局リスト」を加工して作成";
+                                    /** @constant */
+                                    url: "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/denshishohousen_taioushisetsu.html";
                                 };
                                 /** @description 祝日の出典（内閣府、政府標準利用規約・CC BY 4.0 互換）。祝日APIと、一覧APIの open_at に使う。 */
                                 holiday_source: {
@@ -2238,10 +2326,10 @@ export interface operations {
                                     /** @constant */
                                     url: "https://catalog.registries.digital.go.jp/rc/dataset/";
                                 };
-                                /** @description 町丁目までしか求められない施設の座標と、施設の診療時間の出典（厚生労働省、PDL1.0）。 */
+                                /** @description 町丁目までしか求められない施設の座標と、施設の診療時間・フリガナ・ホームページの出典（厚生労働省、PDL1.0）。 */
                                 medical_info_net_source: {
                                     /** @constant */
-                                    name: "厚生労働省「医療情報ネット」のオープンデータ（所在地座標・診療時間・休診日）を加工して作成";
+                                    name: "厚生労働省「医療情報ネット」のオープンデータ（所在地座標・診療時間・休診日・フリガナ・ホームページ）を加工して作成";
                                     /** @constant */
                                     url: "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/newpage_43373.html";
                                 };
@@ -2258,6 +2346,13 @@ export interface operations {
                                     name: "総務省「住民基本台帳に基づく人口、人口動態及び世帯数」（市区町村別）を加工して作成";
                                     /** @constant */
                                     url: "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/daityo/jinkou_jinkoudoutai-setaisuu.html";
+                                };
+                                /** @description 電子処方箋への対応の出典（厚生労働省、PDL1.0）。施設の e_prescription と一覧APIの絞り込みに使う。 */
+                                e_prescription_source: {
+                                    /** @constant */
+                                    name: "厚生労働省「電子処方せん対応の医療機関・薬局リスト」を加工して作成";
+                                    /** @constant */
+                                    url: "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/denshishohousen_taioushisetsu.html";
                                 };
                                 /** @description 祝日の出典（内閣府、政府標準利用規約・CC BY 4.0 互換）。祝日APIと、一覧APIの open_at に使う。 */
                                 holiday_source: {
