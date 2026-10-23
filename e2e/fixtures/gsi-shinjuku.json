@@ -1,0 +1,449 @@
+[
+  {
+    "geometry": {
+      "coordinates": [
+        140.155212,
+        38.291252
+      ],
+      "type": "Point"
+    },
+    "type": "Feature",
+    "properties": {
+      "addressCode": "",
+      "title": "山形県朝日町新宿"
+    }
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        140.073578,
+        36.816437
+      ],
+      "type": "Point"
+    },
+    "type": "Feature",
+    "properties": {
+      "addressCode": "",
+      "title": "栃木県大田原市新宿"
+    }
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        139.528717,
+        36.239136
+      ],
+      "type": "Point"
+    },
+    "type": "Feature",
+    "properties": {
+      "addressCode": "",
+      "title": "群馬県館林市新宿"
+    }
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        139.337234,
+        36.401527
+      ],
+      "type": "Point"
+    },
+    "type": "Feature",
+    "properties": {
+      "addressCode": "",
+      "title": "群馬県桐生市新宿"
+    }
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        139.684082,
+        35.89246
+      ],
+      "type": "Point"
+    },
+    "type": "Feature",
+    "properties": {
+      "addressCode": "",
+      "title": "埼玉県さいたま市緑区新宿"
+    }
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        139.441071,
+        36.115849
+      ],
+      "type": "Point"
+    },
+    "type": "Feature",
+    "properties": {
+      "addressCode": "",
+      "title": "埼玉県鴻巣市新宿"
+    }
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        139.069656,
+        36.191036
+      ],
+      "type": "Point"
+    },
+    "type": "Feature",
+    "properties": {
+      "addressCode": "",
+      "title": "埼玉県神川町新宿"
+    }
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        139.86853,
+        34.989059
+      ],
+      "type": "Point"
+    },
+    "type": "Feature",
+    "properties": {
+      "addressCode": "",
+      "title": "千葉県館山市新宿"
+    }
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        140.697525,
+        35.833527
+      ],
+      "type": "Point"
+    },
+    "type": "Feature",
+    "properties": {
+      "addressCode": "",
+      "title": "千葉県東庄町新宿"
+    }
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        140.113571,
+        35.605099
+      ],
+      "type": "Point"
+    },
+    "type": "Feature",
+    "properties": {
+      "addressCode": "",
+      "title": "千葉県千葉市中央区新宿"
+    }
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        139.920914,
+        35.387169
+      ],
+      "type": "Point"
+    },
+    "type": "Feature",
+    "properties": {
+      "addressCode": "",
+      "title": "千葉県木更津市新宿"
+    }
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        139.859421,
+        35.75819
+      ],
+      "type": "Point"
+    },
+    "type": "Feature",
+    "properties": {
+      "addressCode": "",
+      "title": "東京都葛飾区新宿"
+    }
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        139.703613,
+        35.69389
+      ],
+      "type": "Point"
+    },
+    "type": "Feature",
+    "properties": {
+      "addressCode": "",
+      "title": "東京都新宿区"
+    }
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        139.71225,
+        35.689556
+      ],
+      "type": "Point"
+    },
+    "type": "Feature",
+    "properties": {
+      "addressCode": "",
+      "title": "東京都新宿区新宿"
+    }
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        139.574219,
+        35.290417
+      ],
+      "type": "Point"
+    },
+    "type": "Feature",
+    "properties": {
+      "addressCode": "",
+      "title": "神奈川県逗子市新宿"
+    }
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        137.39856,
+        36.813972
+      ],
+      "type": "Point"
+    },
+    "type": "Feature",
+    "properties": {
+      "addressCode": "",
+      "title": "富山県魚津市新宿"
+    }
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        138.903458,
+        35.116371
+      ],
+      "type": "Point"
+    },
+    "type": "Feature",
+    "properties": {
+      "addressCode": "",
+      "title": "静岡県清水町新宿"
+    }
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        137.013031,
+        35.151821
+      ],
+      "type": "Point"
+    },
+    "type": "Feature",
+    "properties": {
+      "addressCode": "",
+      "title": "愛知県名古屋市名東区新宿"
+    }
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        139.6990458,
+        35.69166432
+      ],
+      "type": "Point"
+    },
+    "type": "Feature",
+    "properties": {
+      "addressCode": "13104",
+      "title": "新宿警察署新宿駅西口交番",
+      "dataSource": "3"
+    }
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        139.70116651,
+        35.69174338
+      ],
+      "type": "Point"
+    },
+    "type": "Feature",
+    "properties": {
+      "addressCode": "13104",
+      "title": "新宿警察署新宿駅東口交番",
+      "dataSource": "3"
+    }
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        139.69779266,
+        35.68785339
+      ],
+      "type": "Point"
+    },
+    "type": "Feature",
+    "properties": {
+      "addressCode": "13104",
+      "title": "新宿駅南口郵便局",
+      "dataSource": "3"
+    }
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        139.698784875,
+        35.6881808913889
+      ],
+      "type": "Point"
+    },
+    "type": "Feature",
+    "properties": {
+      "addressCode": "13104",
+      "title": "新宿駅",
+      "dataSource": "1"
+    }
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        139.698821736667,
+        35.6834081569444
+      ],
+      "type": "Point"
+    },
+    "type": "Feature",
+    "properties": {
+      "addressCode": "13113",
+      "title": "南新宿駅",
+      "dataSource": "1"
+    }
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        139.699542978056,
+        35.6895977725
+      ],
+      "type": "Point"
+    },
+    "type": "Feature",
+    "properties": {
+      "addressCode": "13104",
+      "title": "新宿駅",
+      "dataSource": "1"
+    }
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        139.699896308889,
+        35.6911596955556
+      ],
+      "type": "Point"
+    },
+    "type": "Feature",
+    "properties": {
+      "addressCode": "13104",
+      "title": "新宿駅",
+      "dataSource": "1"
+    }
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        139.692527099444,
+        35.6948927302778
+      ],
+      "type": "Point"
+    },
+    "type": "Feature",
+    "properties": {
+      "addressCode": "13104",
+      "title": "西新宿駅",
+      "dataSource": "1"
+    }
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        139.701237673611,
+        35.6902021344444
+      ],
+      "type": "Point"
+    },
+    "type": "Feature",
+    "properties": {
+      "addressCode": "13104",
+      "title": "新宿駅",
+      "dataSource": "1"
+    }
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        139.700152273611,
+        35.6956339219444
+      ],
+      "type": "Point"
+    },
+    "type": "Feature",
+    "properties": {
+      "addressCode": "13104",
+      "title": "西武新宿駅",
+      "dataSource": "1"
+    }
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        139.708018813611,
+        35.6991062322222
+      ],
+      "type": "Point"
+    },
+    "type": "Feature",
+    "properties": {
+      "addressCode": "13104",
+      "title": "東新宿駅",
+      "dataSource": "1"
+    }
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        139.707546611111,
+        35.6979267777778
+      ],
+      "type": "Point"
+    },
+    "type": "Feature",
+    "properties": {
+      "addressCode": "13104",
+      "title": "東新宿駅",
+      "dataSource": "1"
+    }
+  },
+  {
+    "geometry": {
+      "coordinates": [
+        139.700534145833,
+        35.6925612908333
+      ],
+      "type": "Point"
+    },
+    "type": "Feature",
+    "properties": {
+      "addressCode": "13104",
+      "title": "新宿駅",
+      "dataSource": "1"
+    }
+  }
+]

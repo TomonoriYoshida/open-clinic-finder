@@ -1,0 +1,64 @@
+name: Test
+
+# On pull requests and pushes to main. The site is built and published on the
+# API server (see README), so this is what checks a change before that.
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+# Actions are pinned to commit SHAs (tags can be moved); Dependabot keeps them updated.
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    # The image's browsers must match @playwright/test in package.json; the
+    # first step checks it, since Dependabot does not update this tag.
+    container:
+      image: mcr.microsoft.com/playwright:v1.58.0-noble
+    env:
+      PLAYWRIGHT_IMAGE_VERSION: 1.58.0
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Check the image matches @playwright/test
+        run: |
+          version=$(node -p "require('./package.json').devDependencies['@playwright/test']")
+          if [ "$version" != "$PLAYWRIGHT_IMAGE_VERSION" ]; then
+            echo "::error::@playwright/test is $version but the container image is v$PLAYWRIGHT_IMAGE_VERSION; bump both."
+            exit 1
+          fi
+
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ~/.npm
+          key: npm-${{ hashFiles('package-lock.json') }}
+
+      - run: npm ci
+
+      # The server builds with node:22-alpine (npm 10), which rejects a lock file
+      # written by this image's newer npm; catch that before merging.
+      - name: Check the lock file installs with npm 10 (as the server does)
+        run: npx --yes npm@10 ci --dry-run --ignore-scripts --no-audit --no-fund
+
+      - run: npm run lint
+
+      - run: npm run typecheck
+
+      # Built against a placeholder API origin that the tests answer from fixtures.
+      - run: npm run build:e2e
+
+      - run: npm run test:e2e
+
+      - if: failure()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: playwright-report
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 14

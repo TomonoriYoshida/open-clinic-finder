@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "next typegen && tsc --noEmit",
-    "generate:api": "openapi-typescript openapi/openapi.json -o src/lib/api/schema.d.ts"
+    "generate:api": "openapi-typescript openapi/openapi.json -o src/lib/api/schema.d.ts",
+    "build:e2e": "NEXT_PUBLIC_API_ORIGIN=http://api.test next build",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.104.0",
@@ -20,6 +22,8 @@
     "react-dom": "19.2.8"
   },
   "devDependencies": {
+    "@axe-core/playwright": "4.14.0",
+    "@playwright/test": "1.58.0",
     "@tailwindcss/postcss": "^4",
     "@types/leaflet": "^1.9.22",
     "@types/node": "^20",
@@ -31,5 +35,8 @@
     "openapi-typescript": "^7.13.0",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "overrides": {
+    "playwright-core": "$@playwright/test"
   }
 }

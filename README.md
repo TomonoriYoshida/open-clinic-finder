@@ -53,6 +53,44 @@ APIが取り込んだアドレス・ベース・レジストリの市区町村�
 vendor/bin/sail artisan tinker --execute 'echo json_encode(App\Models\Municipality::query()->orderBy("code")->get()->mapWithKeys(fn ($m) => [$m->code => App\Enums\Prefecture::from($m->prefecture_code)->label().$m->name]), JSON_UNESCAPED_UNICODE);' > ../open-clinic-finder/src/lib/municipalities.json
 ```
 
+## 画面のテスト
+
+[Playwright](https://playwright.dev/) で、ビルドした画面をスマホの画面（Pixel 7 相当）で動かして確かめます（`e2e/`）。PR と `main` への push のたびに GitHub Actions（`.github/workflows/test.yml`）で動きます。本番への反映はサーバーでのビルドなので、マージの前にここで通しておきます。
+
+- APIと地名検索（国土地理院）は本物を呼ばず、テスト用の固定データ（`e2e/fixtures/`）で答えます。テスト用のビルドはAPIのオリジンをダミーの `http://api.test` にし、その通信をテストが受けます。地図タイルなど、ほかの外部への通信は止めます。
+- 時刻は 2026-10-05（月）10:30（日本時間）に固定します。「いま開いている」の検索で送る時刻が、この時刻になることを確かめます。
+- 現在地は、テストごとに許可（東京駅前）か、許可しないかを決めます。
+- 想定していないAPIが呼ばれると、テストは失敗します。新しいAPIを使うときは、`e2e/support.ts` に固定データの応答を加えます。
+- トップ・検索結果・施設詳細は、axe でアクセシビリティも確かめます（重大な問題があれば失敗）。
+
+```bash
+# テスト用にビルドする
+docker run --rm --network host -u "$(id -u):$(id -g)" -e HOME=/tmp -v "$PWD":/app -w /app mcr.microsoft.com/playwright:v1.58.0-noble npm run build:e2e
+# テストする
+docker run --rm --network host --ipc=host -u "$(id -u):$(id -g)" -e HOME=/tmp -v "$PWD":/app -w /app mcr.microsoft.com/playwright:v1.58.0-noble npm run test:e2e
+```
+
+- 依存関係を追加・更新するときは、本番のサーバーと同じ `node:22-alpine`（npm 10）で `npm install` してください。Playwright のイメージ（npm 11）で書いた lockfile は、サーバーの `npm ci` で通らないことがあります（CI の確認で失敗します）。
+- ビルドは Playwright のイメージで行います。`node:22-alpine` と行き来すると、`.next` に残ったキャッシュでビルドが失敗することがあります（`rm -rf .next` で直ります）。
+- イメージの版（`v1.58.0`）は、`package.json` の `@playwright/test` と合わせます。上げるときは、ここと `.github/workflows/test.yml`（イメージのタグと `PLAYWRIGHT_IMAGE_VERSION`）も一緒に上げます。
+- 失敗したテストの記録は `test-results/` に残ります（`npx playwright show-trace <trace.zip>` で再生できます）。CI では成果物 `playwright-report` に入ります。
+
+### 固定データを作り直す
+
+`e2e/fixtures/*.json` は、APIと地名検索の実際の応答です。近くの施設の一覧は、座標と診療時間がそろっている本番のAPIから取ります。選択肢・施設・診療時間はローカルのAPIで構いません。施設は、時間帯が2つあり、受付時間と第n週の休みがあるもの（鈴森内科クリニック）を使っています。
+
+```bash
+B=http://localhost:8000/api/v1; ID=33987
+curl -s "$B/options" > e2e/fixtures/options.json
+curl -s "$B/medical-facilities/$ID" > e2e/fixtures/facility.json
+curl -s "$B/medical-facilities/$ID/opening-hours" > e2e/fixtures/opening-hours.json
+# 東京駅前で、2026-10-05（月）10:30に開いている近い5件
+curl -s "https://168-110-42-30.sslip.io/api/v1/medical-facilities?latitude=35.681236&longitude=139.767125&radius=2000&status=1&per_page=5&open_at=2026-10-05T10:30" > e2e/fixtures/nearby.json
+curl -s "https://msearch.gsi.go.jp/address-search/AddressSearch?q=%E6%96%B0%E5%AE%BF%E9%A7%85" > e2e/fixtures/gsi-shinjuku.json
+```
+
+一覧を取り直したら、`e2e/finder.spec.ts` の件数（`1,043件`）や施設名、閉まる時刻の期待値も合わせます。
+
 ## 本番への反映
 
 APIのサーバーでこのリポジトリをビルドし、書き出した `out/` をAPIのWebサーバー（Caddy）が `/` で配信します。
