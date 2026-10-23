@@ -1,0 +1,607 @@
+{
+  "data": {
+    "prefectures": [
+      {
+        "code": "01",
+        "label": "北海道",
+        "bureau": {
+          "code": 1,
+          "label": "北海道厚生局"
+        }
+      },
+      {
+        "code": "02",
+        "label": "青森県",
+        "bureau": {
+          "code": 2,
+          "label": "東北厚生局"
+        }
+      },
+      {
+        "code": "03",
+        "label": "岩手県",
+        "bureau": {
+          "code": 2,
+          "label": "東北厚生局"
+        }
+      },
+      {
+        "code": "04",
+        "label": "宮城県",
+        "bureau": {
+          "code": 2,
+          "label": "東北厚生局"
+        }
+      },
+      {
+        "code": "05",
+        "label": "秋田県",
+        "bureau": {
+          "code": 2,
+          "label": "東北厚生局"
+        }
+      },
+      {
+        "code": "06",
+        "label": "山形県",
+        "bureau": {
+          "code": 2,
+          "label": "東北厚生局"
+        }
+      },
+      {
+        "code": "07",
+        "label": "福島県",
+        "bureau": {
+          "code": 2,
+          "label": "東北厚生局"
+        }
+      },
+      {
+        "code": "08",
+        "label": "茨城県",
+        "bureau": {
+          "code": 3,
+          "label": "関東信越厚生局"
+        }
+      },
+      {
+        "code": "09",
+        "label": "栃木県",
+        "bureau": {
+          "code": 3,
+          "label": "関東信越厚生局"
+        }
+      },
+      {
+        "code": "10",
+        "label": "群馬県",
+        "bureau": {
+          "code": 3,
+          "label": "関東信越厚生局"
+        }
+      },
+      {
+        "code": "11",
+        "label": "埼玉県",
+        "bureau": {
+          "code": 3,
+          "label": "関東信越厚生局"
+        }
+      },
+      {
+        "code": "12",
+        "label": "千葉県",
+        "bureau": {
+          "code": 3,
+          "label": "関東信越厚生局"
+        }
+      },
+      {
+        "code": "13",
+        "label": "東京都",
+        "bureau": {
+          "code": 3,
+          "label": "関東信越厚生局"
+        }
+      },
+      {
+        "code": "14",
+        "label": "神奈川県",
+        "bureau": {
+          "code": 3,
+          "label": "関東信越厚生局"
+        }
+      },
+      {
+        "code": "15",
+        "label": "新潟県",
+        "bureau": {
+          "code": 3,
+          "label": "関東信越厚生局"
+        }
+      },
+      {
+        "code": "16",
+        "label": "富山県",
+        "bureau": {
+          "code": 4,
+          "label": "東海北陸厚生局"
+        }
+      },
+      {
+        "code": "17",
+        "label": "石川県",
+        "bureau": {
+          "code": 4,
+          "label": "東海北陸厚生局"
+        }
+      },
+      {
+        "code": "18",
+        "label": "福井県",
+        "bureau": {
+          "code": 5,
+          "label": "近畿厚生局"
+        }
+      },
+      {
+        "code": "19",
+        "label": "山梨県",
+        "bureau": {
+          "code": 3,
+          "label": "関東信越厚生局"
+        }
+      },
+      {
+        "code": "20",
+        "label": "長野県",
+        "bureau": {
+          "code": 3,
+          "label": "関東信越厚生局"
+        }
+      },
+      {
+        "code": "21",
+        "label": "岐阜県",
+        "bureau": {
+          "code": 4,
+          "label": "東海北陸厚生局"
+        }
+      },
+      {
+        "code": "22",
+        "label": "静岡県",
+        "bureau": {
+          "code": 4,
+          "label": "東海北陸厚生局"
+        }
+      },
+      {
+        "code": "23",
+        "label": "愛知県",
+        "bureau": {
+          "code": 4,
+          "label": "東海北陸厚生局"
+        }
+      },
+      {
+        "code": "24",
+        "label": "三重県",
+        "bureau": {
+          "code": 4,
+          "label": "東海北陸厚生局"
+        }
+      },
+      {
+        "code": "25",
+        "label": "滋賀県",
+        "bureau": {
+          "code": 5,
+          "label": "近畿厚生局"
+        }
+      },
+      {
+        "code": "26",
+        "label": "京都府",
+        "bureau": {
+          "code": 5,
+          "label": "近畿厚生局"
+        }
+      },
+      {
+        "code": "27",
+        "label": "大阪府",
+        "bureau": {
+          "code": 5,
+          "label": "近畿厚生局"
+        }
+      },
+      {
+        "code": "28",
+        "label": "兵庫県",
+        "bureau": {
+          "code": 5,
+          "label": "近畿厚生局"
+        }
+      },
+      {
+        "code": "29",
+        "label": "奈良県",
+        "bureau": {
+          "code": 5,
+          "label": "近畿厚生局"
+        }
+      },
+      {
+        "code": "30",
+        "label": "和歌山県",
+        "bureau": {
+          "code": 5,
+          "label": "近畿厚生局"
+        }
+      },
+      {
+        "code": "31",
+        "label": "鳥取県",
+        "bureau": {
+          "code": 6,
+          "label": "中国四国厚生局"
+        }
+      },
+      {
+        "code": "32",
+        "label": "島根県",
+        "bureau": {
+          "code": 6,
+          "label": "中国四国厚生局"
+        }
+      },
+      {
+        "code": "33",
+        "label": "岡山県",
+        "bureau": {
+          "code": 6,
+          "label": "中国四国厚生局"
+        }
+      },
+      {
+        "code": "34",
+        "label": "広島県",
+        "bureau": {
+          "code": 6,
+          "label": "中国四国厚生局"
+        }
+      },
+      {
+        "code": "35",
+        "label": "山口県",
+        "bureau": {
+          "code": 6,
+          "label": "中国四国厚生局"
+        }
+      },
+      {
+        "code": "36",
+        "label": "徳島県",
+        "bureau": {
+          "code": 7,
+          "label": "四国厚生局"
+        }
+      },
+      {
+        "code": "37",
+        "label": "香川県",
+        "bureau": {
+          "code": 7,
+          "label": "四国厚生局"
+        }
+      },
+      {
+        "code": "38",
+        "label": "愛媛県",
+        "bureau": {
+          "code": 7,
+          "label": "四国厚生局"
+        }
+      },
+      {
+        "code": "39",
+        "label": "高知県",
+        "bureau": {
+          "code": 7,
+          "label": "四国厚生局"
+        }
+      },
+      {
+        "code": "40",
+        "label": "福岡県",
+        "bureau": {
+          "code": 8,
+          "label": "九州厚生局"
+        }
+      },
+      {
+        "code": "41",
+        "label": "佐賀県",
+        "bureau": {
+          "code": 8,
+          "label": "九州厚生局"
+        }
+      },
+      {
+        "code": "42",
+        "label": "長崎県",
+        "bureau": {
+          "code": 8,
+          "label": "九州厚生局"
+        }
+      },
+      {
+        "code": "43",
+        "label": "熊本県",
+        "bureau": {
+          "code": 8,
+          "label": "九州厚生局"
+        }
+      },
+      {
+        "code": "44",
+        "label": "大分県",
+        "bureau": {
+          "code": 8,
+          "label": "九州厚生局"
+        }
+      },
+      {
+        "code": "45",
+        "label": "宮崎県",
+        "bureau": {
+          "code": 8,
+          "label": "九州厚生局"
+        }
+      },
+      {
+        "code": "46",
+        "label": "鹿児島県",
+        "bureau": {
+          "code": 8,
+          "label": "九州厚生局"
+        }
+      },
+      {
+        "code": "47",
+        "label": "沖縄県",
+        "bureau": {
+          "code": 8,
+          "label": "九州厚生局"
+        }
+      }
+    ],
+    "institution_types": [
+      {
+        "code": 1,
+        "label": "病院"
+      },
+      {
+        "code": 2,
+        "label": "診療所"
+      },
+      {
+        "code": 3,
+        "label": "歯科診療所"
+      },
+      {
+        "code": 4,
+        "label": "薬局"
+      }
+    ],
+    "statuses": [
+      {
+        "code": 1,
+        "label": "指定中"
+      },
+      {
+        "code": 2,
+        "label": "廃止"
+      },
+      {
+        "code": 3,
+        "label": "休止"
+      }
+    ],
+    "bureaus": [
+      {
+        "code": 1,
+        "label": "北海道厚生局"
+      },
+      {
+        "code": 2,
+        "label": "東北厚生局"
+      },
+      {
+        "code": 3,
+        "label": "関東信越厚生局"
+      },
+      {
+        "code": 4,
+        "label": "東海北陸厚生局"
+      },
+      {
+        "code": 5,
+        "label": "近畿厚生局"
+      },
+      {
+        "code": 6,
+        "label": "中国四国厚生局"
+      },
+      {
+        "code": 7,
+        "label": "四国厚生局"
+      },
+      {
+        "code": 8,
+        "label": "九州厚生局"
+      }
+    ],
+    "department_categories": [
+      {
+        "code": 1,
+        "label": "内科"
+      },
+      {
+        "code": 2,
+        "label": "外科"
+      },
+      {
+        "code": 3,
+        "label": "小児科"
+      },
+      {
+        "code": 4,
+        "label": "皮膚科"
+      },
+      {
+        "code": 5,
+        "label": "眼科"
+      },
+      {
+        "code": 6,
+        "label": "耳鼻いんこう科"
+      },
+      {
+        "code": 7,
+        "label": "産科"
+      },
+      {
+        "code": 8,
+        "label": "婦人科"
+      },
+      {
+        "code": 9,
+        "label": "リハビリテーション科"
+      },
+      {
+        "code": 10,
+        "label": "放射線科"
+      },
+      {
+        "code": 11,
+        "label": "麻酔科"
+      },
+      {
+        "code": 12,
+        "label": "泌尿器科"
+      },
+      {
+        "code": 13,
+        "label": "精神科"
+      },
+      {
+        "code": 14,
+        "label": "神経科"
+      },
+      {
+        "code": 15,
+        "label": "歯科"
+      },
+      {
+        "code": 16,
+        "label": "リウマチ科"
+      },
+      {
+        "code": 17,
+        "label": "アレルギー科"
+      },
+      {
+        "code": 18,
+        "label": "肛門科"
+      },
+      {
+        "code": 19,
+        "label": "形成外科"
+      },
+      {
+        "code": 20,
+        "label": "病理診断科"
+      },
+      {
+        "code": 21,
+        "label": "臨床検査科"
+      },
+      {
+        "code": 22,
+        "label": "救急科"
+      },
+      {
+        "code": 23,
+        "label": "循環器内科"
+      },
+      {
+        "code": 24,
+        "label": "消化器内科"
+      },
+      {
+        "code": 25,
+        "label": "呼吸器内科"
+      },
+      {
+        "code": 26,
+        "label": "総合診療科"
+      }
+    ],
+    "event_types": [
+      {
+        "code": 1,
+        "label": "新規"
+      },
+      {
+        "code": 2,
+        "label": "廃止"
+      },
+      {
+        "code": 3,
+        "label": "変更"
+      }
+    ],
+    "geocode_levels": [
+      {
+        "code": 1,
+        "label": "住居"
+      },
+      {
+        "code": 2,
+        "label": "街区"
+      },
+      {
+        "code": 3,
+        "label": "地番"
+      },
+      {
+        "code": 4,
+        "label": "地番（枝番なし）"
+      },
+      {
+        "code": 5,
+        "label": "町丁目"
+      },
+      {
+        "code": 6,
+        "label": "医療情報ネット"
+      },
+      {
+        "code": 7,
+        "label": "国土数値情報"
+      }
+    ],
+    "designation_reasons": [
+      "新規",
+      "組織変更",
+      "交代",
+      "移動",
+      "移転",
+      "その他",
+      "継承"
+    ]
+  }
+}
