@@ -3,7 +3,7 @@
 :root {
   --background: #ffffff;
   --foreground: #1f2933;
-  --muted: #66707a;
+  --muted: #606a74;
   /* Dividers and card outlines, which only decorate. */
   --border: #d3d9de;
   /* Outlines that show where a control is: 3:1 or more against every background (DADS). */
