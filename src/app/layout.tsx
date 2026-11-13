@@ -61,6 +61,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
                 個人が運営する非公式のサイトで、厚生労働省・地方厚生局とは関係ありません。予告なく内容を変更したり、公開を終了したりすることがあります。
               </p>
               <p>
+                現在地や検索した場所は、近くの施設を探すためだけに使い、このサイトのサーバーには保存しません（アクセスの記録からも除いています）。ただし、ページのURLに含まれるため、ブラウザの履歴には残ります。駅名・住所の検索と地図には、国土地理院のサービスを使っています。
+              </p>
+              <p>
                 <a href={apiDocsUrl} className="underline underline-offset-2 hover:text-accent">
                   このデータを使いたい開発者の方へ（API）
                 </a>

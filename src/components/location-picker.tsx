@@ -83,6 +83,7 @@ export default function LocationPicker({ onPick, prominent = false, near = null 
       >
         {locating ? "現在地を取得中…" : "📍 現在地から探す"}
       </button>
+      {prominent && <p className="mt-1 text-sm text-muted">現在地は近くの施設を探すためだけに使い、保存しません。</p>}
 
       <form onSubmit={search} className="mt-4" role="search">
         <label htmlFor="place-keyword" className="block font-bold">

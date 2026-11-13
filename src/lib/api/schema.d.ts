@@ -316,7 +316,8 @@ export interface components {
              *     }
              */
             event_type: {
-                code: number;
+                /** @enum {integer} */
+                code: 1 | 2 | 3;
                 label: string;
             };
             /**
@@ -328,7 +329,8 @@ export interface components {
              *     }
              */
             origin: {
-                code: number;
+                /** @enum {integer} */
+                code: 1 | 2 | 3;
                 label: string;
             };
             /**
@@ -369,11 +371,13 @@ export interface components {
             changes?: {
                 attribute: string | "bureau";
                 old: {
-                    code: number;
+                    /** @enum {integer} */
+                    code: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26;
                     label: string;
                 } | unknown[] | string | null;
                 new: {
-                    code: number;
+                    /** @enum {integer} */
+                    code: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26;
                     label: string;
                 } | unknown[] | string | null;
             }[];
@@ -405,7 +409,8 @@ export interface components {
              *     }
              */
             event_type: {
-                code: number;
+                /** @enum {integer} */
+                code: 1 | 2 | 3;
                 label: string;
             };
             /**
@@ -417,7 +422,8 @@ export interface components {
              *     }
              */
             origin: {
-                code: number;
+                /** @enum {integer} */
+                code: 1 | 2 | 3;
                 label: string;
             };
             /**
@@ -458,11 +464,13 @@ export interface components {
             changes?: {
                 attribute: string | "bureau";
                 old: {
-                    code: number;
+                    /** @enum {integer} */
+                    code: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26;
                     label: string;
                 } | unknown[] | string | null;
                 new: {
-                    code: number;
+                    /** @enum {integer} */
+                    code: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26;
                     label: string;
                 } | unknown[] | string | null;
             }[];
@@ -891,7 +899,7 @@ export interface operations {
                                     /** @constant */
                                     name: "アドレス・ベース・レジストリ（デジタル庁）の市区町村・町字・住居表示・地番の各マスターと位置参照データを加工して作成";
                                     /** @constant */
-                                    url: "https://catalog.registries.digital.go.jp/rc/dataset/";
+                                    url: "https://www.digital.go.jp/policies/base_registry_address";
                                 };
                                 /** @description 町丁目までしか求められない施設の座標と、施設の診療時間・フリガナ・ホームページの出典（厚生労働省、PDL1.0）。 */
                                 medical_info_net_source: {
@@ -1010,7 +1018,7 @@ export interface operations {
                 designated_to?: string;
                 /** @description 登録理由（`designation_history` の `reason`）。例: 新規、交代、組織変更、移転。指定年月日と組み合わせると「期間内に新規開業した施設」を取得できる */
                 designation_reason?: string;
-                /** @description 電子処方箋への対応。`1` で対応している施設だけ、`0` で対応していない施設だけ（厚生労働省の対応施設リストにあるか。毎週更新） */
+                /** @description 電子処方箋への対応。`true` で対応している施設だけ、`false` で対応していない施設だけ（`1` / `0` も可）（厚生労働省の対応施設リストにあるか。毎週更新） */
                 e_prescription?: boolean;
                 /** @description 並び順。`designated_on` / `-designated_on`（指定年月日の古い順 / 新しい順、指定年月日のない施設は末尾）、`updated_at` / `-updated_at`（内容が変わった日時の古い順 / 新しい順）。省略時はid順 */
                 sort?: "id" | "designated_on" | "-designated_on" | "updated_at" | "-updated_at";
@@ -1106,7 +1114,7 @@ export interface operations {
                                     /** @constant */
                                     name: "アドレス・ベース・レジストリ（デジタル庁）の市区町村・町字・住居表示・地番の各マスターと位置参照データを加工して作成";
                                     /** @constant */
-                                    url: "https://catalog.registries.digital.go.jp/rc/dataset/";
+                                    url: "https://www.digital.go.jp/policies/base_registry_address";
                                 };
                                 /** @description 町丁目までしか求められない施設の座標と、施設の診療時間・フリガナ・ホームページの出典（厚生労働省、PDL1.0）。 */
                                 medical_info_net_source: {
@@ -1190,7 +1198,7 @@ export interface operations {
                                     /** @constant */
                                     name: "アドレス・ベース・レジストリ（デジタル庁）の市区町村・町字・住居表示・地番の各マスターと位置参照データを加工して作成";
                                     /** @constant */
-                                    url: "https://catalog.registries.digital.go.jp/rc/dataset/";
+                                    url: "https://www.digital.go.jp/policies/base_registry_address";
                                 };
                                 /** @description 町丁目までしか求められない施設の座標と、施設の診療時間・フリガナ・ホームページの出典（厚生労働省、PDL1.0）。 */
                                 medical_info_net_source: {
@@ -1284,7 +1292,7 @@ export interface operations {
                                     /** @constant */
                                     name: "アドレス・ベース・レジストリ（デジタル庁）の市区町村・町字・住居表示・地番の各マスターと位置参照データを加工して作成";
                                     /** @constant */
-                                    url: "https://catalog.registries.digital.go.jp/rc/dataset/";
+                                    url: "https://www.digital.go.jp/policies/base_registry_address";
                                 };
                                 /** @description 町丁目までしか求められない施設の座標と、施設の診療時間・フリガナ・ホームページの出典（厚生労働省、PDL1.0）。 */
                                 medical_info_net_source: {
@@ -1378,7 +1386,7 @@ export interface operations {
                                     /** @constant */
                                     name: "アドレス・ベース・レジストリ（デジタル庁）の市区町村・町字・住居表示・地番の各マスターと位置参照データを加工して作成";
                                     /** @constant */
-                                    url: "https://catalog.registries.digital.go.jp/rc/dataset/";
+                                    url: "https://www.digital.go.jp/policies/base_registry_address";
                                 };
                                 /** @description 町丁目までしか求められない施設の座標と、施設の診療時間・フリガナ・ホームページの出典（厚生労働省、PDL1.0）。 */
                                 medical_info_net_source: {
@@ -1514,7 +1522,7 @@ export interface operations {
                                     /** @constant */
                                     name: "アドレス・ベース・レジストリ（デジタル庁）の市区町村・町字・住居表示・地番の各マスターと位置参照データを加工して作成";
                                     /** @constant */
-                                    url: "https://catalog.registries.digital.go.jp/rc/dataset/";
+                                    url: "https://www.digital.go.jp/policies/base_registry_address";
                                 };
                                 /** @description 町丁目までしか求められない施設の座標と、施設の診療時間・フリガナ・ホームページの出典（厚生労働省、PDL1.0）。 */
                                 medical_info_net_source: {
@@ -1630,8 +1638,9 @@ export interface operations {
                             /**
                              * @description 指定した集計の単位
                              * @example month
+                             * @enum {string}
                              */
-                            group_by: string;
+                            group_by: "month" | "municipality" | "department_category";
                             attribution: {
                                 /**
                                  * @description 出典の表示。データを利用・再配布するときは、この文と各出典を表示する。
@@ -1655,7 +1664,7 @@ export interface operations {
                                     /** @constant */
                                     name: "アドレス・ベース・レジストリ（デジタル庁）の市区町村・町字・住居表示・地番の各マスターと位置参照データを加工して作成";
                                     /** @constant */
-                                    url: "https://catalog.registries.digital.go.jp/rc/dataset/";
+                                    url: "https://www.digital.go.jp/policies/base_registry_address";
                                 };
                                 /** @description 町丁目までしか求められない施設の座標と、施設の診療時間・フリガナ・ホームページの出典（厚生労働省、PDL1.0）。 */
                                 medical_info_net_source: {
@@ -1854,7 +1863,7 @@ export interface operations {
                                     /** @constant */
                                     name: "アドレス・ベース・レジストリ（デジタル庁）の市区町村・町字・住居表示・地番の各マスターと位置参照データを加工して作成";
                                     /** @constant */
-                                    url: "https://catalog.registries.digital.go.jp/rc/dataset/";
+                                    url: "https://www.digital.go.jp/policies/base_registry_address";
                                 };
                                 /** @description 町丁目までしか求められない施設の座標と、施設の診療時間・フリガナ・ホームページの出典（厚生労働省、PDL1.0）。 */
                                 medical_info_net_source: {
@@ -1928,7 +1937,7 @@ export interface operations {
                 department_category?: components["schemas"]["DepartmentBaseCategory"];
                 /** @description 登録理由（`designation_history` の `reason`）。例: 新規、交代、組織変更、移転。指定年月日と組み合わせると「期間内に新規開業した施設」を数えられる */
                 designation_reason?: string;
-                /** @description 電子処方箋への対応。`1` で対応している施設だけ、`0` で対応していない施設だけ（厚生労働省の対応施設リストにあるか。毎週更新） */
+                /** @description 電子処方箋への対応。`true` で対応している施設だけ、`false` で対応していない施設だけ（`1` / `0` も可）（厚生労働省の対応施設リストにあるか。毎週更新） */
                 e_prescription?: boolean;
                 /** @description 指定年月日がこの日以降（YYYY-MM-DD）。`group_by=month` では必須 */
                 designated_from?: string;
@@ -1989,8 +1998,9 @@ export interface operations {
                             /**
                              * @description 指定した集計の単位
                              * @example municipality
+                             * @enum {string}
                              */
-                            group_by: string;
+                            group_by: "month" | "municipality" | "department_category";
                             /**
                              * @description `population` の基準日（YYYY-MM-DD）。`municipality` 以外、または人口が未取込なら null
                              * @example 2026-01-01
@@ -2019,7 +2029,7 @@ export interface operations {
                                     /** @constant */
                                     name: "アドレス・ベース・レジストリ（デジタル庁）の市区町村・町字・住居表示・地番の各マスターと位置参照データを加工して作成";
                                     /** @constant */
-                                    url: "https://catalog.registries.digital.go.jp/rc/dataset/";
+                                    url: "https://www.digital.go.jp/policies/base_registry_address";
                                 };
                                 /** @description 町丁目までしか求められない施設の座標と、施設の診療時間・フリガナ・ホームページの出典（厚生労働省、PDL1.0）。 */
                                 medical_info_net_source: {
@@ -2324,7 +2334,7 @@ export interface operations {
                                     /** @constant */
                                     name: "アドレス・ベース・レジストリ（デジタル庁）の市区町村・町字・住居表示・地番の各マスターと位置参照データを加工して作成";
                                     /** @constant */
-                                    url: "https://catalog.registries.digital.go.jp/rc/dataset/";
+                                    url: "https://www.digital.go.jp/policies/base_registry_address";
                                 };
                                 /** @description 町丁目までしか求められない施設の座標と、施設の診療時間・フリガナ・ホームページの出典（厚生労働省、PDL1.0）。 */
                                 medical_info_net_source: {
