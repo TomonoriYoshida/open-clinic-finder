@@ -16,6 +16,7 @@ test.describe("トップ（場所を選ぶ前）", () => {
 
     await expect(page.getByRole("heading", { level: 1 })).toHaveText("近くでいま開いている病院・薬局を探す");
     await expect(page.getByRole("button", { name: "📍 現在地から探す" })).toBeVisible();
+    await expect(page.getByText("現在地は近くの施設を探すためだけに使い、保存しません。")).toBeVisible();
     await expect(page.getByLabel("駅名・住所で探す")).toBeVisible();
     expect(api.requestsTo("/api/v1/medical-facilities")).toEqual([]);
   });
