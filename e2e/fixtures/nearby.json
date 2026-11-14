@@ -39,6 +39,8 @@
       },
       "distance": 10,
       "open_until": "2026-10-05T20:30:00+09:00",
+      "arrives_at": "2026-10-05T08:31:00+09:00",
+      "opens_at": "2026-10-05T09:00:00+09:00",
       "phone_number": "03-6206-3070",
       "website_url": "https://www.international-clinic.tokyo/",
       "designated_on": "2024-01-01",
@@ -113,6 +115,8 @@
       },
       "distance": 10,
       "open_until": "2026-10-05T20:30:00+09:00",
+      "arrives_at": "2026-10-05T08:31:00+09:00",
+      "opens_at": "2026-10-05T09:00:00+09:00",
       "phone_number": "03-6259-1605",
       "website_url": "https://www.businessclinic.tokyo/",
       "designated_on": "2023-12-01",
@@ -187,6 +191,8 @@
       },
       "distance": 10,
       "open_until": "2026-10-05T21:00:00+09:00",
+      "arrives_at": "2026-10-05T08:31:00+09:00",
+      "opens_at": "2026-10-05T09:00:00+09:00",
       "phone_number": "03-6259-1561",
       "website_url": "https://www.ainj.co.jp/",
       "designated_on": "2018-12-01",
@@ -244,6 +250,8 @@
       },
       "distance": 243,
       "open_until": "2026-10-05T11:30:00+09:00",
+      "arrives_at": "2026-10-05T08:34:00+09:00",
+      "opens_at": "2026-10-05T09:00:00+09:00",
       "phone_number": "03-3527-9135",
       "website_url": "https://www.kenekieisei.or.jp",
       "designated_on": "2021-05-01",
@@ -265,12 +273,12 @@
       "updated_at": "2026-10-22T01:11:35.000000Z"
     },
     {
-      "id": 68489,
-      "facility_code": "0288100",
-      "medical_institution_code": "1330288100",
+      "id": 94860,
+      "facility_code": "0255174",
+      "medical_institution_code": "1340255174",
       "institution_type": {
-        "code": 3,
-        "label": "歯科診療所"
+        "code": 4,
+        "label": "薬局"
       },
       "status": {
         "code": 1,
@@ -280,8 +288,8 @@
         "code": 3,
         "label": "関東信越厚生局"
       },
-      "name": "医療法人社団　聖功会　ノブデンタルオフィス",
-      "name_kana": "イリョウホウジンシャダンセイコウカイ ノブデンタルオフィス",
+      "name": "ウエルシア薬局　東京ミッドタウン八重洲店",
+      "name_kana": "ウエルシアヤッキョクトウキョウミッドタウンヤエステン",
       "prefecture_code": "13",
       "prefecture": {
         "code": "13",
@@ -291,49 +299,254 @@
         "code": "13102",
         "label": "中央区"
       },
-      "postal_code": "103-0028",
-      "address": "中央区八重洲一丁目７番２０号　八重洲口会館１階１０２区画",
+      "postal_code": "104-0028",
+      "address": "中央区八重洲二丁目２番１号　東京ミッドタウン八重洲　地下１階",
       "location": {
-        "latitude": 35.681263,
-        "longitude": 139.769814,
+        "latitude": 35.679696,
+        "longitude": 139.769163,
         "level": {
           "code": 1,
           "label": "住居"
         }
       },
-      "distance": 243,
-      "open_until": "2026-10-05T12:00:00+09:00",
-      "phone_number": "03-6225-5888",
-      "website_url": "http://www.nobu-dental-office.com/",
-      "designated_on": "2023-04-24",
+      "distance": 251,
+      "open_until": "2026-10-05T13:00:00+09:00",
+      "arrives_at": "2026-10-05T08:35:00+09:00",
+      "opens_at": "2026-10-05T09:00:00+09:00",
+      "phone_number": "03-6281-6920",
+      "website_url": "https://www.welcia-yakkyoku.co.jp/",
+      "designated_on": "2022-09-17",
       "designation_history": [
         {
-          "date": "2023-04-24",
-          "reason": "移動"
+          "date": "2022-09-17",
+          "reason": "新規"
+        }
+      ],
+      "bed_counts": null,
+      "department_categories": [],
+      "e_prescription": {
+        "started_on": "2024-02-27",
+        "refill_started_on": null
+      },
+      "created_at": "2026-10-02T22:22:48.000000Z",
+      "updated_at": "2026-10-22T01:11:35.000000Z"
+    },
+    {
+      "id": 34046,
+      "facility_code": "0132001",
+      "medical_institution_code": "1310132001",
+      "institution_type": {
+        "code": 2,
+        "label": "診療所"
+      },
+      "status": {
+        "code": 1,
+        "label": "指定中"
+      },
+      "bureau": {
+        "code": 3,
+        "label": "関東信越厚生局"
+      },
+      "name": "医療法人社団　榊原厚生会　榊原サピアタワークリニック",
+      "name_kana": "イリョウホウジンシャダンサカキバラコウセイカイ サカキバラサピアタワークリニック",
+      "prefecture_code": "13",
+      "prefecture": {
+        "code": "13",
+        "label": "東京都"
+      },
+      "municipality": {
+        "code": "13101",
+        "label": "千代田区"
+      },
+      "postal_code": "100-0005",
+      "address": "千代田区丸の内一丁目７番１２号　サピアタワー７階",
+      "location": {
+        "latitude": 35.6835,
+        "longitude": 139.76795,
+        "level": {
+          "code": 2,
+          "label": "街区"
+        }
+      },
+      "distance": 263,
+      "open_until": "2026-10-05T12:30:00+09:00",
+      "arrives_at": "2026-10-05T08:35:00+09:00",
+      "phone_number": "03-5288-0011",
+      "website_url": "https://www.sapiatower-clinic.jp",
+      "designated_on": "2007-05-01",
+      "designation_history": [
+        {
+          "date": "2025-05-01",
+          "reason": "新規"
         }
       ],
       "bed_counts": null,
       "department_categories": [
         {
-          "code": 15,
-          "label": "歯科"
+          "code": 1,
+          "label": "内科"
+        },
+        {
+          "code": 23,
+          "label": "循環器内科"
+        },
+        {
+          "code": 24,
+          "label": "消化器内科"
         }
       ],
       "e_prescription": null,
-      "created_at": "2026-10-02T22:20:20.000000Z",
+      "created_at": "2026-10-02T22:16:51.000000Z",
+      "updated_at": "2026-10-22T01:11:35.000000Z"
+    },
+    {
+      "id": 34175,
+      "facility_code": "0135293",
+      "medical_institution_code": "1310135293",
+      "institution_type": {
+        "code": 2,
+        "label": "診療所"
+      },
+      "status": {
+        "code": 1,
+        "label": "指定中"
+      },
+      "bureau": {
+        "code": 3,
+        "label": "関東信越厚生局"
+      },
+      "name": "医療法人社団　豊栄会　アイクリニック東京　サピアタワー",
+      "name_kana": "イリョウホウジンシャダンホウエイカイ アイクリニックトウキョウサピアタワー",
+      "prefecture_code": "13",
+      "prefecture": {
+        "code": "13",
+        "label": "東京都"
+      },
+      "municipality": {
+        "code": "13101",
+        "label": "千代田区"
+      },
+      "postal_code": "100-0005",
+      "address": "千代田区丸の内一丁目７番１２号　サピアタワー７階",
+      "location": {
+        "latitude": 35.6835,
+        "longitude": 139.76795,
+        "level": {
+          "code": 2,
+          "label": "街区"
+        }
+      },
+      "distance": 263,
+      "open_until": "2026-10-05T12:30:00+09:00",
+      "arrives_at": "2026-10-05T08:35:00+09:00",
+      "opens_at": "2026-10-05T09:00:00+09:00",
+      "phone_number": "03-3214-8822",
+      "website_url": "https://eyeclinic-tokyo.jp",
+      "designated_on": "2019-03-01",
+      "designation_history": [
+        {
+          "date": "2025-03-01",
+          "reason": "新規"
+        }
+      ],
+      "bed_counts": null,
+      "department_categories": [
+        {
+          "code": 5,
+          "label": "眼科"
+        }
+      ],
+      "e_prescription": null,
+      "created_at": "2026-10-02T22:16:51.000000Z",
+      "updated_at": "2026-10-22T01:11:35.000000Z"
+    },
+    {
+      "id": 34150,
+      "facility_code": "0134742",
+      "medical_institution_code": "1310134742",
+      "institution_type": {
+        "code": 2,
+        "label": "診療所"
+      },
+      "status": {
+        "code": 1,
+        "label": "指定中"
+      },
+      "bureau": {
+        "code": 3,
+        "label": "関東信越厚生局"
+      },
+      "name": "東京ビジネスクリニック　八重洲北口",
+      "name_kana": "トウキョウビジネスクリニック ヤエスキタグチ",
+      "prefecture_code": "13",
+      "prefecture": {
+        "code": "13",
+        "label": "東京都"
+      },
+      "municipality": {
+        "code": "13101",
+        "label": "千代田区"
+      },
+      "postal_code": "100-0005",
+      "address": "千代田区丸の内一丁目８番２号　鉄鋼ビルディング地下１階",
+      "location": {
+        "latitude": 35.682665,
+        "longitude": 139.769561,
+        "level": {
+          "code": 2,
+          "label": "街区"
+        }
+      },
+      "distance": 271,
+      "open_until": "2026-10-05T20:30:00+09:00",
+      "arrives_at": "2026-10-05T08:35:00+09:00",
+      "opens_at": "2026-10-05T09:00:00+09:00",
+      "phone_number": "03-6268-0079",
+      "website_url": "https://www.businessclinic.tokyo/",
+      "designated_on": "2017-04-01",
+      "designation_history": [
+        {
+          "date": "2023-04-01",
+          "reason": "組織変更"
+        }
+      ],
+      "bed_counts": null,
+      "department_categories": [
+        {
+          "code": 1,
+          "label": "内科"
+        },
+        {
+          "code": 2,
+          "label": "外科"
+        },
+        {
+          "code": 3,
+          "label": "小児科"
+        },
+        {
+          "code": 4,
+          "label": "皮膚科"
+        }
+      ],
+      "e_prescription": {
+        "started_on": "2026-05-20",
+        "refill_started_on": null
+      },
+      "created_at": "2026-10-02T22:16:51.000000Z",
       "updated_at": "2026-10-22T01:11:35.000000Z"
     }
   ],
   "links": {
-    "first": "https://168-110-42-30.sslip.io/api/v1/medical-facilities?latitude=35.681236&longitude=139.767125&radius=2000&status=1&per_page=5&open_at=2026-10-05T10%3A30&page=1",
-    "last": "https://168-110-42-30.sslip.io/api/v1/medical-facilities?latitude=35.681236&longitude=139.767125&radius=2000&status=1&per_page=5&open_at=2026-10-05T10%3A30&page=209",
+    "first": "https://168-110-42-30.sslip.io/api/v1/medical-facilities?latitude=35.681236&longitude=139.767125&radius=2000&status=1&per_page=8&open_at=2026-10-05T08%3A30&travel=walk&wait=30&page=1",
+    "last": "https://168-110-42-30.sslip.io/api/v1/medical-facilities?latitude=35.681236&longitude=139.767125&radius=2000&status=1&per_page=8&open_at=2026-10-05T08%3A30&travel=walk&wait=30&page=60",
     "prev": null,
-    "next": "https://168-110-42-30.sslip.io/api/v1/medical-facilities?latitude=35.681236&longitude=139.767125&radius=2000&status=1&per_page=5&open_at=2026-10-05T10%3A30&page=2"
+    "next": "https://168-110-42-30.sslip.io/api/v1/medical-facilities?latitude=35.681236&longitude=139.767125&radius=2000&status=1&per_page=8&open_at=2026-10-05T08%3A30&travel=walk&wait=30&page=2"
   },
   "meta": {
     "current_page": 1,
     "from": 1,
-    "last_page": 209,
+    "last_page": 60,
     "links": [
       {
         "url": null,
@@ -342,61 +555,61 @@
         "active": false
       },
       {
-        "url": "https://168-110-42-30.sslip.io/api/v1/medical-facilities?latitude=35.681236&longitude=139.767125&radius=2000&status=1&per_page=5&open_at=2026-10-05T10%3A30&page=1",
+        "url": "https://168-110-42-30.sslip.io/api/v1/medical-facilities?latitude=35.681236&longitude=139.767125&radius=2000&status=1&per_page=8&open_at=2026-10-05T08%3A30&travel=walk&wait=30&page=1",
         "label": "1",
         "page": 1,
         "active": true
       },
       {
-        "url": "https://168-110-42-30.sslip.io/api/v1/medical-facilities?latitude=35.681236&longitude=139.767125&radius=2000&status=1&per_page=5&open_at=2026-10-05T10%3A30&page=2",
+        "url": "https://168-110-42-30.sslip.io/api/v1/medical-facilities?latitude=35.681236&longitude=139.767125&radius=2000&status=1&per_page=8&open_at=2026-10-05T08%3A30&travel=walk&wait=30&page=2",
         "label": "2",
         "page": 2,
         "active": false
       },
       {
-        "url": "https://168-110-42-30.sslip.io/api/v1/medical-facilities?latitude=35.681236&longitude=139.767125&radius=2000&status=1&per_page=5&open_at=2026-10-05T10%3A30&page=3",
+        "url": "https://168-110-42-30.sslip.io/api/v1/medical-facilities?latitude=35.681236&longitude=139.767125&radius=2000&status=1&per_page=8&open_at=2026-10-05T08%3A30&travel=walk&wait=30&page=3",
         "label": "3",
         "page": 3,
         "active": false
       },
       {
-        "url": "https://168-110-42-30.sslip.io/api/v1/medical-facilities?latitude=35.681236&longitude=139.767125&radius=2000&status=1&per_page=5&open_at=2026-10-05T10%3A30&page=4",
+        "url": "https://168-110-42-30.sslip.io/api/v1/medical-facilities?latitude=35.681236&longitude=139.767125&radius=2000&status=1&per_page=8&open_at=2026-10-05T08%3A30&travel=walk&wait=30&page=4",
         "label": "4",
         "page": 4,
         "active": false
       },
       {
-        "url": "https://168-110-42-30.sslip.io/api/v1/medical-facilities?latitude=35.681236&longitude=139.767125&radius=2000&status=1&per_page=5&open_at=2026-10-05T10%3A30&page=5",
+        "url": "https://168-110-42-30.sslip.io/api/v1/medical-facilities?latitude=35.681236&longitude=139.767125&radius=2000&status=1&per_page=8&open_at=2026-10-05T08%3A30&travel=walk&wait=30&page=5",
         "label": "5",
         "page": 5,
         "active": false
       },
       {
-        "url": "https://168-110-42-30.sslip.io/api/v1/medical-facilities?latitude=35.681236&longitude=139.767125&radius=2000&status=1&per_page=5&open_at=2026-10-05T10%3A30&page=6",
+        "url": "https://168-110-42-30.sslip.io/api/v1/medical-facilities?latitude=35.681236&longitude=139.767125&radius=2000&status=1&per_page=8&open_at=2026-10-05T08%3A30&travel=walk&wait=30&page=6",
         "label": "6",
         "page": 6,
         "active": false
       },
       {
-        "url": "https://168-110-42-30.sslip.io/api/v1/medical-facilities?latitude=35.681236&longitude=139.767125&radius=2000&status=1&per_page=5&open_at=2026-10-05T10%3A30&page=7",
+        "url": "https://168-110-42-30.sslip.io/api/v1/medical-facilities?latitude=35.681236&longitude=139.767125&radius=2000&status=1&per_page=8&open_at=2026-10-05T08%3A30&travel=walk&wait=30&page=7",
         "label": "7",
         "page": 7,
         "active": false
       },
       {
-        "url": "https://168-110-42-30.sslip.io/api/v1/medical-facilities?latitude=35.681236&longitude=139.767125&radius=2000&status=1&per_page=5&open_at=2026-10-05T10%3A30&page=8",
+        "url": "https://168-110-42-30.sslip.io/api/v1/medical-facilities?latitude=35.681236&longitude=139.767125&radius=2000&status=1&per_page=8&open_at=2026-10-05T08%3A30&travel=walk&wait=30&page=8",
         "label": "8",
         "page": 8,
         "active": false
       },
       {
-        "url": "https://168-110-42-30.sslip.io/api/v1/medical-facilities?latitude=35.681236&longitude=139.767125&radius=2000&status=1&per_page=5&open_at=2026-10-05T10%3A30&page=9",
+        "url": "https://168-110-42-30.sslip.io/api/v1/medical-facilities?latitude=35.681236&longitude=139.767125&radius=2000&status=1&per_page=8&open_at=2026-10-05T08%3A30&travel=walk&wait=30&page=9",
         "label": "9",
         "page": 9,
         "active": false
       },
       {
-        "url": "https://168-110-42-30.sslip.io/api/v1/medical-facilities?latitude=35.681236&longitude=139.767125&radius=2000&status=1&per_page=5&open_at=2026-10-05T10%3A30&page=10",
+        "url": "https://168-110-42-30.sslip.io/api/v1/medical-facilities?latitude=35.681236&longitude=139.767125&radius=2000&status=1&per_page=8&open_at=2026-10-05T08%3A30&travel=walk&wait=30&page=10",
         "label": "10",
         "page": 10,
         "active": false
@@ -407,29 +620,29 @@
         "active": false
       },
       {
-        "url": "https://168-110-42-30.sslip.io/api/v1/medical-facilities?latitude=35.681236&longitude=139.767125&radius=2000&status=1&per_page=5&open_at=2026-10-05T10%3A30&page=208",
-        "label": "208",
-        "page": 208,
+        "url": "https://168-110-42-30.sslip.io/api/v1/medical-facilities?latitude=35.681236&longitude=139.767125&radius=2000&status=1&per_page=8&open_at=2026-10-05T08%3A30&travel=walk&wait=30&page=59",
+        "label": "59",
+        "page": 59,
         "active": false
       },
       {
-        "url": "https://168-110-42-30.sslip.io/api/v1/medical-facilities?latitude=35.681236&longitude=139.767125&radius=2000&status=1&per_page=5&open_at=2026-10-05T10%3A30&page=209",
-        "label": "209",
-        "page": 209,
+        "url": "https://168-110-42-30.sslip.io/api/v1/medical-facilities?latitude=35.681236&longitude=139.767125&radius=2000&status=1&per_page=8&open_at=2026-10-05T08%3A30&travel=walk&wait=30&page=60",
+        "label": "60",
+        "page": 60,
         "active": false
       },
       {
-        "url": "https://168-110-42-30.sslip.io/api/v1/medical-facilities?latitude=35.681236&longitude=139.767125&radius=2000&status=1&per_page=5&open_at=2026-10-05T10%3A30&page=2",
+        "url": "https://168-110-42-30.sslip.io/api/v1/medical-facilities?latitude=35.681236&longitude=139.767125&radius=2000&status=1&per_page=8&open_at=2026-10-05T08%3A30&travel=walk&wait=30&page=2",
         "label": "Next &raquo;",
         "page": 2,
         "active": false
       }
     ],
     "path": "https://168-110-42-30.sslip.io/api/v1/medical-facilities",
-    "per_page": 5,
-    "to": 5,
-    "total": 1043,
-    "max_page": 2000,
+    "per_page": 8,
+    "to": 8,
+    "total": 474,
+    "max_page": 1250,
     "total_is_capped": false,
     "attribution": {
       "notice": "本APIのデータは、各地方厚生局が公開する「保険医療機関・保険薬局の指定一覧」を加工して作成しています。",
@@ -440,7 +653,7 @@
       "disclaimer": "データの正確性・完全性は保証しません。最新かつ正確な情報は、各地方厚生局の公表資料を確認してください。",
       "address_source": {
         "name": "アドレス・ベース・レジストリ（デジタル庁）の市区町村・町字・住居表示・地番の各マスターと位置参照データを加工して作成",
-        "url": "https://catalog.registries.digital.go.jp/rc/dataset/"
+        "url": "https://www.digital.go.jp/policies/base_registry_address"
       },
       "medical_info_net_source": {
         "name": "厚生労働省「医療情報ネット」のオープンデータ（所在地座標・診療時間・休診日・フリガナ・ホームページ）を加工して作成",
@@ -449,6 +662,10 @@
       "national_land_source": {
         "name": "「国土数値情報（医療機関データ）」（国土交通省）を加工して作成",
         "url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P04-2020.html"
+      },
+      "station_source": {
+        "name": "「国土数値情報（鉄道データ）」（国土交通省）を加工して作成",
+        "url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N02-2025.html"
       },
       "population_source": {
         "name": "総務省「住民基本台帳に基づく人口、人口動態及び世帯数」（市区町村別）を加工して作成",

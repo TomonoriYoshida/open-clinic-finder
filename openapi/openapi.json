@@ -224,6 +224,23 @@
                                                                 "url"
                                                             ]
                                                         },
+                                                        "station_source": {
+                                                            "type": "object",
+                                                            "description": "\u99c5\u306e\u4f4d\u7f6e\u306e\u51fa\u5178\uff08\u56fd\u571f\u4ea4\u901a\u7701\u3001CC BY 4.0\uff09\u3002\u99c5\u306e\u691c\u7d22API\u306b\u4f7f\u3046\u3002",
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string",
+                                                                    "const": "\u300c\u56fd\u571f\u6570\u5024\u60c5\u5831\uff08\u9244\u9053\u30c7\u30fc\u30bf\uff09\u300d\uff08\u56fd\u571f\u4ea4\u901a\u7701\uff09\u3092\u52a0\u5de5\u3057\u3066\u4f5c\u6210"
+                                                                },
+                                                                "url": {
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "name",
+                                                                "url"
+                                                            ]
+                                                        },
                                                         "population_source": {
                                                             "type": "object",
                                                             "description": "\u5e02\u533a\u753a\u6751\u306e\u4eba\u53e3\u306e\u51fa\u5178\uff08\u7dcf\u52d9\u7701\u3001\u653f\u5e9c\u6a19\u6e96\u5229\u7528\u898f\u7d04\u30fbCC BY 4.0 \u4e92\u63db\uff09\u3002\u96c6\u8a08API\u306e\u4eba\u53e3\u3042\u305f\u308a\u306e\u4ef6\u6570\u306b\u4f7f\u3046\u3002",
@@ -305,6 +322,7 @@
                                                         "address_source",
                                                         "medical_info_net_source",
                                                         "national_land_source",
+                                                        "station_source",
                                                         "population_source",
                                                         "e_prescription_source",
                                                         "holiday_source",
@@ -411,7 +429,7 @@
         "/v1/medical-facilities": {
             "get": {
                 "operationId": "v1.medical-facilities.index",
-                "description": "\u533b\u7642\u65bd\u8a2d\u30de\u30b9\u30bf\u3092\u30da\u30fc\u30b8\u30cd\u30fc\u30b7\u30e7\u30f3\u4ed8\u304d\u3067\u8fd4\u3057\u307e\u3059\u3002`q` \u306f\u65bd\u8a2d\u540d\u30fb\u4f4f\u6240\u306e\u5168\u89d2\u534a\u89d2/\u7570\u4f53\u5b57\u3086\u308c\u3092\u5438\u53ce\u3057\u305f\u3042\u3044\u307e\u3044\u691c\u7d22\u3067\u3059\u3002`latitude`\u30fb`longitude` \u3092\u6307\u5b9a\u3059\u308b\u3068\u3001`radius` \u4ee5\u5185\u306e\u65bd\u8a2d\u3092\u8fd1\u3044\u9806\u306b\u8fd4\u3057\u307e\u3059\u3002`open_at` \u3092\u6307\u5b9a\u3059\u308b\u3068\u3001\u305d\u306e\u65e5\u6642\u306b\u53d7\u4ed8\u4e2d\u306e\u65bd\u8a2d\uff08\u539a\u751f\u52b4\u50cd\u7701\u300c\u533b\u7642\u60c5\u5831\u30cd\u30c3\u30c8\u300d\u306e\u8a3a\u7642\u6642\u9593\u3067\u5224\u5b9a\uff09\u3060\u3051\u3092\u8fd4\u3057\u3001\u5404\u65bd\u8a2d\u306b\u53d7\u4ed8\u304c\u7d42\u308f\u308b\u65e5\u6642 `open_until` \u3092\u542b\u3081\u307e\u3059\u3002",
+                "description": "\u533b\u7642\u65bd\u8a2d\u30de\u30b9\u30bf\u3092\u30da\u30fc\u30b8\u30cd\u30fc\u30b7\u30e7\u30f3\u4ed8\u304d\u3067\u8fd4\u3057\u307e\u3059\u3002`q` \u306f\u65bd\u8a2d\u540d\u30fb\u4f4f\u6240\u306e\u5168\u89d2\u534a\u89d2/\u7570\u4f53\u5b57\u3086\u308c\u3092\u5438\u53ce\u3057\u305f\u3042\u3044\u307e\u3044\u691c\u7d22\u3067\u3059\u3002`latitude`\u30fb`longitude` \u3092\u6307\u5b9a\u3059\u308b\u3068\u3001`radius` \u4ee5\u5185\u306e\u65bd\u8a2d\u3092\u8fd1\u3044\u9806\u306b\u8fd4\u3057\u307e\u3059\u3002`open_at` \u3092\u6307\u5b9a\u3059\u308b\u3068\u3001\u305d\u306e\u65e5\u6642\u306b\u53d7\u4ed8\u4e2d\u306e\u65bd\u8a2d\uff08\u539a\u751f\u52b4\u50cd\u7701\u300c\u533b\u7642\u60c5\u5831\u30cd\u30c3\u30c8\u300d\u306e\u8a3a\u7642\u6642\u9593\u3067\u5224\u5b9a\uff09\u3060\u3051\u3092\u8fd4\u3057\u3001\u5404\u65bd\u8a2d\u306b\u53d7\u4ed8\u304c\u7d42\u308f\u308b\u65e5\u6642 `open_until` \u3092\u542b\u3081\u307e\u3059\u3002\u3055\u3089\u306b `travel`\uff08`walk` / `car`\uff09\u3092\u6307\u5b9a\u3059\u308b\u3068\u3001`open_at` \u3092\u51fa\u767a\u6642\u523b\u3068\u3057\u3066\u3001\u65bd\u8a2d\u3054\u3068\u306b\u76f4\u7dda\u8ddd\u96e2\u304b\u3089\u898b\u7a4d\u3082\u3063\u305f\u5230\u7740\u306e\u76ee\u5b89\u306e\u6642\u523b\u3067\u5224\u5b9a\u3057\u3001`wait` \u3092\u6307\u5b9a\u3059\u308b\u3068\u3001\u5230\u7740\u304b\u3089\u305d\u306e\u5206\u6570\u4ee5\u5185\u306b\u53d7\u4ed8\u304c\u59cb\u307e\u308b\u65bd\u8a2d\u3082\u542b\u3081\u307e\u3059\uff08\u5230\u7740\u306e\u76ee\u5b89 `arrives_at`\u3001\u53d7\u4ed8\u304c\u59cb\u307e\u308b\u65e5\u6642 `opens_at` \u304c\u4ed8\u304d\u307e\u3059\uff09\u3002",
                 "summary": "\u65bd\u8a2d\u4e00\u89a7\u30fb\u691c\u7d22",
                 "tags": [
                     "MedicalFacility"
@@ -550,6 +568,28 @@
                         "schema": {
                             "type": "string",
                             "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "travel",
+                        "in": "query",
+                        "description": "\u79fb\u52d5\u624b\u6bb5\uff08`walk`: \u5f92\u6b69\u3001`car`: \u8eca\uff09\u3002`open_at` \u3068 `latitude`\u30fb`longitude` \u3068\u7d44\u307f\u5408\u308f\u305b\u3001`open_at` \u3092\u51fa\u767a\u6642\u523b\u3068\u3057\u3066\u3001\u65bd\u8a2d\u3054\u3068\u306b\u5230\u7740\u306e\u76ee\u5b89\u306e\u6642\u523b\u3067\u53d7\u4ed8\u4e2d\u304b\u3092\u5224\u5b9a\u3059\u308b\u3002\u5230\u7740\u306e\u76ee\u5b89\u306f\u76f4\u7dda\u8ddd\u96e2\u30921.3\u500d\u3057\u3001\u5f92\u6b69\u306f\u5206\u901f80m\u3001\u8eca\u306f\u6642\u901f20km\u3067\u5272\u3063\u305f\u76ee\u5b89\u3002\u5404\u65bd\u8a2d\u306b\u5230\u7740\u306e\u76ee\u5b89 `arrives_at` \u304c\u4ed8\u304f",
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "walk",
+                                "car"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "wait",
+                        "in": "query",
+                        "description": "\u5230\u7740\uff08`travel` \u304c\u306a\u3051\u308c\u3070 `open_at`\uff09\u304b\u3089\u4f55\u5206\u4ee5\u5185\u306b\u53d7\u4ed8\u304c\u59cb\u307e\u308b\u65bd\u8a2d\u3082\u542b\u3081\u308b\u304b\uff080\u301c60\u3001\u30c7\u30d5\u30a9\u30eb\u30c80\uff09\u3002`open_at` \u3068 `latitude`\u30fb`longitude` \u3068\u7d44\u307f\u5408\u308f\u305b\u308b\u3002\u5230\u7740\u306e\u6642\u70b9\u3067\u307e\u3060\u53d7\u4ed8\u524d\u306e\u65bd\u8a2d\u306b\u306f\u3001\u53d7\u4ed8\u304c\u59cb\u307e\u308b\u65e5\u6642 `opens_at` \u304c\u4ed8\u304f",
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 60
                         }
                     },
                     {
@@ -853,6 +893,23 @@
                                                                         "url"
                                                                     ]
                                                                 },
+                                                                "station_source": {
+                                                                    "type": "object",
+                                                                    "description": "\u99c5\u306e\u4f4d\u7f6e\u306e\u51fa\u5178\uff08\u56fd\u571f\u4ea4\u901a\u7701\u3001CC BY 4.0\uff09\u3002\u99c5\u306e\u691c\u7d22API\u306b\u4f7f\u3046\u3002",
+                                                                    "properties": {
+                                                                        "name": {
+                                                                            "type": "string",
+                                                                            "const": "\u300c\u56fd\u571f\u6570\u5024\u60c5\u5831\uff08\u9244\u9053\u30c7\u30fc\u30bf\uff09\u300d\uff08\u56fd\u571f\u4ea4\u901a\u7701\uff09\u3092\u52a0\u5de5\u3057\u3066\u4f5c\u6210"
+                                                                        },
+                                                                        "url": {
+                                                                            "type": "string"
+                                                                        }
+                                                                    },
+                                                                    "required": [
+                                                                        "name",
+                                                                        "url"
+                                                                    ]
+                                                                },
                                                                 "population_source": {
                                                                     "type": "object",
                                                                     "description": "\u5e02\u533a\u753a\u6751\u306e\u4eba\u53e3\u306e\u51fa\u5178\uff08\u7dcf\u52d9\u7701\u3001\u653f\u5e9c\u6a19\u6e96\u5229\u7528\u898f\u7d04\u30fbCC BY 4.0 \u4e92\u63db\uff09\u3002\u96c6\u8a08API\u306e\u4eba\u53e3\u3042\u305f\u308a\u306e\u4ef6\u6570\u306b\u4f7f\u3046\u3002",
@@ -934,6 +991,7 @@
                                                                 "address_source",
                                                                 "medical_info_net_source",
                                                                 "national_land_source",
+                                                                "station_source",
                                                                 "population_source",
                                                                 "e_prescription_source",
                                                                 "holiday_source",
@@ -1120,6 +1178,23 @@
                                                                         "url"
                                                                     ]
                                                                 },
+                                                                "station_source": {
+                                                                    "type": "object",
+                                                                    "description": "\u99c5\u306e\u4f4d\u7f6e\u306e\u51fa\u5178\uff08\u56fd\u571f\u4ea4\u901a\u7701\u3001CC BY 4.0\uff09\u3002\u99c5\u306e\u691c\u7d22API\u306b\u4f7f\u3046\u3002",
+                                                                    "properties": {
+                                                                        "name": {
+                                                                            "type": "string",
+                                                                            "const": "\u300c\u56fd\u571f\u6570\u5024\u60c5\u5831\uff08\u9244\u9053\u30c7\u30fc\u30bf\uff09\u300d\uff08\u56fd\u571f\u4ea4\u901a\u7701\uff09\u3092\u52a0\u5de5\u3057\u3066\u4f5c\u6210"
+                                                                        },
+                                                                        "url": {
+                                                                            "type": "string"
+                                                                        }
+                                                                    },
+                                                                    "required": [
+                                                                        "name",
+                                                                        "url"
+                                                                    ]
+                                                                },
                                                                 "population_source": {
                                                                     "type": "object",
                                                                     "description": "\u5e02\u533a\u753a\u6751\u306e\u4eba\u53e3\u306e\u51fa\u5178\uff08\u7dcf\u52d9\u7701\u3001\u653f\u5e9c\u6a19\u6e96\u5229\u7528\u898f\u7d04\u30fbCC BY 4.0 \u4e92\u63db\uff09\u3002\u96c6\u8a08API\u306e\u4eba\u53e3\u3042\u305f\u308a\u306e\u4ef6\u6570\u306b\u4f7f\u3046\u3002",
@@ -1201,6 +1276,7 @@
                                                                 "address_source",
                                                                 "medical_info_net_source",
                                                                 "national_land_source",
+                                                                "station_source",
                                                                 "population_source",
                                                                 "e_prescription_source",
                                                                 "holiday_source",
@@ -1352,6 +1428,23 @@
                                                                 "url"
                                                             ]
                                                         },
+                                                        "station_source": {
+                                                            "type": "object",
+                                                            "description": "\u99c5\u306e\u4f4d\u7f6e\u306e\u51fa\u5178\uff08\u56fd\u571f\u4ea4\u901a\u7701\u3001CC BY 4.0\uff09\u3002\u99c5\u306e\u691c\u7d22API\u306b\u4f7f\u3046\u3002",
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string",
+                                                                    "const": "\u300c\u56fd\u571f\u6570\u5024\u60c5\u5831\uff08\u9244\u9053\u30c7\u30fc\u30bf\uff09\u300d\uff08\u56fd\u571f\u4ea4\u901a\u7701\uff09\u3092\u52a0\u5de5\u3057\u3066\u4f5c\u6210"
+                                                                },
+                                                                "url": {
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "name",
+                                                                "url"
+                                                            ]
+                                                        },
                                                         "population_source": {
                                                             "type": "object",
                                                             "description": "\u5e02\u533a\u753a\u6751\u306e\u4eba\u53e3\u306e\u51fa\u5178\uff08\u7dcf\u52d9\u7701\u3001\u653f\u5e9c\u6a19\u6e96\u5229\u7528\u898f\u7d04\u30fbCC BY 4.0 \u4e92\u63db\uff09\u3002\u96c6\u8a08API\u306e\u4eba\u53e3\u3042\u305f\u308a\u306e\u4ef6\u6570\u306b\u4f7f\u3046\u3002",
@@ -1433,6 +1526,7 @@
                                                         "address_source",
                                                         "medical_info_net_source",
                                                         "national_land_source",
+                                                        "station_source",
                                                         "population_source",
                                                         "e_prescription_source",
                                                         "holiday_source",
@@ -1580,6 +1674,23 @@
                                                                 "url"
                                                             ]
                                                         },
+                                                        "station_source": {
+                                                            "type": "object",
+                                                            "description": "\u99c5\u306e\u4f4d\u7f6e\u306e\u51fa\u5178\uff08\u56fd\u571f\u4ea4\u901a\u7701\u3001CC BY 4.0\uff09\u3002\u99c5\u306e\u691c\u7d22API\u306b\u4f7f\u3046\u3002",
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string",
+                                                                    "const": "\u300c\u56fd\u571f\u6570\u5024\u60c5\u5831\uff08\u9244\u9053\u30c7\u30fc\u30bf\uff09\u300d\uff08\u56fd\u571f\u4ea4\u901a\u7701\uff09\u3092\u52a0\u5de5\u3057\u3066\u4f5c\u6210"
+                                                                },
+                                                                "url": {
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "name",
+                                                                "url"
+                                                            ]
+                                                        },
                                                         "population_source": {
                                                             "type": "object",
                                                             "description": "\u5e02\u533a\u753a\u6751\u306e\u4eba\u53e3\u306e\u51fa\u5178\uff08\u7dcf\u52d9\u7701\u3001\u653f\u5e9c\u6a19\u6e96\u5229\u7528\u898f\u7d04\u30fbCC BY 4.0 \u4e92\u63db\uff09\u3002\u96c6\u8a08API\u306e\u4eba\u53e3\u3042\u305f\u308a\u306e\u4ef6\u6570\u306b\u4f7f\u3046\u3002",
@@ -1661,6 +1772,7 @@
                                                         "address_source",
                                                         "medical_info_net_source",
                                                         "national_land_source",
+                                                        "station_source",
                                                         "population_source",
                                                         "e_prescription_source",
                                                         "holiday_source",
@@ -1978,6 +2090,23 @@
                                                                 "url"
                                                             ]
                                                         },
+                                                        "station_source": {
+                                                            "type": "object",
+                                                            "description": "\u99c5\u306e\u4f4d\u7f6e\u306e\u51fa\u5178\uff08\u56fd\u571f\u4ea4\u901a\u7701\u3001CC BY 4.0\uff09\u3002\u99c5\u306e\u691c\u7d22API\u306b\u4f7f\u3046\u3002",
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string",
+                                                                    "const": "\u300c\u56fd\u571f\u6570\u5024\u60c5\u5831\uff08\u9244\u9053\u30c7\u30fc\u30bf\uff09\u300d\uff08\u56fd\u571f\u4ea4\u901a\u7701\uff09\u3092\u52a0\u5de5\u3057\u3066\u4f5c\u6210"
+                                                                },
+                                                                "url": {
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "name",
+                                                                "url"
+                                                            ]
+                                                        },
                                                         "population_source": {
                                                             "type": "object",
                                                             "description": "\u5e02\u533a\u753a\u6751\u306e\u4eba\u53e3\u306e\u51fa\u5178\uff08\u7dcf\u52d9\u7701\u3001\u653f\u5e9c\u6a19\u6e96\u5229\u7528\u898f\u7d04\u30fbCC BY 4.0 \u4e92\u63db\uff09\u3002\u96c6\u8a08API\u306e\u4eba\u53e3\u3042\u305f\u308a\u306e\u4ef6\u6570\u306b\u4f7f\u3046\u3002",
@@ -2059,6 +2188,7 @@
                                                         "address_source",
                                                         "medical_info_net_source",
                                                         "national_land_source",
+                                                        "station_source",
                                                         "population_source",
                                                         "e_prescription_source",
                                                         "holiday_source",
@@ -2345,6 +2475,23 @@
                                                                 "url"
                                                             ]
                                                         },
+                                                        "station_source": {
+                                                            "type": "object",
+                                                            "description": "\u99c5\u306e\u4f4d\u7f6e\u306e\u51fa\u5178\uff08\u56fd\u571f\u4ea4\u901a\u7701\u3001CC BY 4.0\uff09\u3002\u99c5\u306e\u691c\u7d22API\u306b\u4f7f\u3046\u3002",
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string",
+                                                                    "const": "\u300c\u56fd\u571f\u6570\u5024\u60c5\u5831\uff08\u9244\u9053\u30c7\u30fc\u30bf\uff09\u300d\uff08\u56fd\u571f\u4ea4\u901a\u7701\uff09\u3092\u52a0\u5de5\u3057\u3066\u4f5c\u6210"
+                                                                },
+                                                                "url": {
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "name",
+                                                                "url"
+                                                            ]
+                                                        },
                                                         "population_source": {
                                                             "type": "object",
                                                             "description": "\u5e02\u533a\u753a\u6751\u306e\u4eba\u53e3\u306e\u51fa\u5178\uff08\u7dcf\u52d9\u7701\u3001\u653f\u5e9c\u6a19\u6e96\u5229\u7528\u898f\u7d04\u30fbCC BY 4.0 \u4e92\u63db\uff09\u3002\u96c6\u8a08API\u306e\u4eba\u53e3\u3042\u305f\u308a\u306e\u4ef6\u6570\u306b\u4f7f\u3046\u3002",
@@ -2426,6 +2573,7 @@
                                                         "address_source",
                                                         "medical_info_net_source",
                                                         "national_land_source",
+                                                        "station_source",
                                                         "population_source",
                                                         "e_prescription_source",
                                                         "holiday_source",
@@ -2818,6 +2966,23 @@
                                                                 "url"
                                                             ]
                                                         },
+                                                        "station_source": {
+                                                            "type": "object",
+                                                            "description": "\u99c5\u306e\u4f4d\u7f6e\u306e\u51fa\u5178\uff08\u56fd\u571f\u4ea4\u901a\u7701\u3001CC BY 4.0\uff09\u3002\u99c5\u306e\u691c\u7d22API\u306b\u4f7f\u3046\u3002",
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string",
+                                                                    "const": "\u300c\u56fd\u571f\u6570\u5024\u60c5\u5831\uff08\u9244\u9053\u30c7\u30fc\u30bf\uff09\u300d\uff08\u56fd\u571f\u4ea4\u901a\u7701\uff09\u3092\u52a0\u5de5\u3057\u3066\u4f5c\u6210"
+                                                                },
+                                                                "url": {
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "name",
+                                                                "url"
+                                                            ]
+                                                        },
                                                         "population_source": {
                                                             "type": "object",
                                                             "description": "\u5e02\u533a\u753a\u6751\u306e\u4eba\u53e3\u306e\u51fa\u5178\uff08\u7dcf\u52d9\u7701\u3001\u653f\u5e9c\u6a19\u6e96\u5229\u7528\u898f\u7d04\u30fbCC BY 4.0 \u4e92\u63db\uff09\u3002\u96c6\u8a08API\u306e\u4eba\u53e3\u3042\u305f\u308a\u306e\u4ef6\u6570\u306b\u4f7f\u3046\u3002",
@@ -2899,6 +3064,7 @@
                                                         "address_source",
                                                         "medical_info_net_source",
                                                         "national_land_source",
+                                                        "station_source",
                                                         "population_source",
                                                         "e_prescription_source",
                                                         "holiday_source",
@@ -3214,6 +3380,23 @@
                                                                 "url"
                                                             ]
                                                         },
+                                                        "station_source": {
+                                                            "type": "object",
+                                                            "description": "\u99c5\u306e\u4f4d\u7f6e\u306e\u51fa\u5178\uff08\u56fd\u571f\u4ea4\u901a\u7701\u3001CC BY 4.0\uff09\u3002\u99c5\u306e\u691c\u7d22API\u306b\u4f7f\u3046\u3002",
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string",
+                                                                    "const": "\u300c\u56fd\u571f\u6570\u5024\u60c5\u5831\uff08\u9244\u9053\u30c7\u30fc\u30bf\uff09\u300d\uff08\u56fd\u571f\u4ea4\u901a\u7701\uff09\u3092\u52a0\u5de5\u3057\u3066\u4f5c\u6210"
+                                                                },
+                                                                "url": {
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "name",
+                                                                "url"
+                                                            ]
+                                                        },
                                                         "population_source": {
                                                             "type": "object",
                                                             "description": "\u5e02\u533a\u753a\u6751\u306e\u4eba\u53e3\u306e\u51fa\u5178\uff08\u7dcf\u52d9\u7701\u3001\u653f\u5e9c\u6a19\u6e96\u5229\u7528\u898f\u7d04\u30fbCC BY 4.0 \u4e92\u63db\uff09\u3002\u96c6\u8a08API\u306e\u4eba\u53e3\u3042\u305f\u308a\u306e\u4ef6\u6570\u306b\u4f7f\u3046\u3002",
@@ -3295,6 +3478,7 @@
                                                         "address_source",
                                                         "medical_info_net_source",
                                                         "national_land_source",
+                                                        "station_source",
                                                         "population_source",
                                                         "e_prescription_source",
                                                         "holiday_source",
@@ -3808,6 +3992,23 @@
                                                                 "url"
                                                             ]
                                                         },
+                                                        "station_source": {
+                                                            "type": "object",
+                                                            "description": "\u99c5\u306e\u4f4d\u7f6e\u306e\u51fa\u5178\uff08\u56fd\u571f\u4ea4\u901a\u7701\u3001CC BY 4.0\uff09\u3002\u99c5\u306e\u691c\u7d22API\u306b\u4f7f\u3046\u3002",
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string",
+                                                                    "const": "\u300c\u56fd\u571f\u6570\u5024\u60c5\u5831\uff08\u9244\u9053\u30c7\u30fc\u30bf\uff09\u300d\uff08\u56fd\u571f\u4ea4\u901a\u7701\uff09\u3092\u52a0\u5de5\u3057\u3066\u4f5c\u6210"
+                                                                },
+                                                                "url": {
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "name",
+                                                                "url"
+                                                            ]
+                                                        },
                                                         "population_source": {
                                                             "type": "object",
                                                             "description": "\u5e02\u533a\u753a\u6751\u306e\u4eba\u53e3\u306e\u51fa\u5178\uff08\u7dcf\u52d9\u7701\u3001\u653f\u5e9c\u6a19\u6e96\u5229\u7528\u898f\u7d04\u30fbCC BY 4.0 \u4e92\u63db\uff09\u3002\u96c6\u8a08API\u306e\u4eba\u53e3\u3042\u305f\u308a\u306e\u4ef6\u6570\u306b\u4f7f\u3046\u3002",
@@ -3889,6 +4090,366 @@
                                                         "address_source",
                                                         "medical_info_net_source",
                                                         "national_land_source",
+                                                        "station_source",
+                                                        "population_source",
+                                                        "e_prescription_source",
+                                                        "holiday_source",
+                                                        "sources"
+                                                    ]
+                                                }
+                                            },
+                                            "required": [
+                                                "attribution"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "data",
+                                        "meta"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/ValidationException"
+                    }
+                }
+            }
+        },
+        "/v1/stations": {
+            "get": {
+                "operationId": "v1.stations.index",
+                "description": "\u99c5\u540d\u304b\u3089\u99c5\u306e\u4f4d\u7f6e\u3092\u8fd4\u3057\u307e\u3059\u3002\u4e00\u89a7API\u306e `latitude`\u30fb`longitude` \u306b\u6e21\u3059\u3068\u3001\u99c5\u306e\u8fd1\u304f\u306e\u65bd\u8a2d\u3092\u691c\u7d22\u3067\u304d\u307e\u3059\u3002\u8907\u6570\u306e\u8def\u7dda\u304c\u4e57\u308a\u5165\u308c\u308b\u99c5\u306f1\u4ef6\u306b\u307e\u3068\u3081\u3001`lines` \u306b\u8def\u7dda\u3092\u4e26\u3079\u307e\u3059\u3002\u540c\u3058\u540d\u524d\u306e\u99c5\u304c\u5404\u5730\u306b\u3042\u308b\u3068\u304d\u306f\u3001`prefecture`\u30fb`municipality`\uff08\u99c5\u306e\u8fd1\u304f\u306e\u65bd\u8a2d\u304b\u3089\u5224\u5b9a\uff09\u3068\u8def\u7dda\u3067\u898b\u5206\u3051\u3066\u304f\u3060\u3055\u3044\u3002\u56fd\u571f\u4ea4\u901a\u7701\u300c\u56fd\u571f\u6570\u5024\u60c5\u5831\uff08\u9244\u9053\u30c7\u30fc\u30bf\uff09\u300d\u306e\u99c5\u306e\u4f4d\u7f6e\uff08\u30db\u30fc\u30e0\u306e\u4e2d\u592e\uff09\u3067\u3059\u3002",
+                "summary": "\u99c5\u306e\u691c\u7d22",
+                "tags": [
+                    "RailwayStation"
+                ],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "required": true,
+                        "description": "\u99c5\u540d\uff08\u4f8b: `\u6625\u65e5`\u3001`\u5e02\u30f6\u8c37\u99c5`\uff09\u3002\u672b\u5c3e\u306e\u300c\u99c5\u300d\u306f\u3042\u3063\u3066\u3082\u306a\u304f\u3066\u3082\u3088\u304f\u3001\u5168\u89d2\u534a\u89d2\u30fb\u300c\u30f6\u300d\u300c\u30b1\u300d\u306e\u9055\u3044\u306f\u533a\u5225\u3057\u306a\u3044\u3002\u4e00\u81f4\u3059\u308b\u99c5\u304c\u306a\u3051\u308c\u3070\u3001\u3053\u306e\u8a9e\u3067\u59cb\u307e\u308b\u99c5\u3092\u8fd4\u3059",
+                        "schema": {
+                            "type": "string",
+                            "maxLength": 50
+                        }
+                    },
+                    {
+                        "name": "prefecture_code",
+                        "in": "query",
+                        "description": "\u90fd\u9053\u5e9c\u770c\u30b3\u30fc\u30c9\uff08JIS X 0401\u306e2\u6841\u300101\u301c47\uff09\u3002\u540c\u3058\u540d\u524d\u306e\u99c5\u3092\u7d5e\u308a\u8fbc\u3080",
+                        "schema": {
+                            "$ref": "#/components/schemas/Prefecture"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "description": "\u4e00\u81f4\u3057\u305f\u99c5\uff08\u6700\u592720\u4ef6\uff09\u3002\u540d\u524d\u304c\u5b8c\u5168\u306b\u4e00\u81f4\u3057\u305f\u99c5\u3092\u8fd4\u3057\u3001\u306a\u3051\u308c\u3070\u305d\u306e\u8a9e\u3067\u59cb\u307e\u308b\u99c5\u3092\u540d\u524d\u306e\u77ed\u3044\u9806\u306b\u8fd4\u3059\uff08\u540c\u3058\u9577\u3055\u306a\u3089\u90fd\u9053\u5e9c\u770c\u30b3\u30fc\u30c9\u9806\uff09\u3002`latitude`\u30fb`longitude` \u306f\u99c5\u306e\u4f4d\u7f6e\uff08\u8def\u7dda\u3054\u3068\u306e\u30db\u30fc\u30e0\u306e\u4e2d\u592e\u306e\u5e73\u5747\uff09\u3001`lines` \u306f\u4e57\u308a\u5165\u308c\u308b\u8def\u7dda\uff08`operator` \u306f\u4e8b\u696d\u8005\u3001`line` \u306f\u8def\u7dda\u540d\uff09\u3002`prefecture`\u30fb`municipality` \u306f\u99c5\u306e\u8fd1\u304f\uff08\u7d043km\u4ee5\u5185\uff09\u306e\u65bd\u8a2d\u304b\u3089\u5224\u5b9a\u3057\u305f\u3082\u306e\u3067\u3001\u8fd1\u304f\u306b\u65bd\u8a2d\u304c\u306a\u3051\u308c\u3070 `null`",
+                                            "examples": [
+                                                [
+                                                    {
+                                                        "name": "\u6625\u65e5",
+                                                        "prefecture": {
+                                                            "code": "13",
+                                                            "label": "\u6771\u4eac\u90fd"
+                                                        },
+                                                        "municipality": {
+                                                            "code": "13105",
+                                                            "label": "\u6587\u4eac\u533a"
+                                                        },
+                                                        "latitude": 35.709235,
+                                                        "longitude": 139.75251,
+                                                        "lines": [
+                                                            {
+                                                                "operator": "\u6771\u4eac\u90fd",
+                                                                "line": "6\u53f7\u7dda\u4e09\u7530\u7dda"
+                                                            },
+                                                            {
+                                                                "operator": "\u6771\u4eac\u90fd",
+                                                                "line": "12\u53f7\u7dda\u5927\u6c5f\u6238\u7dda"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            ],
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "name": {
+                                                        "type": "string"
+                                                    },
+                                                    "prefecture": {
+                                                        "type": [
+                                                            "object",
+                                                            "null"
+                                                        ],
+                                                        "properties": {
+                                                            "code": {
+                                                                "type": "string"
+                                                            },
+                                                            "label": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "code",
+                                                            "label"
+                                                        ]
+                                                    },
+                                                    "municipality": {
+                                                        "type": [
+                                                            "object",
+                                                            "null"
+                                                        ],
+                                                        "properties": {
+                                                            "code": {
+                                                                "type": "string"
+                                                            },
+                                                            "label": {
+                                                                "type": [
+                                                                    "string",
+                                                                    "null"
+                                                                ]
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "code",
+                                                            "label"
+                                                        ]
+                                                    },
+                                                    "latitude": {
+                                                        "type": "number"
+                                                    },
+                                                    "longitude": {
+                                                        "type": "number"
+                                                    },
+                                                    "lines": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "operator": {
+                                                                    "type": "string"
+                                                                },
+                                                                "line": {
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "operator",
+                                                                "line"
+                                                            ]
+                                                        }
+                                                    }
+                                                },
+                                                "required": [
+                                                    "name",
+                                                    "prefecture",
+                                                    "municipality",
+                                                    "latitude",
+                                                    "longitude",
+                                                    "lines"
+                                                ]
+                                            }
+                                        },
+                                        "meta": {
+                                            "type": "object",
+                                            "properties": {
+                                                "attribution": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "notice": {
+                                                            "type": "string",
+                                                            "description": "\u51fa\u5178\u306e\u8868\u793a\u3002\u30c7\u30fc\u30bf\u3092\u5229\u7528\u30fb\u518d\u914d\u5e03\u3059\u308b\u3068\u304d\u306f\u3001\u3053\u306e\u6587\u3068\u5404\u51fa\u5178\u3092\u8868\u793a\u3059\u308b\u3002",
+                                                            "const": "\u672cAPI\u306e\u30c7\u30fc\u30bf\u306f\u3001\u5404\u5730\u65b9\u539a\u751f\u5c40\u304c\u516c\u958b\u3059\u308b\u300c\u4fdd\u967a\u533b\u7642\u6a5f\u95a2\u30fb\u4fdd\u967a\u85ac\u5c40\u306e\u6307\u5b9a\u4e00\u89a7\u300d\u3092\u52a0\u5de5\u3057\u3066\u4f5c\u6210\u3057\u3066\u3044\u307e\u3059\u3002"
+                                                        },
+                                                        "license": {
+                                                            "type": "object",
+                                                            "description": "\u5229\u7528\u6761\u4ef6\uff08\u52a0\u5de5\u3057\u305f\u30c7\u30fc\u30bf\u3082\u540c\u3058\u6761\u4ef6\u3067\u63d0\u4f9b\u3059\u308b\uff09\u3002",
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string",
+                                                                    "const": "\u516c\u5171\u30c7\u30fc\u30bf\u5229\u7528\u898f\u7d04\uff08\u7b2c1.0\u7248\uff09"
+                                                                },
+                                                                "url": {
+                                                                    "type": "string",
+                                                                    "const": "https://www.digital.go.jp/resources/open_data/public_data_license_v1.0"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "name",
+                                                                "url"
+                                                            ]
+                                                        },
+                                                        "disclaimer": {
+                                                            "type": "string",
+                                                            "description": "\u514d\u8cac\u4e8b\u9805\u3002",
+                                                            "const": "\u30c7\u30fc\u30bf\u306e\u6b63\u78ba\u6027\u30fb\u5b8c\u5168\u6027\u306f\u4fdd\u8a3c\u3057\u307e\u305b\u3093\u3002\u6700\u65b0\u304b\u3064\u6b63\u78ba\u306a\u60c5\u5831\u306f\u3001\u5404\u5730\u65b9\u539a\u751f\u5c40\u306e\u516c\u8868\u8cc7\u6599\u3092\u78ba\u8a8d\u3057\u3066\u304f\u3060\u3055\u3044\u3002"
+                                                        },
+                                                        "address_source": {
+                                                            "type": "object",
+                                                            "description": "\u5e02\u533a\u753a\u6751\u30fb\u5ea7\u6a19\u306e\u51fa\u5178\uff08\u30c7\u30b8\u30bf\u30eb\u5e81 \u30a2\u30c9\u30ec\u30b9\u30fb\u30d9\u30fc\u30b9\u30fb\u30ec\u30b8\u30b9\u30c8\u30ea\u3001CC BY 4.0\uff09\u3002",
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string",
+                                                                    "const": "\u30a2\u30c9\u30ec\u30b9\u30fb\u30d9\u30fc\u30b9\u30fb\u30ec\u30b8\u30b9\u30c8\u30ea\uff08\u30c7\u30b8\u30bf\u30eb\u5e81\uff09\u306e\u5e02\u533a\u753a\u6751\u30fb\u753a\u5b57\u30fb\u4f4f\u5c45\u8868\u793a\u30fb\u5730\u756a\u306e\u5404\u30de\u30b9\u30bf\u30fc\u3068\u4f4d\u7f6e\u53c2\u7167\u30c7\u30fc\u30bf\u3092\u52a0\u5de5\u3057\u3066\u4f5c\u6210"
+                                                                },
+                                                                "url": {
+                                                                    "type": "string",
+                                                                    "const": "https://www.digital.go.jp/policies/base_registry_address"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "name",
+                                                                "url"
+                                                            ]
+                                                        },
+                                                        "medical_info_net_source": {
+                                                            "type": "object",
+                                                            "description": "\u753a\u4e01\u76ee\u307e\u3067\u3057\u304b\u6c42\u3081\u3089\u308c\u306a\u3044\u65bd\u8a2d\u306e\u5ea7\u6a19\u3068\u3001\u65bd\u8a2d\u306e\u8a3a\u7642\u6642\u9593\u30fb\u30d5\u30ea\u30ac\u30ca\u30fb\u30db\u30fc\u30e0\u30da\u30fc\u30b8\u306e\u51fa\u5178\uff08\u539a\u751f\u52b4\u50cd\u7701\u3001PDL1.0\uff09\u3002",
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string",
+                                                                    "const": "\u539a\u751f\u52b4\u50cd\u7701\u300c\u533b\u7642\u60c5\u5831\u30cd\u30c3\u30c8\u300d\u306e\u30aa\u30fc\u30d7\u30f3\u30c7\u30fc\u30bf\uff08\u6240\u5728\u5730\u5ea7\u6a19\u30fb\u8a3a\u7642\u6642\u9593\u30fb\u4f11\u8a3a\u65e5\u30fb\u30d5\u30ea\u30ac\u30ca\u30fb\u30db\u30fc\u30e0\u30da\u30fc\u30b8\uff09\u3092\u52a0\u5de5\u3057\u3066\u4f5c\u6210"
+                                                                },
+                                                                "url": {
+                                                                    "type": "string",
+                                                                    "const": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/newpage_43373.html"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "name",
+                                                                "url"
+                                                            ]
+                                                        },
+                                                        "national_land_source": {
+                                                            "type": "object",
+                                                            "description": "\u4f4f\u6240\u304b\u3089\u3082\u533b\u7642\u60c5\u5831\u30cd\u30c3\u30c8\u304b\u3089\u3082\u753a\u4e01\u76ee\u307e\u3067\u3057\u304b\u6c42\u3081\u3089\u308c\u306a\u3044\u75c5\u9662\u30fb\u8a3a\u7642\u6240\u30fb\u6b6f\u79d1\u8a3a\u7642\u6240\u306e\u5ea7\u6a19\u306e\u51fa\u5178\uff08\u56fd\u571f\u4ea4\u901a\u7701\u3001CC BY 4.0\uff09\u3002",
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string",
+                                                                    "const": "\u300c\u56fd\u571f\u6570\u5024\u60c5\u5831\uff08\u533b\u7642\u6a5f\u95a2\u30c7\u30fc\u30bf\uff09\u300d\uff08\u56fd\u571f\u4ea4\u901a\u7701\uff09\u3092\u52a0\u5de5\u3057\u3066\u4f5c\u6210"
+                                                                },
+                                                                "url": {
+                                                                    "type": "string",
+                                                                    "const": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P04-2020.html"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "name",
+                                                                "url"
+                                                            ]
+                                                        },
+                                                        "station_source": {
+                                                            "type": "object",
+                                                            "description": "\u99c5\u306e\u4f4d\u7f6e\u306e\u51fa\u5178\uff08\u56fd\u571f\u4ea4\u901a\u7701\u3001CC BY 4.0\uff09\u3002\u99c5\u306e\u691c\u7d22API\u306b\u4f7f\u3046\u3002",
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string",
+                                                                    "const": "\u300c\u56fd\u571f\u6570\u5024\u60c5\u5831\uff08\u9244\u9053\u30c7\u30fc\u30bf\uff09\u300d\uff08\u56fd\u571f\u4ea4\u901a\u7701\uff09\u3092\u52a0\u5de5\u3057\u3066\u4f5c\u6210"
+                                                                },
+                                                                "url": {
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "name",
+                                                                "url"
+                                                            ]
+                                                        },
+                                                        "population_source": {
+                                                            "type": "object",
+                                                            "description": "\u5e02\u533a\u753a\u6751\u306e\u4eba\u53e3\u306e\u51fa\u5178\uff08\u7dcf\u52d9\u7701\u3001\u653f\u5e9c\u6a19\u6e96\u5229\u7528\u898f\u7d04\u30fbCC BY 4.0 \u4e92\u63db\uff09\u3002\u96c6\u8a08API\u306e\u4eba\u53e3\u3042\u305f\u308a\u306e\u4ef6\u6570\u306b\u4f7f\u3046\u3002",
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string",
+                                                                    "const": "\u7dcf\u52d9\u7701\u300c\u4f4f\u6c11\u57fa\u672c\u53f0\u5e33\u306b\u57fa\u3065\u304f\u4eba\u53e3\u3001\u4eba\u53e3\u52d5\u614b\u53ca\u3073\u4e16\u5e2f\u6570\u300d\uff08\u5e02\u533a\u753a\u6751\u5225\uff09\u3092\u52a0\u5de5\u3057\u3066\u4f5c\u6210"
+                                                                },
+                                                                "url": {
+                                                                    "type": "string",
+                                                                    "const": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/daityo/jinkou_jinkoudoutai-setaisuu.html"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "name",
+                                                                "url"
+                                                            ]
+                                                        },
+                                                        "e_prescription_source": {
+                                                            "type": "object",
+                                                            "description": "\u96fb\u5b50\u51e6\u65b9\u7b8b\u3078\u306e\u5bfe\u5fdc\u306e\u51fa\u5178\uff08\u539a\u751f\u52b4\u50cd\u7701\u3001PDL1.0\uff09\u3002\u65bd\u8a2d\u306e e_prescription \u3068\u4e00\u89a7API\u306e\u7d5e\u308a\u8fbc\u307f\u306b\u4f7f\u3046\u3002",
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string",
+                                                                    "const": "\u539a\u751f\u52b4\u50cd\u7701\u300c\u96fb\u5b50\u51e6\u65b9\u305b\u3093\u5bfe\u5fdc\u306e\u533b\u7642\u6a5f\u95a2\u30fb\u85ac\u5c40\u30ea\u30b9\u30c8\u300d\u3092\u52a0\u5de5\u3057\u3066\u4f5c\u6210"
+                                                                },
+                                                                "url": {
+                                                                    "type": "string",
+                                                                    "const": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/denshishohousen_taioushisetsu.html"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "name",
+                                                                "url"
+                                                            ]
+                                                        },
+                                                        "holiday_source": {
+                                                            "type": "object",
+                                                            "description": "\u795d\u65e5\u306e\u51fa\u5178\uff08\u5185\u95a3\u5e9c\u3001\u653f\u5e9c\u6a19\u6e96\u5229\u7528\u898f\u7d04\u30fbCC BY 4.0 \u4e92\u63db\uff09\u3002\u795d\u65e5API\u3068\u3001\u4e00\u89a7API\u306e open_at \u306b\u4f7f\u3046\u3002",
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string",
+                                                                    "const": "\u5185\u95a3\u5e9c\u300c\u56fd\u6c11\u306e\u795d\u65e5\u306b\u3064\u3044\u3066\u300d\u306e\u795d\u65e5\u4e00\u89a7\uff08CSV\uff09\u3092\u52a0\u5de5\u3057\u3066\u4f5c\u6210"
+                                                                },
+                                                                "url": {
+                                                                    "type": "string",
+                                                                    "const": "https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "name",
+                                                                "url"
+                                                            ]
+                                                        },
+                                                        "sources": {
+                                                            "type": "array",
+                                                            "description": "\u65bd\u8a2d\u30c7\u30fc\u30bf\u306e\u51fa\u5178\uff08\u3053\u306eAPI\u304c\u53d6\u308a\u6271\u3046\u5730\u65b9\u539a\u751f\u5c40\u3068\u3001\u305d\u306e\u516c\u958b\u30da\u30fc\u30b8\uff09\u3002",
+                                                            "items": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "bureau": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "url": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "required": [
+                                                                    "bureau",
+                                                                    "url"
+                                                                ]
+                                                            }
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "notice",
+                                                        "license",
+                                                        "disclaimer",
+                                                        "address_source",
+                                                        "medical_info_net_source",
+                                                        "national_land_source",
+                                                        "station_source",
                                                         "population_source",
                                                         "e_prescription_source",
                                                         "holiday_source",
@@ -4736,9 +5297,23 @@
                     },
                     "open_until": {
                         "type": "string",
-                        "description": "`open_at` \u306e\u65e5\u6642\u304b\u3089\u53d7\u4ed8\u304c\u7d9a\u304f\u7d42\u308f\u308a\u306e\u65e5\u6642\uff08\u65e5\u672c\u6642\u9593\uff09\u3002\u65e5\u4ed8\u3092\u307e\u305f\u3050\u53d7\u4ed8\u306f\u7fcc\u65e5\u306e\u7d42\u308f\u308a\u307e\u3067\u3002`open_at` \u3092\u6307\u5b9a\u3057\u305f\u691c\u7d22\u306e\u3068\u304d\u3060\u3051\u542b\u307e\u308c\u308b",
+                        "description": "`open_at` \u306e\u65e5\u6642\u304b\u3089\u53d7\u4ed8\u304c\u7d9a\u304f\u7d42\u308f\u308a\u306e\u65e5\u6642\uff08\u65e5\u672c\u6642\u9593\uff09\u3002\u65e5\u4ed8\u3092\u307e\u305f\u3050\u53d7\u4ed8\u306f\u7fcc\u65e5\u306e\u7d42\u308f\u308a\u307e\u3067\u3002`open_at` \u3092\u6307\u5b9a\u3057\u305f\u691c\u7d22\u306e\u3068\u304d\u3060\u3051\u542b\u307e\u308c\u308b\u3002`travel`\u30fb`wait` \u304c\u3042\u308c\u3070\u3001\u5230\u7740\u306e\u6642\u70b9\u3067\u53d7\u4ed8\u4e2d\u304b\u3001\u305d\u306e\u5f8c\u306b\u59cb\u307e\u308b\u53d7\u4ed8\u306e\u7d42\u308f\u308a\u306e\u65e5\u6642",
                         "examples": [
                             "2026-10-05T19:00:00+09:00"
+                        ]
+                    },
+                    "arrives_at": {
+                        "type": "string",
+                        "description": "\u5230\u7740\u306e\u76ee\u5b89\u306e\u65e5\u6642\uff08\u65e5\u672c\u6642\u9593\uff09\u3002`open_at` \u3092\u51fa\u767a\u6642\u523b\u3068\u3057\u3066\u3001\u76f4\u7dda\u8ddd\u96e2\u304b\u3089\u898b\u7a4d\u3082\u3063\u305f\u76ee\u5b89\u3002`travel` \u3092\u6307\u5b9a\u3057\u305f\u691c\u7d22\u306e\u3068\u304d\u3060\u3051\u542b\u307e\u308c\u308b",
+                        "examples": [
+                            "2026-10-05T08:52:00+09:00"
+                        ]
+                    },
+                    "opens_at": {
+                        "type": "string",
+                        "description": "\u5230\u7740\u306e\u6642\u70b9\u3067\u306f\u307e\u3060\u53d7\u4ed8\u524d\u306e\u65bd\u8a2d\u306e\u3001\u53d7\u4ed8\u304c\u59cb\u307e\u308b\u65e5\u6642\uff08\u65e5\u672c\u6642\u9593\uff09\u3002`wait` \u3092\u6307\u5b9a\u3057\u305f\u691c\u7d22\u3067\u3001\u5230\u7740\u304b\u3089\u305d\u306e\u5206\u6570\u4ee5\u5185\u306b\u53d7\u4ed8\u304c\u59cb\u307e\u308b\u65bd\u8a2d\u3060\u3051\u306b\u542b\u307e\u308c\u308b",
+                        "examples": [
+                            "2026-10-05T09:00:00+09:00"
                         ]
                     },
                     "phone_number": {

@@ -1,13 +1,29 @@
+import { formatDuration, formatOpenUntil, formatTimeAfter, minutesBetween } from "@/lib/time";
 import { copy, fixtures } from "./fixtures";
 import { allowLocation, expect, test, tokyoStation } from "./support";
 
-/** "1,043件": the count line shows the API's total. */
+/** "474件": the count line shows the API's total. */
 const nearbyCount = `${fixtures.nearby.meta.total.toLocaleString("ja-JP")}件`;
 
-/** "11:30まで" for a facility of the nearby fixture (all close on the day searched). */
-function openUntilLabel(name: string): string {
-  const openUntil = fixtures.nearby.data.find((facility) => facility.name === name)!.open_until!;
-  return `${Number(openUntil.slice(11, 13))}:${openUntil.slice(14, 16)}まで`;
+/** The departure the nearby fixture was captured for: Monday 2026-10-05 08:30 in Japan. */
+const departure = "2026-10-05T08:30:00+09:00";
+
+/**
+ * What a result of the nearby fixture says about its hours when reached on
+ * foot: when it opens (and how long after arriving), or that it is open then
+ * and until when; and the estimated walk.
+ */
+function statusTexts(facility: (typeof fixtures.nearby.data)[number]): string[] {
+  const searchedAt = departure.slice(0, 16);
+  const arrivesAt = facility.arrives_at!;
+  const walk = `徒歩約${formatDuration(minutesBetween(departure, arrivesAt))}・${formatTimeAfter(arrivesAt, searchedAt)}ごろ着`;
+
+  if (facility.opens_at) {
+    return [`${formatTimeAfter(facility.opens_at, searchedAt)}から受付（着いて${formatDuration(minutesBetween(arrivesAt, facility.opens_at))}後）`, walk];
+  }
+
+  const closingSoon = minutesBetween(arrivesAt, facility.open_until!) <= 30;
+  return [`${closingSoon ? "まもなく終了・" : "着くころ受付中・"}${formatOpenUntil(facility.open_until!, searchedAt)}`, walk];
 }
 
 test.describe("トップ（場所を選ぶ前）", () => {
@@ -34,8 +50,11 @@ test.describe("トップ（場所を選ぶ前）", () => {
     );
 
     const query = api.requestsTo("/api/v1/medical-facilities").at(-1)!.searchParams;
-    // The clock is fixed at Monday 2026-10-05 10:30 in Japan.
-    expect(query.get("open_at")).toBe("2026-10-05T10:30");
+    // The clock is fixed at Monday 2026-10-05 08:30 in Japan: the departure,
+    // each facility judged at its arrival on foot, or opening 30 minutes after.
+    expect(query.get("open_at")).toBe("2026-10-05T08:30");
+    expect(query.get("travel")).toBe("walk");
+    expect(query.get("wait")).toBe("30");
     expect(query.get("radius")).toBe("2000");
     expect(query.get("status")).toBe("1");
     expect(Number(query.get("latitude"))).toBeCloseTo(tokyoStation.latitude, 3);
@@ -66,12 +85,45 @@ test.describe("トップ（場所を選ぶ前）", () => {
 test.describe("検索結果", () => {
   const resultsPath = `/?lat=${tokyoStation.latitude}&lng=${tokyoStation.longitude}&place=東京駅`;
 
-  test("施設ごとに、何時まで開いているかを表示する", async ({ page }) => {
+  test("施設ごとに、着く時刻の目安と、そのころの受付の状況を表示する", async ({ page }) => {
     await page.goto(resultsPath);
 
-    for (const { name } of fixtures.nearby.data) {
-      await expect(page.getByRole("listitem").filter({ hasText: name })).toContainText(openUntilLabel(name));
+    for (const facility of fixtures.nearby.data) {
+      const item = page.getByRole("listitem").filter({ hasText: facility.name.replace(/\u3000/g, " ") });
+      for (const text of statusTexts(facility)) {
+        await expect(item).toContainText(text);
+      }
     }
+    // The fixture has both kinds: open on arrival, and opening a little after.
+    expect(fixtures.nearby.data.some((facility) => facility.opens_at)).toBe(true);
+    expect(fixtures.nearby.data.some((facility) => !facility.opens_at)).toBe(true);
+  });
+
+  test("日付をまたいで着く時刻には「翌」を付け、受付が短い施設は注意の色で知らせる", async ({ page, api }) => {
+    const lateNight = copy(fixtures.nearby);
+    const [nextDay, shortWindow] = lateNight.data;
+    // Leaving at 23:40: one reached at 0:05 the next day, open until 2:00.
+    Object.assign(nextDay, { arrives_at: "2026-10-06T00:05:00+09:00", opens_at: undefined, open_until: "2026-10-06T02:00:00+09:00" });
+    // One that opens at 23:50 for only 20 minutes.
+    Object.assign(shortWindow, { arrives_at: "2026-10-05T23:41:00+09:00", opens_at: "2026-10-05T23:50:00+09:00", open_until: "2026-10-06T00:10:00+09:00" });
+    lateNight.data = [nextDay, shortWindow];
+    api.on("facilities", () => ({ json: lateNight }));
+
+    await page.goto(`${resultsPath}&when=2026-10-05T23:40`);
+
+    const first = page.getByRole("listitem").filter({ hasText: nextDay.name.replace(/\u3000/g, " ") });
+    await expect(first).toContainText("徒歩約25分・翌0:05ごろ着");
+    await expect(first).toContainText("着くころ受付中・翌2:00まで");
+    const second = page.getByRole("listitem").filter({ hasText: shortWindow.name.replace(/\u3000/g, " ") });
+    await expect(second.getByText("23:50〜翌0:10のみ受付")).toHaveClass(/text-warning/);
+  });
+
+  test("車に切り替えると、車で着く時刻で探す", async ({ page, api }) => {
+    await page.goto(resultsPath);
+    await page.getByRole("radio", { name: "🚗 車" }).click();
+
+    await expect(page).toHaveURL(/[?&]go=car/);
+    await expect.poll(() => api.requestsTo("/api/v1/medical-facilities").at(-1)?.searchParams.get("travel")).toBe("car");
   });
 
   test("見つからないときは、範囲を広げるか時間で絞らずに探せる", async ({ page, api }) => {
@@ -83,13 +135,17 @@ test.describe("検索結果", () => {
     api.on("facilities", (url) => (url.searchParams.has("open_at") ? { json: empty } : { json: fixtures.nearby }));
     await page.goto(resultsPath);
 
-    await expect(page.getByText("この範囲に、この時間に開いている施設は見つかりませんでした。")).toBeVisible();
+    await expect(page.getByText("この範囲に、着くころ開いている施設や、まもなく開く施設は見つかりませんでした。")).toBeVisible();
     await expect(page.getByRole("button", { name: "5km以内に広げる" })).toBeVisible();
     await page.getByRole("button", { name: "時間で絞らずに探す" }).click();
 
     await expect(page).toHaveURL(/[?&]when=any/);
     await expect(page.getByText(nearbyCount)).toBeVisible();
-    expect(api.requestsTo("/api/v1/medical-facilities").at(-1)!.searchParams.has("open_at")).toBe(false);
+    const query = api.requestsTo("/api/v1/medical-facilities").at(-1)!.searchParams;
+    expect(query.has("open_at")).toBe(false);
+    expect(query.has("travel")).toBe(false);
+    // Without a time, there is no arrival to judge, so no way of travelling to pick.
+    await expect(page.getByRole("radiogroup", { name: "移動手段" })).toHaveCount(0);
   });
 
   test("地図に切り替えると、位置のある施設に印を立てる", async ({ page }) => {

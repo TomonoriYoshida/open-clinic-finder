@@ -53,7 +53,7 @@ export interface paths {
         };
         /**
          * 施設一覧・検索
-         * @description 医療施設マスタをページネーション付きで返します。`q` は施設名・住所の全角半角/異体字ゆれを吸収したあいまい検索です。`latitude`・`longitude` を指定すると、`radius` 以内の施設を近い順に返します。`open_at` を指定すると、その日時に受付中の施設（厚生労働省「医療情報ネット」の診療時間で判定）だけを返し、各施設に受付が終わる日時 `open_until` を含めます。
+         * @description 医療施設マスタをページネーション付きで返します。`q` は施設名・住所の全角半角/異体字ゆれを吸収したあいまい検索です。`latitude`・`longitude` を指定すると、`radius` 以内の施設を近い順に返します。`open_at` を指定すると、その日時に受付中の施設（厚生労働省「医療情報ネット」の診療時間で判定）だけを返し、各施設に受付が終わる日時 `open_until` を含めます。さらに `travel`（`walk` / `car`）を指定すると、`open_at` を出発時刻として、施設ごとに直線距離から見積もった到着の目安の時刻で判定し、`wait` を指定すると、到着からその分数以内に受付が始まる施設も含めます（到着の目安 `arrives_at`、受付が始まる日時 `opens_at` が付きます）。
          */
         get: operations["v1.medical-facilities.index"];
         put?: never;
@@ -229,6 +229,26 @@ export interface paths {
          * @description 内閣府「国民の祝日」の一覧から、期間内の祝日・休日（振替休日・国民の休日を含む）を日付順に返します。一覧には翌年末までが載り、翌年分は例年2月ごろに追加されます。年末年始やお盆は含みません。一覧APIの `open_at` は、祝日には診療時間の「祝」の時刻で判定します。
          */
         get: operations["v1.holidays"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/stations": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * 駅の検索
+         * @description 駅名から駅の位置を返します。一覧APIの `latitude`・`longitude` に渡すと、駅の近くの施設を検索できます。複数の路線が乗り入れる駅は1件にまとめ、`lines` に路線を並べます。同じ名前の駅が各地にあるときは、`prefecture`・`municipality`（駅の近くの施設から判定）と路線で見分けてください。国土交通省「国土数値情報（鉄道データ）」の駅の位置（ホームの中央）です。
+         */
+        get: operations["v1.stations.index"];
         put?: never;
         post?: never;
         delete?: never;
@@ -598,10 +618,20 @@ export interface components {
              */
             distance?: number;
             /**
-             * @description `open_at` の日時から受付が続く終わりの日時（日本時間）。日付をまたぐ受付は翌日の終わりまで。`open_at` を指定した検索のときだけ含まれる
+             * @description `open_at` の日時から受付が続く終わりの日時（日本時間）。日付をまたぐ受付は翌日の終わりまで。`open_at` を指定した検索のときだけ含まれる。`travel`・`wait` があれば、到着の時点で受付中か、その後に始まる受付の終わりの日時
              * @example 2026-10-05T19:00:00+09:00
              */
             open_until?: string;
+            /**
+             * @description 到着の目安の日時（日本時間）。`open_at` を出発時刻として、直線距離から見積もった目安。`travel` を指定した検索のときだけ含まれる
+             * @example 2026-10-05T08:52:00+09:00
+             */
+            arrives_at?: string;
+            /**
+             * @description 到着の時点ではまだ受付前の施設の、受付が始まる日時（日本時間）。`wait` を指定した検索で、到着からその分数以内に受付が始まる施設だけに含まれる
+             * @example 2026-10-05T09:00:00+09:00
+             */
+            opens_at?: string;
             /**
              * @description 電話番号（区切りをハイフンに揃えたもの）
              * @example 03-3262-3421
@@ -915,6 +945,12 @@ export interface operations {
                                     /** @constant */
                                     url: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P04-2020.html";
                                 };
+                                /** @description 駅の位置の出典（国土交通省、CC BY 4.0）。駅の検索APIに使う。 */
+                                station_source: {
+                                    /** @constant */
+                                    name: "「国土数値情報（鉄道データ）」（国土交通省）を加工して作成";
+                                    url: string;
+                                };
                                 /** @description 市区町村の人口の出典（総務省、政府標準利用規約・CC BY 4.0 互換）。集計APIの人口あたりの件数に使う。 */
                                 population_source: {
                                     /** @constant */
@@ -1026,6 +1062,10 @@ export interface operations {
                 updated_since?: string;
                 /** @description この日時に受付中の施設だけを返す（ISO 8601。時差の指定がなければ日本時間。例: `2026-10-05T10:30`）。厚生労働省「医療情報ネット」の診療時間で判定し（受付時間があれば受付時間、なければ診療時間。どれかの診療科が開いていれば対象）、祝日は「祝」の時刻、「第2水曜休診」のような休みも反映する。照合できない施設や、年末年始などの臨時の休みは判定できない */
                 open_at?: string;
+                /** @description 移動手段（`walk`: 徒歩、`car`: 車）。`open_at` と `latitude`・`longitude` と組み合わせ、`open_at` を出発時刻として、施設ごとに到着の目安の時刻で受付中かを判定する。到着の目安は直線距離を1.3倍し、徒歩は分速80m、車は時速20kmで割った目安。各施設に到着の目安 `arrives_at` が付く */
+                travel?: "walk" | "car";
+                /** @description 到着（`travel` がなければ `open_at`）から何分以内に受付が始まる施設も含めるか（0〜60、デフォルト0）。`open_at` と `latitude`・`longitude` と組み合わせる。到着の時点でまだ受付前の施設には、受付が始まる日時 `opens_at` が付く */
+                wait?: number;
                 /** @description 検索地点の緯度（世界測地系）。`longitude` と組み合わせ、`radius` 以内の施設を近い順に返す（`sort` を指定した場合はその順）。各施設に `distance` が付く */
                 latitude?: number;
                 /** @description 検索地点の経度（世界測地系） */
@@ -1130,6 +1170,12 @@ export interface operations {
                                     /** @constant */
                                     url: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P04-2020.html";
                                 };
+                                /** @description 駅の位置の出典（国土交通省、CC BY 4.0）。駅の検索APIに使う。 */
+                                station_source: {
+                                    /** @constant */
+                                    name: "「国土数値情報（鉄道データ）」（国土交通省）を加工して作成";
+                                    url: string;
+                                };
                                 /** @description 市区町村の人口の出典（総務省、政府標準利用規約・CC BY 4.0 互換）。集計APIの人口あたりの件数に使う。 */
                                 population_source: {
                                     /** @constant */
@@ -1213,6 +1259,12 @@ export interface operations {
                                     name: "「国土数値情報（医療機関データ）」（国土交通省）を加工して作成";
                                     /** @constant */
                                     url: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P04-2020.html";
+                                };
+                                /** @description 駅の位置の出典（国土交通省、CC BY 4.0）。駅の検索APIに使う。 */
+                                station_source: {
+                                    /** @constant */
+                                    name: "「国土数値情報（鉄道データ）」（国土交通省）を加工して作成";
+                                    url: string;
                                 };
                                 /** @description 市区町村の人口の出典（総務省、政府標準利用規約・CC BY 4.0 互換）。集計APIの人口あたりの件数に使う。 */
                                 population_source: {
@@ -1308,6 +1360,12 @@ export interface operations {
                                     /** @constant */
                                     url: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P04-2020.html";
                                 };
+                                /** @description 駅の位置の出典（国土交通省、CC BY 4.0）。駅の検索APIに使う。 */
+                                station_source: {
+                                    /** @constant */
+                                    name: "「国土数値情報（鉄道データ）」（国土交通省）を加工して作成";
+                                    url: string;
+                                };
                                 /** @description 市区町村の人口の出典（総務省、政府標準利用規約・CC BY 4.0 互換）。集計APIの人口あたりの件数に使う。 */
                                 population_source: {
                                     /** @constant */
@@ -1401,6 +1459,12 @@ export interface operations {
                                     name: "「国土数値情報（医療機関データ）」（国土交通省）を加工して作成";
                                     /** @constant */
                                     url: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P04-2020.html";
+                                };
+                                /** @description 駅の位置の出典（国土交通省、CC BY 4.0）。駅の検索APIに使う。 */
+                                station_source: {
+                                    /** @constant */
+                                    name: "「国土数値情報（鉄道データ）」（国土交通省）を加工して作成";
+                                    url: string;
                                 };
                                 /** @description 市区町村の人口の出典（総務省、政府標準利用規約・CC BY 4.0 互換）。集計APIの人口あたりの件数に使う。 */
                                 population_source: {
@@ -1537,6 +1601,12 @@ export interface operations {
                                     name: "「国土数値情報（医療機関データ）」（国土交通省）を加工して作成";
                                     /** @constant */
                                     url: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P04-2020.html";
+                                };
+                                /** @description 駅の位置の出典（国土交通省、CC BY 4.0）。駅の検索APIに使う。 */
+                                station_source: {
+                                    /** @constant */
+                                    name: "「国土数値情報（鉄道データ）」（国土交通省）を加工して作成";
+                                    url: string;
                                 };
                                 /** @description 市区町村の人口の出典（総務省、政府標準利用規約・CC BY 4.0 互換）。集計APIの人口あたりの件数に使う。 */
                                 population_source: {
@@ -1679,6 +1749,12 @@ export interface operations {
                                     name: "「国土数値情報（医療機関データ）」（国土交通省）を加工して作成";
                                     /** @constant */
                                     url: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P04-2020.html";
+                                };
+                                /** @description 駅の位置の出典（国土交通省、CC BY 4.0）。駅の検索APIに使う。 */
+                                station_source: {
+                                    /** @constant */
+                                    name: "「国土数値情報（鉄道データ）」（国土交通省）を加工して作成";
+                                    url: string;
                                 };
                                 /** @description 市区町村の人口の出典（総務省、政府標準利用規約・CC BY 4.0 互換）。集計APIの人口あたりの件数に使う。 */
                                 population_source: {
@@ -1879,6 +1955,12 @@ export interface operations {
                                     /** @constant */
                                     url: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P04-2020.html";
                                 };
+                                /** @description 駅の位置の出典（国土交通省、CC BY 4.0）。駅の検索APIに使う。 */
+                                station_source: {
+                                    /** @constant */
+                                    name: "「国土数値情報（鉄道データ）」（国土交通省）を加工して作成";
+                                    url: string;
+                                };
                                 /** @description 市区町村の人口の出典（総務省、政府標準利用規約・CC BY 4.0 互換）。集計APIの人口あたりの件数に使う。 */
                                 population_source: {
                                     /** @constant */
@@ -2044,6 +2126,12 @@ export interface operations {
                                     name: "「国土数値情報（医療機関データ）」（国土交通省）を加工して作成";
                                     /** @constant */
                                     url: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P04-2020.html";
+                                };
+                                /** @description 駅の位置の出典（国土交通省、CC BY 4.0）。駅の検索APIに使う。 */
+                                station_source: {
+                                    /** @constant */
+                                    name: "「国土数値情報（鉄道データ）」（国土交通省）を加工して作成";
+                                    url: string;
                                 };
                                 /** @description 市区町村の人口の出典（総務省、政府標準利用規約・CC BY 4.0 互換）。集計APIの人口あたりの件数に使う。 */
                                 population_source: {
@@ -2349,6 +2437,157 @@ export interface operations {
                                     name: "「国土数値情報（医療機関データ）」（国土交通省）を加工して作成";
                                     /** @constant */
                                     url: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P04-2020.html";
+                                };
+                                /** @description 駅の位置の出典（国土交通省、CC BY 4.0）。駅の検索APIに使う。 */
+                                station_source: {
+                                    /** @constant */
+                                    name: "「国土数値情報（鉄道データ）」（国土交通省）を加工して作成";
+                                    url: string;
+                                };
+                                /** @description 市区町村の人口の出典（総務省、政府標準利用規約・CC BY 4.0 互換）。集計APIの人口あたりの件数に使う。 */
+                                population_source: {
+                                    /** @constant */
+                                    name: "総務省「住民基本台帳に基づく人口、人口動態及び世帯数」（市区町村別）を加工して作成";
+                                    /** @constant */
+                                    url: "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/daityo/jinkou_jinkoudoutai-setaisuu.html";
+                                };
+                                /** @description 電子処方箋への対応の出典（厚生労働省、PDL1.0）。施設の e_prescription と一覧APIの絞り込みに使う。 */
+                                e_prescription_source: {
+                                    /** @constant */
+                                    name: "厚生労働省「電子処方せん対応の医療機関・薬局リスト」を加工して作成";
+                                    /** @constant */
+                                    url: "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/denshishohousen_taioushisetsu.html";
+                                };
+                                /** @description 祝日の出典（内閣府、政府標準利用規約・CC BY 4.0 互換）。祝日APIと、一覧APIの open_at に使う。 */
+                                holiday_source: {
+                                    /** @constant */
+                                    name: "内閣府「国民の祝日について」の祝日一覧（CSV）を加工して作成";
+                                    /** @constant */
+                                    url: "https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html";
+                                };
+                                /** @description 施設データの出典（このAPIが取り扱う地方厚生局と、その公開ページ）。 */
+                                sources: {
+                                    bureau: string;
+                                    url: string;
+                                }[];
+                            };
+                        };
+                    };
+                };
+            };
+            422: components["responses"]["ValidationException"];
+        };
+    };
+    "v1.stations.index": {
+        parameters: {
+            query: {
+                /** @description 駅名（例: `春日`、`市ヶ谷駅`）。末尾の「駅」はあってもなくてもよく、全角半角・「ヶ」「ケ」の違いは区別しない。一致する駅がなければ、この語で始まる駅を返す */
+                name: string;
+                /** @description 都道府県コード（JIS X 0401の2桁、01〜47）。同じ名前の駅を絞り込む */
+                prefecture_code?: components["schemas"]["Prefecture"];
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /**
+                         * @description 一致した駅（最大20件）。名前が完全に一致した駅を返し、なければその語で始まる駅を名前の短い順に返す（同じ長さなら都道府県コード順）。`latitude`・`longitude` は駅の位置（路線ごとのホームの中央の平均）、`lines` は乗り入れる路線（`operator` は事業者、`line` は路線名）。`prefecture`・`municipality` は駅の近く（約3km以内）の施設から判定したもので、近くに施設がなければ `null`
+                         * @example [
+                         *       {
+                         *         "name": "春日",
+                         *         "prefecture": {
+                         *           "code": "13",
+                         *           "label": "東京都"
+                         *         },
+                         *         "municipality": {
+                         *           "code": "13105",
+                         *           "label": "文京区"
+                         *         },
+                         *         "latitude": 35.709235,
+                         *         "longitude": 139.75251,
+                         *         "lines": [
+                         *           {
+                         *             "operator": "東京都",
+                         *             "line": "6号線三田線"
+                         *           },
+                         *           {
+                         *             "operator": "東京都",
+                         *             "line": "12号線大江戸線"
+                         *           }
+                         *         ]
+                         *       }
+                         *     ]
+                         */
+                        data: {
+                            name: string;
+                            prefecture: {
+                                code: string;
+                                label: string;
+                            } | null;
+                            municipality: {
+                                code: string;
+                                label: string | null;
+                            } | null;
+                            latitude: number;
+                            longitude: number;
+                            lines: {
+                                operator: string;
+                                line: string;
+                            }[];
+                        }[];
+                        meta: {
+                            attribution: {
+                                /**
+                                 * @description 出典の表示。データを利用・再配布するときは、この文と各出典を表示する。
+                                 * @constant
+                                 */
+                                notice: "本APIのデータは、各地方厚生局が公開する「保険医療機関・保険薬局の指定一覧」を加工して作成しています。";
+                                /** @description 利用条件（加工したデータも同じ条件で提供する）。 */
+                                license: {
+                                    /** @constant */
+                                    name: "公共データ利用規約（第1.0版）";
+                                    /** @constant */
+                                    url: "https://www.digital.go.jp/resources/open_data/public_data_license_v1.0";
+                                };
+                                /**
+                                 * @description 免責事項。
+                                 * @constant
+                                 */
+                                disclaimer: "データの正確性・完全性は保証しません。最新かつ正確な情報は、各地方厚生局の公表資料を確認してください。";
+                                /** @description 市区町村・座標の出典（デジタル庁 アドレス・ベース・レジストリ、CC BY 4.0）。 */
+                                address_source: {
+                                    /** @constant */
+                                    name: "アドレス・ベース・レジストリ（デジタル庁）の市区町村・町字・住居表示・地番の各マスターと位置参照データを加工して作成";
+                                    /** @constant */
+                                    url: "https://www.digital.go.jp/policies/base_registry_address";
+                                };
+                                /** @description 町丁目までしか求められない施設の座標と、施設の診療時間・フリガナ・ホームページの出典（厚生労働省、PDL1.0）。 */
+                                medical_info_net_source: {
+                                    /** @constant */
+                                    name: "厚生労働省「医療情報ネット」のオープンデータ（所在地座標・診療時間・休診日・フリガナ・ホームページ）を加工して作成";
+                                    /** @constant */
+                                    url: "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/newpage_43373.html";
+                                };
+                                /** @description 住所からも医療情報ネットからも町丁目までしか求められない病院・診療所・歯科診療所の座標の出典（国土交通省、CC BY 4.0）。 */
+                                national_land_source: {
+                                    /** @constant */
+                                    name: "「国土数値情報（医療機関データ）」（国土交通省）を加工して作成";
+                                    /** @constant */
+                                    url: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P04-2020.html";
+                                };
+                                /** @description 駅の位置の出典（国土交通省、CC BY 4.0）。駅の検索APIに使う。 */
+                                station_source: {
+                                    /** @constant */
+                                    name: "「国土数値情報（鉄道データ）」（国土交通省）を加工して作成";
+                                    url: string;
                                 };
                                 /** @description 市区町村の人口の出典（総務省、政府標準利用規約・CC BY 4.0 互換）。集計APIの人口あたりの件数に使う。 */
                                 population_source: {

@@ -5,7 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 import AttributionNotice from "@/components/attribution-notice";
 import BottomSheet, { OptionGrid } from "@/components/bottom-sheet";
 import EmergencyNotice from "@/components/emergency-notice";
-import FacilityResult from "@/components/facility-result";
+import FacilityResult, { openingStatus, type TravelMode } from "@/components/facility-result";
 import LocationPicker from "@/components/location-picker";
 import FacilityMap, { type MapMarker } from "@/components/map/facility-map";
 import { EmptyState, ErrorState, LoadingState } from "@/components/query-state";
@@ -29,6 +29,17 @@ const typeOptions: { value: string; label: string }[] = [
   { value: String(institutionTypes.clinic), label: "診療所" },
   { value: String(institutionTypes.dental), label: "歯科" },
   { value: String(institutionTypes.pharmacy), label: "薬局" },
+];
+
+/**
+ * Minutes after the arrival a facility may still open and be listed: setting
+ * off before opening time, a short wait at the door is fine.
+ */
+const waitMinutes = 30;
+
+const travelOptions: { value: TravelMode; label: string }[] = [
+  { value: "walk", label: "🚶 徒歩" },
+  { value: "car", label: "🚗 車" },
 ];
 
 /** `when`: absent for "now", "any" for no time filter, else a Japan-local "YYYY-MM-DDTHH:mm". */
@@ -74,6 +85,8 @@ export default function Finder() {
   const whenParam = searchParams.get("when");
   const when = whenParam === anyTime || (whenParam && localTimePattern.test(whenParam)) ? whenParam : null;
   const searchedAt = when === anyTime ? null : (when ?? (now ? japanLocalTime(now) : null));
+  // The time searched is the departure: each facility is judged at its estimated arrival.
+  const travel: TravelMode | null = searchedAt === null ? null : searchParams.get("go") === "car" ? "car" : "walk";
 
   const query = {
     latitude: place?.latitude ?? 0,
@@ -81,7 +94,7 @@ export default function Finder() {
     radius,
     status: activeStatus,
     per_page: perPage,
-    ...(searchedAt ? { open_at: searchedAt } : {}),
+    ...(searchedAt ? { open_at: searchedAt, travel, wait: waitMinutes } : {}),
     ...(institutionType ? { institution_type: Number(institutionType) } : {}),
     ...(departmentCategory ? { department_category: Number(departmentCategory) } : {}),
   } as FacilityListQuery;
@@ -124,14 +137,18 @@ export default function Finder() {
                 latitude: facility.location.latitude,
                 longitude: facility.location.longitude,
                 title: facility.name,
-                detail: [facility.institution_type.label, facility.distance !== undefined ? formatDistance(facility.distance) : null]
+                detail: [
+                  facility.institution_type.label,
+                  facility.distance !== undefined ? formatDistance(facility.distance) : null,
+                  searchedAt !== null ? (openingStatus(facility, searchedAt)?.text ?? null) : null,
+                ]
                   .filter(Boolean)
                   .join("・"),
               },
             ]
           : [],
       ),
-    [results],
+    [results, searchedAt],
   );
 
   if (place === null) {
@@ -194,11 +211,27 @@ export default function Finder() {
         </div>
         <div className="flex flex-wrap gap-2">
           <FilterButton isChanged={when !== null} onClick={() => setOpenSheet("when")}>
-            🕐 {when === null ? "いま開いている" : when === anyTime ? "時間で絞らない" : formatJapanLocalTimeShort(when)}
+            🕐 {when === null ? "いま出発" : when === anyTime ? "時間で絞らない" : `${formatJapanLocalTimeShort(when)}出発`}
           </FilterButton>
           <FilterButton isChanged={radius !== defaultRadius} onClick={() => setOpenSheet("radius")}>
             {formatDistance(radius)}以内
           </FilterButton>
+          {travel !== null && (
+            <div role="radiogroup" aria-label="移動手段" className="flex rounded-full border border-control-border bg-background p-0.5">
+              {travelOptions.map(({ value, label }) => (
+                <button
+                  key={value}
+                  type="button"
+                  role="radio"
+                  aria-checked={travel === value}
+                  onClick={() => update({ go: value === "walk" ? null : value })}
+                  className={`min-h-10 rounded-full px-3 ${travel === value ? "bg-brand font-bold text-white" : "text-foreground"}`}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+          )}
           {showsDepartmentFilter && (
             <FilterButton isChanged={departmentCategory !== ""} onClick={() => setOpenSheet("dept")}>
               {departmentCategory
@@ -209,7 +242,7 @@ export default function Finder() {
         </div>
       </div>
 
-      <BottomSheet open={openSheet === "when"} onClose={() => setOpenSheet(null)} title="いつ開いている施設を探しますか">
+      <BottomSheet open={openSheet === "when"} onClose={() => setOpenSheet(null)} title="いつ出かけますか">
         <OptionGrid
           columns={3}
           options={[
@@ -233,7 +266,7 @@ export default function Finder() {
         {when !== null && when !== anyTime && (
           <div className="mt-4">
             <label htmlFor="at" className={labelClass}>
-              日時（日本時間）
+              出発の日時（日本時間）
             </label>
             <input
               id="at"
@@ -297,7 +330,9 @@ export default function Finder() {
           <>
             <div className="flex items-center justify-between gap-3">
               <p className="text-muted">
-                {searchedAt && when !== null && <>{formatJapanLocalTime(searchedAt)}に開いている</>}
+                {searchedAt && (
+                  <>{when !== null && `${formatJapanLocalTime(searchedAt)}に出発・`}着くころ開いている・まもなく開く</>
+                )}
                 <span className="font-bold text-foreground">{numberFormatter.format(facilities.data.meta.total)}件</span>
                 {facilities.data.meta.total > perPage && `（近い${perPage}件）`}
                 {facilities.isPlaceholderData && <span role="status"> 更新中…</span>}
@@ -356,7 +391,7 @@ export default function Finder() {
             {facilities.data.data.length === 0 ? (
               <div className="mt-3 space-y-3">
                 <EmptyState>
-                  {searchedAt ? "この範囲に、この時間に開いている施設は見つかりませんでした。" : "この範囲に施設は見つかりませんでした。"}
+                  {searchedAt ? "この範囲に、着くころ開いている施設や、まもなく開く施設は見つかりませんでした。" : "この範囲に施設は見つかりませんでした。"}
                 </EmptyState>
                 <div className="flex flex-wrap justify-center gap-2">
                   {nextRadius && (
@@ -376,7 +411,7 @@ export default function Finder() {
                 <ul className={`mt-3 space-y-3 transition-opacity ${facilities.isPlaceholderData ? "opacity-60" : ""}`}>
                   {facilities.data.data.map((facility) => (
                     <li key={facility.id}>
-                      <FacilityResult facility={facility} searchedAt={searchedAt} />
+                      <FacilityResult facility={facility} searchedAt={searchedAt} travel={travel} />
                     </li>
                   ))}
                 </ul>
@@ -385,7 +420,10 @@ export default function Finder() {
 
             {searchedAt && (
               <p className="mt-4 text-sm leading-relaxed text-muted">
-                ※ 受付時間（なければ診療時間）で判定しています。臨時休診や最近の変更は反映されず、診療時間が公開されていない施設は表示されません。お出かけの前に電話でご確認ください。
+                ※ 受付時間（なければ診療時間）で判定しています。
+                {travel !== null &&
+                  `着く時刻は、まっすぐの距離から見積もった${travel === "walk" ? "徒歩" : "車"}の目安です。着いてから${waitMinutes}分以内に受付が始まる施設も載せています。`}
+                臨時休診や最近の変更は反映されず、診療時間が公開されていない施設は表示されません。お出かけの前に電話でご確認ください。
               </p>
             )}
             <div className="mt-4">
