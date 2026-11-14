@@ -127,6 +127,14 @@ export default function Finder() {
   }
 
   const results = facilities.data?.data;
+  /**
+   * The hours on the results were worked out for the departure and travel
+   * they were fetched with. While another search is under way the previous
+   * results stay on screen (dimmed), and labelling them with the new
+   * departure or travel would mix the two ("車約5分" with walking times), so
+   * the hours wait for the new results.
+   */
+  const hoursAt = facilities.isPlaceholderData ? null : searchedAt;
   const markers = useMemo<MapMarker[]>(
     () =>
       (results ?? []).flatMap((facility) =>
@@ -140,7 +148,7 @@ export default function Finder() {
                 detail: [
                   facility.institution_type.label,
                   facility.distance !== undefined ? formatDistance(facility.distance) : null,
-                  searchedAt !== null ? (openingStatus(facility, searchedAt)?.text ?? null) : null,
+                  hoursAt !== null ? (openingStatus(facility, hoursAt)?.text ?? null) : null,
                 ]
                   .filter(Boolean)
                   .join("・"),
@@ -148,7 +156,7 @@ export default function Finder() {
             ]
           : [],
       ),
-    [results, searchedAt],
+    [results, hoursAt],
   );
 
   if (place === null) {
@@ -411,7 +419,7 @@ export default function Finder() {
                 <ul className={`mt-3 space-y-3 transition-opacity ${facilities.isPlaceholderData ? "opacity-60" : ""}`}>
                   {facilities.data.data.map((facility) => (
                     <li key={facility.id}>
-                      <FacilityResult facility={facility} searchedAt={searchedAt} travel={travel} />
+                      <FacilityResult facility={facility} searchedAt={hoursAt} travel={travel} />
                     </li>
                   ))}
                 </ul>

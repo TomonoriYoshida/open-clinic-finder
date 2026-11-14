@@ -13,7 +13,8 @@ export const now = new Date("2026-10-05T08:30:00+09:00");
 /** In front of Tokyo Station, where the nearby fixture was captured. */
 export const tokyoStation = { latitude: 35.681236, longitude: 139.767125 };
 
-type Reply = { status?: number; json: unknown };
+/** `delayMs` holds the reply back, to look at the page while a search is under way. */
+type Reply = { status?: number; json: unknown; delayMs?: number };
 type Responder = (url: URL) => Reply;
 
 const corsHeaders = { "Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "*" };
@@ -71,7 +72,10 @@ export class MockApi {
       return;
     }
 
-    const { status = 200, json } = entry.responder(url);
+    const { status = 200, json, delayMs = 0 } = entry.responder(url);
+    if (delayMs > 0) {
+      await new Promise((resolve) => setTimeout(resolve, delayMs));
+    }
     await route.fulfill({ status, headers: corsHeaders, json });
   }
 }

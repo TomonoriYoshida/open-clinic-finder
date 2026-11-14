@@ -118,12 +118,27 @@ test.describe("検索結果", () => {
     await expect(second.getByText("23:50〜翌0:10のみ受付")).toHaveClass(/text-warning/);
   });
 
-  test("車に切り替えると、車で着く時刻で探す", async ({ page, api }) => {
+  test("車に切り替えると、車で着く時刻で探し、届くまでは前の時刻を車の時刻として出さない", async ({ page, api }) => {
+    const byCar = copy(fixtures.nearby);
+    for (const facility of byCar.data) {
+      // By car everything is reached a few minutes sooner.
+      facility.arrives_at = new Date(Date.parse(facility.arrives_at!) - 3 * 60000).toISOString().replace(/\.000Z$/, "+00:00");
+    }
+    api.on("facilities", (url) =>
+      url.searchParams.get("travel") === "car" ? { json: byCar, delayMs: 1500 } : { json: fixtures.nearby },
+    );
     await page.goto(resultsPath);
+    await expect(page.getByText(/徒歩約/).first()).toBeVisible();
+
     await page.getByRole("radio", { name: "🚗 車" }).click();
 
     await expect(page).toHaveURL(/[?&]go=car/);
-    await expect.poll(() => api.requestsTo("/api/v1/medical-facilities").at(-1)?.searchParams.get("travel")).toBe("car");
+    // While the car search is under way: the walking results, dimmed, without their hours.
+    await expect(page.getByRole("status").filter({ hasText: "更新中" })).toBeVisible();
+    await expect(page.getByText(/車約|徒歩約/)).toHaveCount(0);
+
+    await expect(page.getByText(/車約/).first()).toBeVisible();
+    expect(api.requestsTo("/api/v1/medical-facilities").at(-1)!.searchParams.get("travel")).toBe("car");
   });
 
   test("見つからないときは、範囲を広げるか時間で絞らずに探せる", async ({ page, api }) => {
