@@ -7,8 +7,8 @@ export const apiOrigin = "http://api.test";
 /** The GSI address search the place search calls from the browser. */
 export const placeSearchOrigin = "https://msearch.gsi.go.jp";
 
-/** Monday, 2026-10-05 10:30 in Japan: the clock every test runs at. */
-export const now = new Date("2026-10-05T10:30:00+09:00");
+/** Monday, 2026-10-05 08:30 in Japan, before most clinics open: the clock every test runs at. */
+export const now = new Date("2026-10-05T08:30:00+09:00");
 
 /** In front of Tokyo Station, where the nearby fixture was captured. */
 export const tokyoStation = { latitude: 35.681236, longitude: 139.767125 };

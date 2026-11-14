@@ -25,7 +25,7 @@ export type OptionsJson = JsonOf<"v1.options">;
 
 export const fixtures = {
   options: optionsJson as unknown as OptionsJson,
-  /** The 5 nearest facilities open on Monday 2026-10-05 10:30 around Tokyo Station (1,043 in all). */
+  /** The 8 nearest facilities open, or opening within 30 minutes, when reached on foot from Tokyo Station leaving on Monday 2026-10-05 08:30 (474 in all). */
   nearby: nearbyJson as unknown as FacilityListJson,
   facility: facilityJson as unknown as FacilityJson,
   openingHours: openingHoursJson as unknown as OpeningHoursJson,

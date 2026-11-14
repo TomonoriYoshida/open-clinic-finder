@@ -8,7 +8,7 @@
 ## できること
 
 - 現在地、または駅名・住所（[国土地理院 住所検索API](https://msearch.gsi.go.jp/)）から、近い順に施設を表示
-- 「いま開いている」「日時を指定」「時間で絞らない」の切り替え。開いている施設には「19:00まで」のように終了時刻を表示
+- 「いま出発」「日時を指定」「時間で絞らない」の切り替え。徒歩か車で着くころに開いている施設（着いて30分以内に開く施設を含む）を、「徒歩約12分・8:52ごろ着」「9:00から受付（着いて8分後）」「着くころ受付中・19:00まで」のように表示。着く時刻は、まっすぐの距離から見積もった目安
 - 種類（病院・診療所・歯科・薬局）と診療科での絞り込み、リストと地図の切り替え
 - 施設の詳細（診療時間の表、電話、経路）
 - 紹介用のQRコード、リンクのコピー、共有
@@ -58,7 +58,7 @@ vendor/bin/sail artisan tinker --execute 'echo json_encode(App\Models\Municipali
 [Playwright](https://playwright.dev/) で、ビルドした画面をスマホの画面（Pixel 7 相当）で動かして確かめます（`e2e/`）。PR と `main` への push のたびに GitHub Actions（`.github/workflows/test.yml`）で動きます。本番への反映はサーバーでのビルドなので、マージの前にここで通しておきます。
 
 - APIと地名検索（国土地理院）は本物を呼ばず、テスト用の固定データ（`e2e/fixtures/`）で答えます。テスト用のビルドはAPIのオリジンをダミーの `http://api.test` にし、その通信をテストが受けます。地図タイルなど、ほかの外部への通信は止めます。
-- 時刻は 2026-10-05（月）10:30（日本時間）に固定します。「いま開いている」の検索で送る時刻が、この時刻になることを確かめます。
+- 時刻は 2026-10-05（月）8:30（日本時間。多くの診療所が開く前）に固定します。検索で送る出発時刻がこの時刻になることと、着くころに開く施設の表示を確かめます。
 - 現在地は、テストごとに許可（東京駅前）か、許可しないかを決めます。
 - 想定していないAPIが呼ばれると、テストは失敗します。新しいAPIを使うときは、`e2e/support.ts` に固定データの応答を加えます。
 - トップ・検索結果・施設詳細は、axe でアクセシビリティも確かめます（重大な問題があれば失敗）。
@@ -84,12 +84,12 @@ B=http://localhost:8000/api/v1; ID=33987
 curl -s "$B/options" > e2e/fixtures/options.json
 curl -s "$B/medical-facilities/$ID" > e2e/fixtures/facility.json
 curl -s "$B/medical-facilities/$ID/opening-hours" > e2e/fixtures/opening-hours.json
-# 東京駅前で、2026-10-05（月）10:30に開いている近い5件
-curl -s "https://168-110-42-30.sslip.io/api/v1/medical-facilities?latitude=35.681236&longitude=139.767125&radius=2000&status=1&per_page=5&open_at=2026-10-05T10:30" > e2e/fixtures/nearby.json
+# 東京駅前を 2026-10-05（月）8:30 に歩いて出発して、着くころ（または着いて30分以内）に開いている近い8件（着いたときに開いている施設と、着いてから開く施設の両方が入る件数）
+curl -s "https://168-110-42-30.sslip.io/api/v1/medical-facilities?latitude=35.681236&longitude=139.767125&radius=2000&status=1&per_page=8&open_at=2026-10-05T08:30&travel=walk&wait=30" > e2e/fixtures/nearby.json
 curl -s "https://msearch.gsi.go.jp/address-search/AddressSearch?q=%E6%96%B0%E5%AE%BF%E9%A7%85" > e2e/fixtures/gsi-shinjuku.json
 ```
 
-一覧を取り直したら、`e2e/finder.spec.ts` の件数（`1,043件`）や施設名、閉まる時刻の期待値も合わせます。
+一覧を取り直しても、件数・施設名・到着や受付の時刻の期待値は固定データから計算するので、テストを直す必要はありません。ただし、着いたときに開いている施設と、着いてから開く施設の両方が入っていることを確かめます（テストもそれを確かめます）。
 
 ## 本番への反映
 
