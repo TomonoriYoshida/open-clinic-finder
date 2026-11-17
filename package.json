@@ -15,7 +15,7 @@
   "dependencies": {
     "@tanstack/react-query": "^5.104.0",
     "leaflet": "^1.9.4",
-    "next": "^16.4.2",
+    "next": "^16.4.5",
     "openapi-fetch": "^0.17.0",
     "qrcode": "^1.5.4",
     "react": "19.2.8",
